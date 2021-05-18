@@ -1,6 +1,6 @@
 
 function setPlayerName() {
-  
+  console.log(localStorage.getItem("playerColor"));
 
   console.log('click');
   let inputNameValue = document.getElementById('inputUserName').value;
@@ -13,21 +13,32 @@ function setPlayerName() {
   }
 
 
-  fetch("../color.json")
+  fetch("http://localhost:3000/users/colors", {
+      method: 'post',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({})
+  })
   .then(function(response){
     return response.json();
   })
   .then(function(data){
     console.log("hello from json");
-    for(obj in data){
-      if(data[obj].taken === false && localStorage.getItem("playerColor", null)){
-        console.log(data[obj].color + "color is available!");
-        localStorage.setItem("playerColor", data[obj].color);
-      }else{
-        console.log(data[obj].color + "color is taken!");
-      }
+    console.log(data.color);
+    if(data.color === 'none'){
+        console.log("Game is full");
+        alert("The game is full. Try again later.")
+    } else {
+        localStorage.setItem("playerColor", data.color);
+        // loadGameBoard();
     }
   });
+//   if(welcome === true){
+//       return true;
+//   } else {
+//       return false;
+//   }
   
 }
 

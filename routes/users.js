@@ -3,6 +3,13 @@ var router = express.Router();
 const setPlayerName = require("../modules/setPlayerInfo.js");
 router.get('/colors');
 
+const colors = [
+  {"color": "blue", "taken":false},
+  {"color": "red", "taken":false},
+  {"color": "yellow", "taken":false},
+  {"color": "pink", "taken":false}
+]
+
 let htmlHead = 
   `<link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
   <title>GridPainter av Grupp 8</title>`;
@@ -17,8 +24,27 @@ let htmlFooter =
   </script>
   `; 
 
-router.get('/', function(req, res, next) {
-
+router.post('/colors', function(req, res, next) {
+  console.log('colors!');
+  let colorPicked = false;
+  for(color in colors){
+    console.log(colors[color].color);
+    if(colors[color].taken === false){
+      console.log(colors[color].color + "color is available!");
+      let chosenColor = {"color": colors[color].color};
+      res.json(chosenColor);
+      colors[color].taken = true;
+      console.log(colors[color].taken);
+      colorPicked = true;
+      break;
+    } else {
+      continue;
+    }
+      // res.json({"color": "none"}) 
+  }
+  if(colorPicked === false){
+    res.json({"color": "none"})
+  }
 });
 
 
@@ -30,7 +56,7 @@ router.get('/', function(req, res, next) {
 
       <div id="loginContainer">
         <input id="inputUserName" placeholder="Skriv ett användarnamn..."></input>
-        <a id="startGameBtn" href="">Starta spelet</a>
+        <button id="startGameBtn">Starta spelet</button>
       </div>
 
       <div id="galleryContainer">
