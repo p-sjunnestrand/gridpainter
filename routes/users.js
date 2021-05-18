@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const setPlayerName = require("../modules/setPlayerInfo.js");
-
+router.get('/colors');
 
 let htmlHead = 
   `<link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
@@ -16,6 +16,11 @@ let htmlFooter =
     document.getElementById('startGameBtn').addEventListener('click', ${setPlayerName});
   </script>
   `; 
+
+router.get('/', function(req, res, next) {
+
+});
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
