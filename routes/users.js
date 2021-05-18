@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const setPlayerName = require("../modules/setPlayerInfo.js");
 
 let htmlHead = 
   `<link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
@@ -9,7 +10,10 @@ let htmlHeader =
   `<header><h1>GridPainter</h1></header>`; 
 
 let htmlFooter = 
-  `<footer>Av: Grupp 8</footer>`; 
+  `<footer>Av: Grupp 8</footer>
+  <script>
+    ${setPlayerName("startGameBtn", "inputUserName")}
+  </script>`; 
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
