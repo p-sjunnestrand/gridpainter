@@ -8,7 +8,7 @@ var usersRouter = require('./routes/users');
 
 const MongoClient = require('mongodb').MongoClient;
 
-MongoClient.connect("mongodb+srv://petterAdmin:@4Nb_%aQ$[LacJ-C@rootcluster.d4txc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+MongoClient.connect("mongodb+srv://petterAdmin:gtnafyHN8WpQWfRB@rootcluster.d4txc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
     useUnifiedTopology: true
 })
 .then(client => {
