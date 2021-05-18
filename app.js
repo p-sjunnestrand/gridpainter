@@ -6,6 +6,18 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const MongoClient = require('mongodb').MongoClient;
+
+MongoClient.connect("mongodb+srv://petterAdmin:@4Nb_%aQ$[LacJ-C@rootcluster.d4txc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+    useUnifiedTopology: true
+})
+.then(client => {
+    console.log('databas uppkopplad!');
+
+    const db = client.db("gridpainter");
+    app.locals.db = db;
+})
+
 var app = express();
 
 app.use(logger('dev'));
