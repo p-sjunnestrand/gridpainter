@@ -1,0 +1,13 @@
+$pixels-30px: 30px;
+
+#gridContainer {
+    width: 480px;
+    display: flex;
+    flex-wrap: wrap;
+ 
+    .pixels {
+        border: 1px solid black;
+        width: $pixels-30px;
+        height: $pixels-30px; 
+    }
+}
