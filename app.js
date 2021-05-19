@@ -34,6 +34,14 @@ app.use('/users', usersRouter);
 io.on('connection', function (socket) {
     console.log('user connected');
 
+    socket.on("disconnect", ()=>{
+        console.log("user disconnected ");
+    })
+
+    socket.on("chat msg", msg =>{
+        console.log("msg", msg);
+        io.emit("chat msg", msg)
+    })
 })
 
 

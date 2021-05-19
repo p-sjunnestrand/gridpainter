@@ -2,6 +2,7 @@ import { printStartPage } from "../modules/printStartPage.mjs"
 import { logIn } from "../modules/logIn.mjs"
 import {setPlayerName} from "../modules/setPlayerInfo.mjs"
 import {printBoard} from "../modules/print-board.mjs"
+import { printChat } from "../modules/printchat.mjs";
 
 
 printStartPage();
@@ -16,6 +17,7 @@ startBtn.addEventListener('click', (e) => {
 
  setPlayerName();
  printBoard();
+ printChat();
 
 //  location.href="game.html";
 })
