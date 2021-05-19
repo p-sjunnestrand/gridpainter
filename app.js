@@ -34,15 +34,6 @@ app.use('/users', usersRouter);
 io.on('connection', function (socket) {
     console.log('user connected');
 
-
-
-
-
-
-
-
-
-
 })
 
 
