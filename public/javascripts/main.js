@@ -1,6 +1,8 @@
 import { printStartPage } from "../modules/printStartPage.mjs"
 import { logIn } from "../modules/logIn.mjs"
 import {setPlayerName} from "../modules/setPlayerInfo.mjs"
+import {printBoard} from "../modules/print-board.mjs"
+
 
 printStartPage();
 
@@ -13,7 +15,9 @@ startBtn.addEventListener('click', (e) => {
  console.log('klick');
 
  setPlayerName();
- //location.href=""
+ printBoard();
+
+//  location.href="game.html";
 })
 
 gallBtn.addEventListener('click', (e) => {
