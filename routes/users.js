@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const setPlayerName = require("../modules/setPlayerInfo.js");
+const setPlayerName = require("../public/modules/setPlayerInfo.js");
 router.get('/colors');
 
 const colors = [
@@ -64,6 +64,12 @@ router.get('/', function(req, res, next) {
       </div>
     </main>` + htmlFooter; 
   res.send(printStartPage);
+});
+
+/* GET users listing. */
+router.get('/', function (req, res, next) {
+
+  res.send('Hello World');
 });
 
 
