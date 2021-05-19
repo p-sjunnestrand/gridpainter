@@ -9,7 +9,9 @@ let gallBtn = document.getElementById('galleryBtn');
 
 let userName = document.getElementById('inputUserName');
 
-startBtn.addEventListener('click', logIn)
+startBtn.addEventListener('click', (e) => {
+ console.log('klick');
+})
 
 gallBtn.addEventListener('click', (e) => {
  console.log('galleri');
