@@ -1,5 +1,5 @@
 
-function setPlayerName() {
+export function setPlayerName() {
   console.log(localStorage.getItem("playerColor"));
 
   console.log('click');
@@ -30,11 +30,12 @@ function setPlayerName() {
           alert("The game is full. Try again later.")
       } else {
           localStorage.setItem("playerColor", data.color);
-          // loadGameBoard();
+        
       }
     });
   }
 }
 
+function loadGameBoard(){
 
-module.exports = setPlayerName;
+}
