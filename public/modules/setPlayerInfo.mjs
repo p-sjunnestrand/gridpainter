@@ -1,7 +1,6 @@
 
 export function setPlayerName() {
   console.log(localStorage.getItem("playerColor"));
-  let playerInfo;
   console.log('click');
 
   let inputNameValue = document.getElementById('inputUserName').value;
@@ -32,7 +31,6 @@ export function setPlayerName() {
           alert("The game is full. Try again later.")
       } else {
           localStorage.setItem("playerColor", data.color);
-          let playerColor = data.color;
       }
     });
   }
