@@ -1,6 +1,7 @@
 
 export function setPlayerName() {
-  console.log(localStorage.getItem("playerColor"));
+  return new Promise ((resolve, reject) => {
+    console.log(localStorage.getItem("playerColor"));
   console.log('click');
 
   let inputNameValue = document.getElementById('inputUserName').value;
@@ -28,10 +29,15 @@ export function setPlayerName() {
       console.log(data.color);
       if(data.color === 'none'){
           console.log("Game is full");
-          alert("The game is full. Try again later.")
+          reject("The game is full. Try again later.");
       } else {
           localStorage.setItem("playerColor", data.color);
+          console.log('player color is ' + data.color);
+          resolve();
+          // setUserColorVar();
       }
     });
   }
+  })
+  
 }

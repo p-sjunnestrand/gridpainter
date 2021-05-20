@@ -1,3 +1,5 @@
+import {gridClick} from "../modules/gridClick.mjs"
+
 export function printBoard(userColor) {
 
     let root = document.getElementById("root"); 
@@ -31,11 +33,15 @@ export function printBoard(userColor) {
         `;
         
     root.innerHTML = board;
-
+    
+    //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
-    gridContainer.addEventListener("click", function(e) {
-        console.log("klickade id:et är: ", e.target.id);
-        console.log("color is : "+ userColor);
-    })
+    gridContainer.addEventListener("click", e => {
+        gridClick(e, userColor);
+    });
+    socket.on("grid change", gridChange => {
+        console.log('hello');
+        document.getElementById(gridChange.coordinates).style.backgroundColor = gridChange.playerColor;
+    });
 
 }
