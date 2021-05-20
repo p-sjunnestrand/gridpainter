@@ -2,6 +2,7 @@ import { printStartPage } from "../modules/printStartPage.mjs"
 import { logIn } from "../modules/logIn.mjs"
 import {setPlayerName} from "../modules/setPlayerInfo.mjs"
 import {printBoard} from "../modules/print-board.mjs"
+import { printChat } from "../modules/printchat.mjs";
 
 
 printStartPage();
@@ -9,13 +10,19 @@ printStartPage();
 let startBtn = document.getElementById('startGameBtn');
 let gallBtn = document.getElementById('galleryBtn');
 
-let userName = document.getElementById('inputUserName');
+
+
+
 
 startBtn.addEventListener('click', (e) => {
  console.log('klick');
-
+ let userName = document.getElementById('inputUserName').value;
  setPlayerName();
- printBoard();
+ let userColor = localStorage.getItem("playerColor");
+console.log("Playercolor" + localStorage.getItem("playerColor"));
+ printBoard(userColor);
+
+ printChat(userName);
 
 //  location.href="game.html";
 })
