@@ -1,6 +1,8 @@
+import { saveImg } from "../modules/saveImg.mjs"
+
 export function printBoard(userColor) {
 
-    let root = document.getElementById("root"); 
+    let root = document.getElementById("root");
     let board = `
     
             <div id="gameBoardContainer">
@@ -15,27 +17,37 @@ export function printBoard(userColor) {
                     </div>
                     <div id="gridContainer">`;
 
-    for (let r=1; r<16; r++) {
+    for (let r = 1; r < 16; r++) {
 
-        for (let c=1; c<16; c++) {
+        for (let c = 1; c < 16; c++) {
             board += `<div id=y${r}x${c} class=pixels></div>`;
         }
     };
 
-    board += 
-                    `</div>
+    board +=
+        `</div>
 
                 </section>
-
+                <button id="saveImg">Spara bild</button>
             </div>
         `;
-        
+
     root.innerHTML = board;
 
     let gridContainer = document.getElementById("gridContainer");
-    gridContainer.addEventListener("click", function(e) {
+    gridContainer.addEventListener("click", function (e) {
         //console.log("klickade id:et är: ", e.path[0].id);
-        console.log("color is : "+ userColor);
+        console.log("color is : " + userColor);
+    })
+
+
+    let save = document.getElementById('saveImg');
+    save.addEventListener('click', e => {
+        console.log('sparad bild');
+        saveImg({
+            name: 'Igor',
+            age: 33
+        });
     })
 
 }
