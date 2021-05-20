@@ -2,7 +2,7 @@ export function printBoard(userColor) {
 
     let root = document.getElementById("root"); 
     let board = `
-        <main>
+    
             <div id="gameBoardContainer">
                 <h2>Welcome Janne</h2>
                 <section>
@@ -28,7 +28,7 @@ export function printBoard(userColor) {
                 </section>
 
             </div>
-        </main>`;
+        `;
         
     root.innerHTML = board;
 
