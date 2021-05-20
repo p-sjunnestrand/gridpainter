@@ -1,16 +1,18 @@
 export function printChat(userName){
 
-    const chatDiv = document.getElementById('chat');
+    const root = document.getElementById('root');
     
     //inserts chat window w/ input field and submit btn
-    chatDiv.insertAdjacentHTML('beforeend', 
-    `<div id="chatWindow">
-        <ul id="chat"></ul>
-    </div>
-    <form id="chatForm">
-        <input type="text" id="chatMsgInput">
-        <button id="sendChatMsgBtn">Send</button>
-    </form>`);
+    root.insertAdjacentHTML('beforeend', 
+    `<div id ="chat>
+        <div id="chatWindow">
+            <ul id="chat"></ul>
+        </div>
+        <form id="chatForm">
+            <input type="text" id="chatMsgInput">
+            <button id="sendChatMsgBtn">Send</button>
+        </form>
+    </div>`);
 
     let msgInput = document.getElementById('chatMsgInput');
     let chatForm = document.getElementById('chatForm');
