@@ -19,7 +19,7 @@ export function printBoard(userColor) {
 
         for (let c=1; c<16; c++) {
             board += `<div id=y${r}x${c} class=pixels></div>`;
-        }
+        }   
     };
 
     board += 
@@ -34,7 +34,7 @@ export function printBoard(userColor) {
 
     let gridContainer = document.getElementById("gridContainer");
     gridContainer.addEventListener("click", function(e) {
-        //console.log("klickade id:et är: ", e.path[0].id);
+        console.log("klickade id:et är: ", e.target.id);
         console.log("color is : "+ userColor);
     })
 
