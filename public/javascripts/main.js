@@ -10,14 +10,18 @@ printStartPage();
 let startBtn = document.getElementById('startGameBtn');
 let gallBtn = document.getElementById('galleryBtn');
 
-let userName = document.getElementById('inputUserName');
+
+
+
 
 startBtn.addEventListener('click', (e) => {
  console.log('klick');
-
+ let userName = document.getElementById('inputUserName').value;
  setPlayerName();
+//  console.log("Player info "+playerInfo);
  printBoard();
- printChat();
+
+ printChat(userName);
 
 //  location.href="game.html";
 })

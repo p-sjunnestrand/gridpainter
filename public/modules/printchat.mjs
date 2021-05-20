@@ -1,4 +1,4 @@
-export function printChat(){
+export function printChat(userName){
 
     const chatDiv = document.getElementById('chat');
     
@@ -19,9 +19,8 @@ export function printChat(){
     chatForm.addEventListener('submit', e => {
         e.preventDefault();
         console.log('chat click!');
-
         if(msgInput.value){
-            socket.emit("chat msg", {text: msgInput.value, playerName: localStorage.getItem('playerName'), playerColor: localStorage.getItem('playerColor')});
+            socket.emit("chat msg", {text: msgInput.value, playerName: userName, playerColor: "playerInfo.color"});
             msgInput.value = '';
           }
     });
@@ -32,6 +31,7 @@ export function printChat(){
         
   
         chat.insertAdjacentHTML('beforeend', `<li><div chatMessage"><div class ="chatPlayerName">${msg.playerName}:</div>${msg.text}</div></li>`)
+        console.log();
       })
     
 }
