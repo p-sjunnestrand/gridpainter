@@ -32,12 +32,8 @@ export function setPlayerName() {
           alert("The game is full. Try again later.")
       } else {
           localStorage.setItem("playerColor", data.color);
-
+          let playerColor = data.color;
       }
     });
   }
-}
-
-function loadGameBoard(){
-
 }

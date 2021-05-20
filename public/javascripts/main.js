@@ -18,8 +18,9 @@ startBtn.addEventListener('click', (e) => {
  console.log('klick');
  let userName = document.getElementById('inputUserName').value;
  setPlayerName();
-//  console.log("Player info "+playerInfo);
- printBoard();
+ let userColor = localStorage.getItem("playerColor");
+console.log("Playercolor" + localStorage.getItem("playerColor"));
+ printBoard(userColor);
 
  printChat(userName);
 

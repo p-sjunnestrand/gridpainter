@@ -1,4 +1,4 @@
-export function printBoard() {
+export function printBoard(userColor) {
 
     let root = document.getElementById("root"); 
     let board = `
@@ -34,7 +34,8 @@ export function printBoard() {
 
     let gridContainer = document.getElementById("gridContainer");
     gridContainer.addEventListener("click", function(e) {
-        console.log("klickade id:et är: ", e.path[0].id);
+        //console.log("klickade id:et är: ", e.path[0].id);
+        console.log("color is : "+ userColor);
     })
 
 }
