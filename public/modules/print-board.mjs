@@ -35,19 +35,34 @@ export function printBoard(userColor) {
     root.innerHTML = board;
 
     let gridContainer = document.getElementById("gridContainer");
-    gridContainer.addEventListener("click", function (e) {
-        //console.log("klickade id:et är: ", e.path[0].id);
+    gridContainer.addEventListener("click", (e) => {
         console.log("color is : " + userColor);
+
+        document.getElementById(e.target.id).style.backgroundColor = userColor;
+
+        let gridClick = {
+            id: e.target.id,
+            color: e.target.style.backgroundColor,
+            type: e.type
+        };
+
+        socket.emit("gridClick", gridClick);
+
+        socket.on("gridClick", gridClick => {
+            console.log(gridClick);
+            document.getElementById(gridClick.id).style.backgroundColor = gridClick.color;
+            // document.getElementById(gridClick.id).type = gridClick.type;
+        })
     })
 
 
     let save = document.getElementById('saveImg');
     save.addEventListener('click', e => {
         console.log('sparad bild');
-        saveImg({
-            name: 'Igor',
-            age: 33
-        });
+        saveImg({});// bild objekt
     })
+
+
+
 
 }

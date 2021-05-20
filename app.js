@@ -36,13 +36,20 @@ app.use('/save', saveRouter);
 io.on('connection', function (socket) {
     console.log('user connected');
 
-    socket.on("disconnect", () => {
-        console.log("user disconnected ");
-    })
-
     socket.on("chat msg", msg => {
         console.log("msg", msg);
         io.emit("chat msg", msg)
+    })
+
+    socket.on("gridClick", gridClick => {
+        console.log(gridClick);
+        socket.broadcast.emit('gridClick', gridClick);
+    })
+
+
+
+    socket.on("disconnect", () => {
+        console.log("user disconnected ");
     })
 })
 
