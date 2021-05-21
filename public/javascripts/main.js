@@ -22,14 +22,7 @@ gallBtn.addEventListener('click', (e) => {
 })
 
 
-let gridArray = []
-let info;
-for (let r=1; r<16; r++) {
-    for (let c=1; c<16; c++) {
-        info = {id: `y${r}x${c}`, color: null};
-        gridArray.push(info);
-    }   
-};
+
 console.log(gridArray);
 //Awaits setPlayerFunction to fetch server and finish before running the other functions in order to properly set let userColor from LS.
 async function startGame() {
