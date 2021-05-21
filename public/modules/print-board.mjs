@@ -1,4 +1,5 @@
 import { saveImg } from "../modules/saveImg.mjs"
+import { gridClick } from "../modules/gridClick.mjs"
 
 export function printBoard(userColor) {
 
@@ -34,26 +35,15 @@ export function printBoard(userColor) {
 
     root.innerHTML = board;
 
+    //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
-    gridContainer.addEventListener("click", (e) => {
-        console.log("color is : " + userColor);
-
-        document.getElementById(e.target.id).style.backgroundColor = userColor;
-
-        let gridClick = {
-            id: e.target.id,
-            color: e.target.style.backgroundColor,
-            type: e.type
-        };
-
-        socket.emit("gridClick", gridClick);
-
-        socket.on("gridClick", gridClick => {
-            console.log(gridClick);
-            document.getElementById(gridClick.id).style.backgroundColor = gridClick.color;
-            // document.getElementById(gridClick.id).type = gridClick.type;
-        })
-    })
+    gridContainer.addEventListener("click", e => {
+        gridClick(e, userColor);
+    });
+    socket.on("grid change", gridChange => {
+        console.log('hello');
+        document.getElementById(gridChange.coordinates).style.backgroundColor = gridChange.playerColor;
+    });
 
 
     let save = document.getElementById('saveImg');
