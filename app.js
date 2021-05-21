@@ -56,21 +56,20 @@ io.on('connection', function (socket) {
     })
     //Handles clicks on gameboard
     socket.on("grid click", click => {
-        console.log("coordinates", click.coordinates);
-        console.log("playerColor", click.playerColor);
+        // console.log("coordinates", click.coordinates);
+        // console.log("playerColor", click.playerColor);
 
         for (grid in gridArray){
             if (gridArray[grid].id === click.coordinates){
-                console.log('Clicked grid', gridArray[grid].id);
+                // console.log('Clicked grid', gridArray[grid].id);
                 gridArray[grid].color = click.playerColor;
-                console.log(gridArray[grid]);
-            }
-        }
-        // console.log(gridArray);
+            };
+        };
 
-        io.emit("grid change", click)
-    })
-})
+        io.emit("grid change", gridArray);
+
+    });
+});
 
 
 
