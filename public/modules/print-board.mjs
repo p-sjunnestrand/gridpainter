@@ -38,11 +38,19 @@ export function printBoard(userColor) {
     //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
     gridContainer.addEventListener("click", e => {
+        //funktionen skickar klick från en klient till servern
         gridClick(e, userColor);
     });
+    
     socket.on("grid change", gridChange => {
-        console.log('hello');
-        document.getElementById(gridChange.coordinates).style.backgroundColor = gridChange.playerColor;
+
+        for (let change in gridChange) {
+            if (gridChange[change].color !== null) {
+                document.getElementById(gridChange[change].id).style.backgroundColor = gridChange[change].color;
+            };
+
+        };
+
     });
 
 

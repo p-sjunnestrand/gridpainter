@@ -23,7 +23,7 @@ gallBtn.addEventListener('click', (e) => {
 
 
 
-console.log(gridArray);
+// console.log(gridArray);
 //Awaits setPlayerFunction to fetch server and finish before running the other functions in order to properly set let userColor from LS.
 async function startGame() {
 
