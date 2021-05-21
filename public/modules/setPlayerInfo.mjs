@@ -1,5 +1,5 @@
 
-export function setPlayerName() {
+export function setPlayerInfo() {
   return new Promise ((resolve, reject) => {
     console.log(localStorage.getItem("playerColor"));
   console.log('click');

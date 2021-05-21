@@ -1,6 +1,6 @@
 
 import { printStartPage } from "../modules/printStartPage.mjs"
-import {setPlayerName} from "../modules/setPlayerInfo.mjs"
+import {setPlayerInfo} from "../modules/setPlayerInfo.mjs"
 import {printBoard} from "../modules/print-board.mjs"
 import { printChat } from "../modules/printchat.mjs";
 
@@ -36,7 +36,7 @@ async function startGame() {
 
     let userName = document.getElementById('inputUserName').value;
 
-    await setPlayerName().catch(error => alert(error));
+    await setPlayerInfo().catch(error => alert(error));
     console.log('launching game!');
 
     let userColor = localStorage.getItem("playerColor");
