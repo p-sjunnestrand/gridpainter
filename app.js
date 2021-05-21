@@ -33,6 +33,16 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/save', saveRouter);
 
+//array that represents the gameboard. Updates with each grid click.
+let gridArray = []
+let info;
+for (let r=1; r<16; r++) {
+    for (let c=1; c<16; c++) {
+        info = {id: `y${r}x${c}`, color: null};
+        gridArray.push(info);
+    }   
+};
+
 io.on('connection', function (socket) {
     console.log('user connected');
 
@@ -48,6 +58,15 @@ io.on('connection', function (socket) {
     socket.on("grid click", click => {
         console.log("coordinates", click.coordinates);
         console.log("playerColor", click.playerColor);
+
+        for (grid in gridArray){
+            if (gridArray[grid].id === click.coordinates){
+                console.log('Clicked grid', gridArray[grid].id);
+                gridArray[grid].color = click.playerColor;
+                console.log(gridArray[grid]);
+            }
+        }
+        // console.log(gridArray);
 
         io.emit("grid change", click)
     })
