@@ -37,12 +37,20 @@ io.on('connection', function (socket) {
     socket.on("disconnect", ()=>{
         console.log("user disconnected ");
     })
-
+    //Handles sent chat messages
     socket.on("chat msg", msg =>{
         console.log("msg", msg);
         io.emit("chat msg", msg)
     })
+    //Handles clicks on gameboard
+    socket.on("grid click", click => {
+        console.log("coordinates", click.coordinates);
+        console.log("playerColor", click.playerColor);
+
+        io.emit("grid change", click)
+    })
 })
+
 
 
 
