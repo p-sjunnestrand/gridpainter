@@ -45,7 +45,7 @@ for (let r=1; r<16; r++) {
 
 io.on('connection', function (socket) {
     console.log('user connected');
-
+    io.emit("grid change", gridArray);
     socket.on("disconnect", () => {
         console.log("user disconnected ");
     })
@@ -56,12 +56,8 @@ io.on('connection', function (socket) {
     })
     //Handles clicks on gameboard
     socket.on("grid click", click => {
-        // console.log("coordinates", click.coordinates);
-        // console.log("playerColor", click.playerColor);
-
         for (grid in gridArray){
             if (gridArray[grid].id === click.coordinates){
-                // console.log('Clicked grid', gridArray[grid].id);
                 gridArray[grid].color = click.playerColor;
             };
         };

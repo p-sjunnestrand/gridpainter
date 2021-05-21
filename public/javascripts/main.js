@@ -6,6 +6,7 @@ import { printChat } from "../modules/printchat.mjs";
 
 
 
+
 printStartPage();
 
 let startBtn = document.getElementById('startGameBtn');
@@ -14,6 +15,7 @@ let gallBtn = document.getElementById('galleryBtn');
 
 startBtn.addEventListener('click', (e) => {
     console.log('klick');
+    
     startGame();
 })
 

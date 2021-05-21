@@ -35,24 +35,30 @@ export function printBoard(userColor) {
 
     root.innerHTML = board;
 
+    let colorBoard = JSON.parse(localStorage.getItem("gridColors")) ;
+
+    for(let color in colorBoard){
+        if (colorBoard[color].color !== null) {
+            document.getElementById(colorBoard[color].id).style.backgroundColor = colorBoard[color].color;
+        };
+    }
+
     //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
     gridContainer.addEventListener("click", e => {
         //funktionen skickar klick från en klient till servern
         gridClick(e, userColor);
     });
-    
-    socket.on("grid change", gridChange => {
 
+    socket.on("grid change", gridChange => {
         for (let change in gridChange) {
             if (gridChange[change].color !== null) {
                 document.getElementById(gridChange[change].id).style.backgroundColor = gridChange[change].color;
             };
-
         };
-
+        localStorage.setItem("gridColors", JSON.stringify(gridChange));
     });
-
+    // console.log(localStorage.getItem("gridColors"));
 
     let save = document.getElementById('saveImg');
     save.addEventListener('click', e => {
