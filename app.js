@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var saveRouter = require('./routes/save');
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -30,15 +31,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/save', saveRouter);
 
 io.on('connection', function (socket) {
     console.log('user connected');
 
-    socket.on("disconnect", ()=>{
+    socket.on("disconnect", () => {
         console.log("user disconnected ");
     })
     //Handles sent chat messages
-    socket.on("chat msg", msg =>{
+    socket.on("chat msg", msg => {
         console.log("msg", msg);
         io.emit("chat msg", msg)
     })

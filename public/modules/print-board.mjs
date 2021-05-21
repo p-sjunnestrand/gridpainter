@@ -1,8 +1,9 @@
-import {gridClick} from "../modules/gridClick.mjs"
+import { saveImg } from "../modules/saveImg.mjs"
+import { gridClick } from "../modules/gridClick.mjs"
 
 export function printBoard(userColor) {
 
-    let root = document.getElementById("root"); 
+    let root = document.getElementById("root");
     let board = `
     
             <div id="gameBoardContainer">
@@ -17,23 +18,23 @@ export function printBoard(userColor) {
                     </div>
                     <div id="gridContainer">`;
 
-    for (let r=1; r<16; r++) {
+    for (let r = 1; r < 16; r++) {
 
-        for (let c=1; c<16; c++) {
+        for (let c = 1; c < 16; c++) {
             board += `<div id=y${r}x${c} class=pixels></div>`;
-        }   
+        }
     };
 
-    board += 
-                    `</div>
+    board +=
+        `</div>
 
                 </section>
-
+                <button id="saveImg">Spara bild</button>
             </div>
         `;
-        
+
     root.innerHTML = board;
-    
+
     //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
     gridContainer.addEventListener("click", e => {
@@ -43,5 +44,15 @@ export function printBoard(userColor) {
         console.log('hello');
         document.getElementById(gridChange.coordinates).style.backgroundColor = gridChange.playerColor;
     });
+
+
+    let save = document.getElementById('saveImg');
+    save.addEventListener('click', e => {
+        console.log('sparad bild');
+        saveImg({});// bild objekt
+    })
+
+
+
 
 }
