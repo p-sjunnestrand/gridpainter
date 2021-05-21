@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const randomKey = require('random-key');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -36,12 +37,46 @@ app.use('/save', saveRouter);
 //array that represents the gameboard. Updates with each grid click.
 let gridArray = []
 let info;
-for (let r=1; r<16; r++) {
-    for (let c=1; c<16; c++) {
-        info = {id: `y${r}x${c}`, color: null};
+for (let r = 1; r < 16; r++) {
+    for (let c = 1; c < 16; c++) {
+        info = { id: `y${r}x${c}`, color: null };
         gridArray.push(info);
-    }   
+    }
 };
+
+// Save picture to db
+app.post('/', function (req, res, next) {
+
+    console.log('rad 50', req.body);
+
+    let savedState = {
+        $set: {
+            id: randomKey.generate(),
+            userName: req.body.userName,
+            gridState: gridArray
+        }
+    };
+
+
+    // req.app.locals.db.collection('savedPaints').insertOne(savedState);
+
+    req.app.locals.db.collection('savedPaints').findOneAndUpdate({ userName: req.body.userName }, savedState, { upsert: true })
+        .then(updatedDocument => {
+            if (updatedDocument) {
+                console.log(`Successfully updated document: ${updatedDocument}.`)
+            } else {
+                console.log("No document matches the provided query.")
+            }
+            return updatedDocument
+        })
+        .catch(err => console.error(`Failed to find and update document: ${err}`))
+
+    console.log(savedState);
+
+
+    res.json('bild sparad i db');
+});
+
 
 io.on('connection', function (socket) {
     console.log('user connected');
@@ -56,8 +91,8 @@ io.on('connection', function (socket) {
     })
     //Handles clicks on gameboard
     socket.on("grid click", click => {
-        for (grid in gridArray){
-            if (gridArray[grid].id === click.coordinates){
+        for (grid in gridArray) {
+            if (gridArray[grid].id === click.coordinates) {
                 gridArray[grid].color = click.playerColor;
             };
         };

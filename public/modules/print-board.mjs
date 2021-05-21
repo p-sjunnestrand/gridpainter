@@ -35,9 +35,9 @@ export function printBoard(userColor) {
 
     root.innerHTML = board;
 
-    let colorBoard = JSON.parse(localStorage.getItem("gridColors")) ;
+    let colorBoard = JSON.parse(localStorage.getItem("gridColors"));
 
-    for(let color in colorBoard){
+    for (let color in colorBoard) {
         if (colorBoard[color].color !== null) {
             document.getElementById(colorBoard[color].id).style.backgroundColor = colorBoard[color].color;
         };
@@ -58,12 +58,13 @@ export function printBoard(userColor) {
         };
         localStorage.setItem("gridColors", JSON.stringify(gridChange));
     });
-    // console.log(localStorage.getItem("gridColors"));
+    console.log(localStorage.getItem("playerName"));
+    let userNameObj = { userName: localStorage.getItem('playerName') };
 
     let save = document.getElementById('saveImg');
     save.addEventListener('click', e => {
         console.log('sparad bild');
-        saveImg({});// bild objekt
+        saveImg(userNameObj);// bild objekt
     })
 
 
