@@ -8,6 +8,7 @@ var usersRouter = require('./routes/users');
 var saveRouter = require('./routes/save');
 
 const MongoClient = require('mongodb').MongoClient;
+const { on } = require('events');
 
 MongoClient.connect("mongodb+srv://petterAdmin:gtnafyHN8WpQWfRB@rootcluster.d4txc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
     useUnifiedTopology: true
@@ -59,12 +60,22 @@ io.on('connection', function (socket) {
         for (grid in gridArray){
             if (gridArray[grid].id === click.coordinates){
                 gridArray[grid].color = click.playerColor;
-            };
-        };
-
+            }
+        }
         io.emit("grid change", gridArray);
 
     });
+
+    socket.on("empty", empty => {
+        console.log("empty is: ", empty);
+        if(empty.empty == true){
+            for(grid in gridArray){
+                gridArray[grid].color = null;
+            }
+            io.emit("empty grid", gridArray)
+        }
+    })
+    
 });
 
 

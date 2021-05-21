@@ -1,5 +1,6 @@
 import { saveImg } from "../modules/saveImg.mjs"
 import { gridClick } from "../modules/gridClick.mjs"
+import {updateGridColors} from "../modules/updateGridColor.mjs"
 
 export function printBoard(userColor) {
 
@@ -30,18 +31,14 @@ export function printBoard(userColor) {
 
                 </section>
                 <button id="saveImg">Spara bild</button>
+
+                <button id="eraseImg">Rensa bild</button>
             </div>
         `;
 
     root.innerHTML = board;
 
-    let colorBoard = JSON.parse(localStorage.getItem("gridColors")) ;
-
-    for(let color in colorBoard){
-        if (colorBoard[color].color !== null) {
-            document.getElementById(colorBoard[color].id).style.backgroundColor = colorBoard[color].color;
-        };
-    }
+    updateGridColors();
 
     //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
@@ -68,5 +65,17 @@ export function printBoard(userColor) {
 
 
 
+    let eraseImgBtn = document.getElementById("eraseImg");
+    eraseImgBtn.addEventListener("click", function(){
+        let empty = {empty: true};
+        socket.emit("empty", empty);
 
+        socket.on("empty grid", gridChange => {
+            localStorage.setItem("gridColors", JSON.stringify(gridChange));
+            //console.log(localStorage.getItem("gridColors"));
+            updateGridColors();
+        });
+
+    });
+    
 }
