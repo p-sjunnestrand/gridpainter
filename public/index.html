@@ -25,6 +25,11 @@
 
   <script>
     const socket = io();
+    //Sets socket.id to LS in order to pair it with color array when starting game.
+    //Could not place it in the main js-file, only works here, for reasons at present unknown.
+    socket.on("socketId", socketId => {
+    localStorage.setItem('socketId', socketId);
+ })
   </script>
 
 </body>

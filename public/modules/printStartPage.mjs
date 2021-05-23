@@ -1,4 +1,5 @@
 
+
 export function printStartPage() {
  let root = document.getElementById('root');
  let printStartPage = `<main>
@@ -15,4 +16,5 @@ export function printStartPage() {
     </main>`;
 
  root.insertAdjacentHTML('beforeend', printStartPage);
+
 }

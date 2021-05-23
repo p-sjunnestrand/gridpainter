@@ -7,6 +7,7 @@ import { printChat } from "../modules/printchat.mjs";
 
 
 
+
 printStartPage();
 
 let startBtn = document.getElementById('startGameBtn');
@@ -33,6 +34,7 @@ async function startGame() {
 
     await setPlayerInfo().catch(error => alert(error));
     console.log('launching game!');
+
 
     let userColor = localStorage.getItem("playerColor");
     console.log("Playercolor" + localStorage.getItem("playerColor"));
