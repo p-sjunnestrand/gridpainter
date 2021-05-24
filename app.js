@@ -103,8 +103,6 @@ io.on('connection', function (socket) {
 
     });
 
-<<<<<<< HEAD
-=======
     socket.on("startTimer", function(data){
         if(start == false){
             countdown = 100;
@@ -112,7 +110,6 @@ io.on('connection', function (socket) {
         }
         start = true; 
     });
->>>>>>> main
 });
 
 
