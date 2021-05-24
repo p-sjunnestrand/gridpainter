@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const randomInt = require('./randomInt');
 const randomKey = require('random-key');
 
 var indexRouter = require('./routes/index');
@@ -210,4 +211,23 @@ app.post('/colors', function(req, res, next) {
   }
 });
 
+app.get('/random', (req, res) => {
+
+    //asigns random int 0-4 to let
+    let generatedRandomInt = randomInt(0,4);
+
+    // console.log("random int", generatedRandomInt);
+
+    //fetches all items from collection
+    req.app.locals.db.collection("savedPaints").find().toArray()
+    .then(results => {
+        // console.log(results[generatedRandomInt]);
+
+        //chooses the pic in the fetched array corresponding to the randomly generated number above.
+        let fetchedRandomPic = results[generatedRandomInt];
+
+        //emits the chosen pic to front.
+        io.emit("random pic", fetchedRandomPic)
+    })
+})
 module.exports = { app: app, server: server };
