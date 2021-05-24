@@ -5,6 +5,7 @@ import {printBoard} from "../modules/print-board.mjs"
 import { printChat } from "../modules/printchat.mjs";
 import { randomPic } from "../modules/randomPic.mjs";
 
+import {startTimer} from "../modules/timer.mjs";
 
 
 
@@ -40,14 +41,14 @@ async function startGame() {
     
     
 
-
     let userColor = localStorage.getItem("playerColor");
     console.log("Playercolor" + localStorage.getItem("playerColor"));
     
-    printBoard(userColor);
+    printBoard(userName, userColor);
     printChat(userName);
     randomPic();
     
+    startTimer();
 }
 socket.on("random pic", data => {
     console.log("random int", data);

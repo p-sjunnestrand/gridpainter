@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var saveRouter = require('./routes/save');
 
 const MongoClient = require('mongodb').MongoClient;
+const { count } = require('console');
 
 MongoClient.connect("mongodb+srv://petterAdmin:gtnafyHN8WpQWfRB@rootcluster.d4txc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
     useUnifiedTopology: true
@@ -51,8 +52,21 @@ const colors = [
     {"color": "pink", "taken":false, "player": ''}
 ]
 
-io.on('connection', function (socket) {
+let start = false;
+let countdown = 100;
+let timer = setInterval(function(){
+    countdown--;
+    io.sockets.emit("timer", {countdown: countdown});
+    if(countdown == 0){
+        clearInterval(timer);
+        io.emit("timesUp", countdown);
+        // Antingen setLocalstorage att timesUp = true och kollarsen i main om den är sann/falsk, om sann kör rättningsfunctionen
+        // eller kör rättningsfunctionen direkt här
+    }
+}, 1000);
 
+
+io.on('connection', function (socket) {
     console.log('user ' + socket.id + ' connected');
 
     let socketId = socket.id
@@ -89,7 +103,22 @@ io.on('connection', function (socket) {
 
     });
 
+<<<<<<< HEAD
+=======
+    socket.on("startTimer", function(data){
+        if(start == false){
+            countdown = 100;
+        io.sockets.emit('timer', { countdown: countdown });
+        }
+        start = true; 
+    });
+>>>>>>> main
 });
+
+
+
+
+
 
 
 app.get('/colors');
