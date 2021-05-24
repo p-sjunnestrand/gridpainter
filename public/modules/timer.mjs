@@ -1,18 +1,18 @@
-let timeLeft = 5;
+let start = true;
 document.getElementById("root").insertAdjacentHTML("beforebegin", "<div id = 'timerBox'></div>")
 let timeBox = document.getElementById("timerBox");
 export function startTimer(){
-    let timer = setInterval(function(){
-        console.log(timeLeft);
-        timeLeft --;
-        timeBox.innerHTML = "<p>Time: " + timeLeft + "</p>";
-        if(timeLeft == 0){
+    socket.emit("startTimer");
+
+    socket.on("timer", function (data){
+        timeBox.innerHTML = "<p>Time: " + data.countdown + "</p>";
+    });
+
+    socket.on("timesUp", time=>{
+        if(time == 0 ){
             alert("Times up!");
-            clearInterval(timer);
-            // Antingen setLocalstorage att timesUp = true och kollarsen i main om den är sann/falsk, om sann kör rättningsfunctionen
-            // eller kör rättningsfunctionen direkt här
         }
-    }, 1000);
+    })
 }
 
 
