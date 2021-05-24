@@ -4,6 +4,7 @@ import { setPlayerInfo } from "../modules/setPlayerInfo.mjs"
 import { printBoard } from "../modules/print-board.mjs"
 import { printChat } from "../modules/printchat.mjs";
 import { getImg } from "../modules/getImage.mjs";
+import { startTimer } from "../modules/timer.mjs";
 
 
 
@@ -18,6 +19,7 @@ startBtn.addEventListener('click', (e) => {
     console.log('klick');
 
     startGame();
+
 })
 
 gallBtn.addEventListener('click', (e) => {
@@ -39,6 +41,7 @@ async function startGame() {
     let userColor = localStorage.getItem("playerColor");
     console.log("Playercolor" + localStorage.getItem("playerColor"));
 
-    printBoard(userColor);
+    printBoard(userName, userColor);
     printChat(userName);
+    startTimer();
 }
