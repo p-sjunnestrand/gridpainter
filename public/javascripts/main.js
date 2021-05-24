@@ -36,11 +36,10 @@ async function startGame() {
     await setPlayerInfo().catch(error => alert(error));
     console.log('launching game!');
 
-
     let userColor = localStorage.getItem("playerColor");
     console.log("Playercolor" + localStorage.getItem("playerColor"));
     
-    printBoard(userColor);
+    printBoard(userName, userColor);
     printChat(userName);
     startTimer();
 }
