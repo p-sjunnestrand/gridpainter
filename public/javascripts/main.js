@@ -6,8 +6,6 @@ import { printChat } from "../modules/printchat.mjs";
 
 
 
-
-
 printStartPage();
 
 let startBtn = document.getElementById('startGameBtn');
