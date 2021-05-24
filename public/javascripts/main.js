@@ -1,9 +1,10 @@
 
 import { printStartPage } from "../modules/printStartPage.mjs"
-import {setPlayerInfo} from "../modules/setPlayerInfo.mjs"
-import {printBoard} from "../modules/print-board.mjs"
+import { setPlayerInfo } from "../modules/setPlayerInfo.mjs"
+import { printBoard } from "../modules/print-board.mjs"
 import { printChat } from "../modules/printchat.mjs";
-import {startTimer} from "../modules/timer.mjs";
+import { getImg } from "../modules/getImage.mjs";
+import { startTimer } from "../modules/timer.mjs";
 
 
 
@@ -16,13 +17,14 @@ let gallBtn = document.getElementById('galleryBtn');
 
 startBtn.addEventListener('click', (e) => {
     console.log('klick');
-    
+
     startGame();
 
 })
 
 gallBtn.addEventListener('click', (e) => {
- console.log('galleri');
+    console.log('galleri');
+    getImg();
 })
 
 
@@ -38,7 +40,7 @@ async function startGame() {
 
     let userColor = localStorage.getItem("playerColor");
     console.log("Playercolor" + localStorage.getItem("playerColor"));
-    
+
     printBoard(userName, userColor);
     printChat(userName);
     startTimer();
