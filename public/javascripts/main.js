@@ -3,12 +3,14 @@ import { printStartPage } from "../modules/printStartPage.mjs"
 import {setPlayerInfo} from "../modules/setPlayerInfo.mjs"
 import {printBoard} from "../modules/print-board.mjs"
 import { printChat } from "../modules/printchat.mjs";
+import { randomPic } from "../modules/randomPic.mjs";
 
 
 
 
 
 printStartPage();
+
 
 let startBtn = document.getElementById('startGameBtn');
 let gallBtn = document.getElementById('galleryBtn');
@@ -35,6 +37,8 @@ async function startGame() {
 
     await setPlayerInfo().catch(error => alert(error));
     console.log('launching game!');
+    
+    
 
 
     let userColor = localStorage.getItem("playerColor");
@@ -42,4 +46,9 @@ async function startGame() {
     
     printBoard(userColor);
     printChat(userName);
+    randomPic();
+    
 }
+socket.on("random pic", data => {
+    console.log("random int", data);
+})
