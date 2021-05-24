@@ -29,7 +29,9 @@ export function printBoard(userName, userColor) {
         `</div>
 
                 </section>
-                <button id="saveImg">Spara bild</button>
+                <button id="saveImg">Save image</button>
+                <button id="restartBtn">Restart</button>
+                <button id="quitBtn">Quit</button>
             </div>
         `;
 

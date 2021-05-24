@@ -42,13 +42,35 @@ for (let r=1; r<16; r++) {
         gridArray.push(info);
     }   
 };
+//array that stores player colors and keeps track of number of players in game
+const colors = [
+    {"color": "blue", "taken":false, "player": ''},
+    {"color": "red", "taken":false, "player": ''},
+    {"color": "yellow", "taken":false, "player": ''},
+    {"color": "pink", "taken":false, "player": ''}
+]
 
 io.on('connection', function (socket) {
-    console.log('user connected');
+
+    console.log('user ' + socket.id + ' connected');
+
+    let socketId = socket.id
+    io.to(socket.id).emit("socketId", socketId);
+
     io.emit("grid change", gridArray);
+
     socket.on("disconnect", () => {
-        console.log("user disconnected ");
+        console.log("user " + socket.id + " disconnected ");
+        for (color in colors){
+            if(colors[color].player === socket.id){
+                colors[color].player = '';
+                colors[color].taken = false;
+                console.log("colorArray", colors);
+            }
+        }
     })
+    
+
     //Handles sent chat messages
     socket.on("chat msg", msg => {
         console.log("msg", msg);
@@ -68,6 +90,35 @@ io.on('connection', function (socket) {
 });
 
 
+app.get('/colors');
 
+
+app.post('/colors', function(req, res, next) {
+  console.log('colors!');
+  let colorPicked = false;
+  for(color in colors){
+    console.log(colors[color].color);
+    if(colors[color].taken === false){
+      console.log(colors[color].color + "color is available!");
+      console.log(req.body);
+      let chosenColor = {"color": colors[color].color};
+      res.json(chosenColor);
+      colors[color].taken = true;
+      colors[color].player = req.body.playerId;
+      console.log('colorArray', colors);
+      console.log(colors[color].taken);
+      colorPicked = true;
+
+      console.log();
+      break;
+    } else {
+      continue;
+    }
+      // res.json({"color": "none"}) 
+  }
+  if(colorPicked === false){
+    res.json({"color": "none"})
+  }
+});
 
 module.exports = { app: app, server: server };
