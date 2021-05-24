@@ -3,7 +3,7 @@ import { printStartPage } from "../modules/printStartPage.mjs"
 import {setPlayerInfo} from "../modules/setPlayerInfo.mjs"
 import {printBoard} from "../modules/print-board.mjs"
 import { printChat } from "../modules/printchat.mjs";
-
+import {startTimer} from "../modules/timer.mjs";
 
 
 
@@ -42,4 +42,5 @@ async function startGame() {
     
     printBoard(userColor);
     printChat(userName);
+    startTimer();
 }
