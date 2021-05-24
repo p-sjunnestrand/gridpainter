@@ -9,12 +9,9 @@ export function printBoard(userName, userColor) {
             <div id="gameBoardContainer">
                 <h2>Welcome ${userName}</h2>
                 <section>
-                    <h3>Your Color</h3>
-                    <div>
-                        <div id="${userColor}">${userColor}</div>
-                        <div id="color2"></div>
-                        <div id="color3"></div>
-                        <div id="color4"></div>
+                    <div id="displayInfoWrapper">
+                        <h3>Your Color:</h3>
+                        <div id="colorBox" class="${userColor}"></div>
                     </div>
                     <div id="gridContainer">`;
 
