@@ -49,18 +49,24 @@ app.post('/', function (req, res, next) {
 
     console.log('rad 50', req.body);
 
+    let query = { userName: req.body.userName }
+
+
     let savedState = {
         $set: {
             id: randomKey.generate(),
             userName: req.body.userName,
             gridState: gridArray
         }
+    }
+
+    let options = {
+        upsert: true,
+        returnNewDocument: true
     };
 
 
-    // req.app.locals.db.collection('savedPaints').insertOne(savedState);
-
-    req.app.locals.db.collection('savedPaints').findOneAndUpdate({ userName: req.body.userName }, savedState, { upsert: true })
+    req.app.locals.db.collection('savedPaints').findOneAndUpdate(query, savedState, options)
         .then(updatedDocument => {
             if (updatedDocument) {
                 console.log(`Successfully updated document: ${updatedDocument}.`)
@@ -71,7 +77,7 @@ app.post('/', function (req, res, next) {
         })
         .catch(err => console.error(`Failed to find and update document: ${err}`))
 
-    console.log(savedState);
+    console.log('rad 82', savedState);
 
 
     res.json('bild sparad i db');

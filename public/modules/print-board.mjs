@@ -64,7 +64,7 @@ export function printBoard(userColor) {
     let save = document.getElementById('saveImg');
     save.addEventListener('click', e => {
         console.log('sparad bild');
-        saveImg(userNameObj);// bild objekt
+        saveImg(userNameObj);
     })
 
 
