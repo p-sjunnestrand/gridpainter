@@ -3,6 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const randomInt = require('./randomInt');
+const randomKey = require('random-key');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -38,11 +39,11 @@ app.use('/save', saveRouter);
 //array that represents the gameboard. Updates with each grid click.
 let gridArray = []
 let info;
-for (let r=1; r<16; r++) {
-    for (let c=1; c<16; c++) {
-        info = {id: `y${r}x${c}`, color: null};
+for (let r = 1; r < 16; r++) {
+    for (let c = 1; c < 16; c++) {
+        info = { id: `y${r}x${c}`, color: null };
         gridArray.push(info);
-    }   
+    }
 };
 //array that stores player colors and keeps track of number of players in game
 const colors = [
@@ -64,6 +65,67 @@ let timer = setInterval(function(){
         // eller kör rättningsfunctionen direkt här
     }
 }, 1000);
+
+
+// Save picture to db
+app.post('/', function (req, res, next) {
+
+    console.log('rad 50', req.body);
+
+    let query = { userName: req.body.userName }
+
+
+    let savedState = {
+        $set: {
+            id: randomKey.generate(),
+            userName: req.body.userName,
+            gridState: gridArray
+        }
+    }
+
+    let options = {
+        upsert: true,
+        returnNewDocument: true
+    };
+
+
+    req.app.locals.db.collection('savedPaints').findOneAndUpdate(query, savedState, options)
+        .then(updatedDocument => {
+            if (updatedDocument) {
+                console.log(`Successfully updated document: ${updatedDocument}.`)
+            } else {
+                console.log("No document matches the provided query.")
+            }
+            return updatedDocument
+        })
+        .catch(err => console.error(`Failed to find and update document: ${err}`))
+
+    console.log('rad 82', savedState);
+
+
+    res.json('bild sparad i db');
+});
+
+
+app.get('/gallery', function (req, res, next) {
+
+    let query = {}
+    let projection = { userName: 1, gridState: 1 }
+
+
+    req.app.locals.db.collection('savedPaints').find(query, projection)
+        .sort({ name: 1 })
+        .toArray()
+        .then(items => {
+            console.log(`Successfully found ${items.length} documents.`)
+            console.log(items);
+            res.json(items);
+        })
+        .catch(err => console.error(`Failed to find documents: ${err}`))
+
+
+
+});
 
 
 io.on('connection', function (socket) {
@@ -93,8 +155,8 @@ io.on('connection', function (socket) {
     })
     //Handles clicks on gameboard
     socket.on("grid click", click => {
-        for (grid in gridArray){
-            if (gridArray[grid].id === click.coordinates){
+        for (grid in gridArray) {
+            if (gridArray[grid].id === click.coordinates) {
                 gridArray[grid].color = click.playerColor;
             };
         };
