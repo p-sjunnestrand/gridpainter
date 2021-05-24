@@ -1,6 +1,7 @@
 let start = true;
 document.getElementById("root").insertAdjacentHTML("beforebegin", "<div id = 'timerBox'></div>")
 let timeBox = document.getElementById("timerBox");
+
 export function startTimer(){
     socket.emit("startTimer");
 
