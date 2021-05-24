@@ -18,6 +18,7 @@ startBtn.addEventListener('click', (e) => {
     console.log('klick');
     
     startGame();
+
 })
 
 gallBtn.addEventListener('click', (e) => {
