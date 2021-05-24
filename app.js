@@ -172,6 +172,11 @@ io.on('connection', function (socket) {
         }
         start = true; 
     });
+
+    socket.on("startGame", data => {
+        console.log("test", data);
+        io.emit("startGame", data);
+    });
 });
 
 
