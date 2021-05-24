@@ -84,6 +84,27 @@ app.post('/', function (req, res, next) {
 });
 
 
+app.get('/gallery', function (req, res, next) {
+
+    let query = {}
+    let projection = { userName: 1, gridState: 1 }
+
+
+    req.app.locals.db.collection('savedPaints').find(query, projection)
+        .sort({ name: 1 })
+        .toArray()
+        .then(items => {
+            console.log(`Successfully found ${items.length} documents.`)
+            console.log(items);
+            res.json(items);
+        })
+        .catch(err => console.error(`Failed to find documents: ${err}`))
+
+
+
+});
+
+
 io.on('connection', function (socket) {
     console.log('user connected');
     io.emit("grid change", gridArray);
