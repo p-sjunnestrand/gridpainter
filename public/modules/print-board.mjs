@@ -1,17 +1,17 @@
 import { saveImg } from "../modules/saveImg.mjs"
 import { gridClick } from "../modules/gridClick.mjs"
 
-export function printBoard(userColor) {
+export function printBoard(userName, userColor) {
 
     let root = document.getElementById("root");
     let board = `
     
             <div id="gameBoardContainer">
-                <h2>Welcome Janne</h2>
+                <h2>Welcome ${userName}</h2>
                 <section>
                     <h3>Your Color</h3>
                     <div>
-                        <div id="color1"></div>
+                        <div id="${userColor}">${userColor}</div>
                         <div id="color2"></div>
                         <div id="color3"></div>
                         <div id="color4"></div>
