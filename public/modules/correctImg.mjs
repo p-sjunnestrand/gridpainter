@@ -26,7 +26,7 @@ export function correctImg() {
   let scorePercentage = Math.floor(sum*100/total);
   console.log("scorePercentage rounded up", scorePercentage);
 
-  correctMsgContainer.innerHTML = `<p>Your score: ${scorePercentage}% out of 100 %.</p>`;
+  correctMsgContainer.innerHTML = `<p>Your score: ${scorePercentage}% out of 100%.</p>`;
 
 
   return scorePercentage;
