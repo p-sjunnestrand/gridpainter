@@ -2,20 +2,17 @@ import { saveImg } from "../modules/saveImg.mjs"
 import { gridClick } from "../modules/gridClick.mjs"
 import { correctImg } from "../modules/correctImg.mjs";
 
-export function printBoard(userColor) {
+export function printBoard(userName, userColor) {
 
     let root = document.getElementById("root");
     let board = `
     
             <div id="gameBoardContainer">
-                <h2>Welcome Janne</h2>
+                <h2>Welcome ${userName}</h2>
                 <section>
-                    <h3>Your Color</h3>
-                    <div>
-                        <div id="color1"></div>
-                        <div id="color2"></div>
-                        <div id="color3"></div>
-                        <div id="color4"></div>
+                    <div id="displayInfoWrapper">
+                        <h3>Your Color:</h3>
+                        <div id="colorBox" class="${userColor}"></div>
                     </div>
                     <div id="gridContainer">`;
 
@@ -39,9 +36,9 @@ export function printBoard(userColor) {
 
     root.innerHTML = board;
 
-    let colorBoard = JSON.parse(localStorage.getItem("gridColors")) ;
+    let colorBoard = JSON.parse(localStorage.getItem("gridColors"));
 
-    for(let color in colorBoard){
+    for (let color in colorBoard) {
         if (colorBoard[color].color !== null) {
             document.getElementById(colorBoard[color].id).style.backgroundColor = colorBoard[color].color;
         };
@@ -62,12 +59,13 @@ export function printBoard(userColor) {
         };
         localStorage.setItem("gridColors", JSON.stringify(gridChange));
     });
-    // console.log(localStorage.getItem("gridColors"));
+    console.log(localStorage.getItem("playerName"));
+    let userNameObj = { userName: localStorage.getItem('playerName') };
 
     let save = document.getElementById('saveImg');
     save.addEventListener('click', e => {
         console.log('sparad bild');
-        saveImg({});// bild objekt
+        saveImg(userNameObj);
     })
 
     let correct = document.getElementById('correctBtn');

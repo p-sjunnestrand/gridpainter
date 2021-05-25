@@ -37,6 +37,6 @@ export function printChat(userName){
   
         chat.insertAdjacentHTML('beforeend', `<li><div chatMessage"><div class ="chatPlayerName">${msg.playerName}:</div>${msg.text}</div></li>`)
         console.log();
-      })
+    })
     
 }

@@ -62,6 +62,33 @@ button {
     font-size: 1.2rem;
 }
 
+#displayInfoWrapper {
+    display: flex;
+    align-items: center;
+
+    #colorBox {
+        width: 35px;
+        height: 35px;
+        margin-left: 10px;
+    }
+
+    .red {
+        background-color: red;
+    }
+
+    .blue {
+        background-color: blue;
+    }
+
+    .yellow {
+        background-color: yellow;
+    }
+
+    .pink {
+        background-color: pink;
+    }
+}
+
 $pixels-30px: 30px;
 
 #gridContainer {

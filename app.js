@@ -2,12 +2,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const randomInt = require('./randomInt');
+const randomKey = require('random-key');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saveRouter = require('./routes/save');
 
 const MongoClient = require('mongodb').MongoClient;
+const { count } = require('console');
 
 MongoClient.connect("mongodb+srv://petterAdmin:gtnafyHN8WpQWfRB@rootcluster.d4txc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
     useUnifiedTopology: true
@@ -36,11 +39,11 @@ app.use('/save', saveRouter);
 //array that represents the gameboard. Updates with each grid click.
 let gridArray = []
 let info;
-for (let r=1; r<16; r++) {
-    for (let c=1; c<16; c++) {
-        info = {id: `y${r}x${c}`, color: null};
+for (let r = 1; r < 16; r++) {
+    for (let c = 1; c < 16; c++) {
+        info = { id: `y${r}x${c}`, color: null };
         gridArray.push(info);
-    }   
+    }
 };
 //array that stores player colors and keeps track of number of players in game
 const colors = [
@@ -50,8 +53,82 @@ const colors = [
     {"color": "pink", "taken":false, "player": ''}
 ]
 
-io.on('connection', function (socket) {
+let start = false;
+let countdown = 100;
+let timer = setInterval(function(){
+    countdown--;
+    io.sockets.emit("timer", {countdown: countdown});
+    if(countdown == 0){
+        clearInterval(timer);
+        io.emit("timesUp", countdown);
+        // Antingen setLocalstorage att timesUp = true och kollarsen i main om den är sann/falsk, om sann kör rättningsfunctionen
+        // eller kör rättningsfunctionen direkt här
+    }
+}, 1000);
 
+
+// Save picture to db
+app.post('/', function (req, res, next) {
+
+    console.log('rad 50', req.body);
+
+    let query = { userName: req.body.userName }
+
+
+    let savedState = {
+        $set: {
+            id: randomKey.generate(),
+            userName: req.body.userName,
+            gridState: gridArray
+        }
+    }
+
+    let options = {
+        upsert: true,
+        returnNewDocument: true
+    };
+
+
+    req.app.locals.db.collection('savedPaints').findOneAndUpdate(query, savedState, options)
+        .then(updatedDocument => {
+            if (updatedDocument) {
+                console.log(`Successfully updated document: ${updatedDocument}.`)
+            } else {
+                console.log("No document matches the provided query.")
+            }
+            return updatedDocument
+        })
+        .catch(err => console.error(`Failed to find and update document: ${err}`))
+
+    console.log('rad 82', savedState);
+
+
+    res.json('bild sparad i db');
+});
+
+
+app.get('/gallery', function (req, res, next) {
+
+    let query = {}
+    let projection = { userName: 1, gridState: 1 }
+
+
+    req.app.locals.db.collection('savedPaints').find(query, projection)
+        .sort({ name: 1 })
+        .toArray()
+        .then(items => {
+            console.log(`Successfully found ${items.length} documents.`)
+            console.log(items);
+            res.json(items);
+        })
+        .catch(err => console.error(`Failed to find documents: ${err}`))
+
+
+
+});
+
+
+io.on('connection', function (socket) {
     console.log('user ' + socket.id + ' connected');
 
     let socketId = socket.id
@@ -78,8 +155,8 @@ io.on('connection', function (socket) {
     })
     //Handles clicks on gameboard
     socket.on("grid click", click => {
-        for (grid in gridArray){
-            if (gridArray[grid].id === click.coordinates){
+        for (grid in gridArray) {
+            if (gridArray[grid].id === click.coordinates) {
                 gridArray[grid].color = click.playerColor;
             };
         };
@@ -87,7 +164,25 @@ io.on('connection', function (socket) {
         io.emit("grid change", gridArray);
 
     });
+
+    socket.on("startTimer", function(data){
+        if(start == false){
+            countdown = 100;
+        io.sockets.emit('timer', { countdown: countdown });
+        }
+        start = true; 
+    });
+
+    socket.on("startGame", data => {
+        console.log("test", data);
+        io.emit("startGame", data);
+    });
 });
+
+
+
+
+
 
 
 app.get('/colors');
@@ -121,4 +216,23 @@ app.post('/colors', function(req, res, next) {
   }
 });
 
+app.get('/random', (req, res) => {
+
+    //asigns random int 0-4 to let
+    let generatedRandomInt = randomInt(0,4);
+
+    // console.log("random int", generatedRandomInt);
+
+    //fetches all items from collection
+    req.app.locals.db.collection("savedPaints").find().toArray()
+    .then(results => {
+        // console.log(results[generatedRandomInt]);
+
+        //chooses the pic in the fetched array corresponding to the randomly generated number above.
+        let fetchedRandomPic = results[generatedRandomInt];
+
+        //emits the chosen pic to front.
+        io.emit("random pic", fetchedRandomPic)
+    })
+})
 module.exports = { app: app, server: server };
