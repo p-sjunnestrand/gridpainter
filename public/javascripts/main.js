@@ -7,6 +7,7 @@ import { randomPic } from "../modules/randomPic.mjs";
 
 import {startTimer} from "../modules/timer.mjs";
 import { getImg } from "../modules/getImage.mjs";
+import { displayCalque } from "../modules/displayCalque.mjs";
 
 
 
@@ -49,10 +50,11 @@ async function startGame() {
 
     printBoard(userName, userColor);
     printChat(userName);
-    randomPic();
+    displayCalque();
+    // randomPic();
     
     startTimer();
 }
-socket.on("random pic", data => {
-    console.log("random int", data);
-})
+// socket.on("random pic", data => {
+//     console.log("random int", data);
+// })

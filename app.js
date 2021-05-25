@@ -180,7 +180,7 @@ io.on('connection', function (socket) {
 
 
 
-app.get('/colors');
+// app.get('/colors');
 
 
 app.post('/colors', function(req, res, next) {
@@ -216,15 +216,16 @@ app.get('/random', (req, res) => {
     //asigns random int 0-4 to let
     let generatedRandomInt = randomInt(0,4);
 
-    // console.log("random int", generatedRandomInt);
+    console.log("random int", generatedRandomInt);
 
     //fetches all items from collection
-    req.app.locals.db.collection("savedPaints").find().toArray()
+    req.app.locals.db.collection("images").find().toArray()
     .then(results => {
         // console.log(results[generatedRandomInt]);
 
         //chooses the pic in the fetched array corresponding to the randomly generated number above.
         let fetchedRandomPic = results[generatedRandomInt];
+        // let fetchedRandomPic = results[0];
 
         //emits the chosen pic to front.
         io.emit("random pic", fetchedRandomPic)

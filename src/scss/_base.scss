@@ -90,6 +90,7 @@ button {
 }
 
 $pixels-30px: 30px;
+$small-pixels: 12px;
 
 #gridContainer {
     width: 490px;
@@ -148,4 +149,19 @@ footer {
     font-size: 0.9rem;
     font-weight: 700;
     text-align: right;
+}
+
+#calqueGridContainer {
+    width: 230px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    padding: 20px;
+ 
+    .calque-pixels {
+        border: 1px solid white;
+        background-color: $color-white;
+        width: $small-pixels;
+        height: $small-pixels; 
+    }
 }
