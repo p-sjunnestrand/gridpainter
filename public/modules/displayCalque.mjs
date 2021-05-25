@@ -21,7 +21,7 @@ export function displayCalque() {
     socket.on("random pic", data => {
         // console.log("random int", data.gridState);
         let gridState = data.gridState;
-        console.log(gridState);
+        // console.log(gridState);
         
         for (let state in gridState){
             // console.log(gridState[state].color);
@@ -35,9 +35,7 @@ export function displayCalque() {
 
 
     let gridState = JSON.parse(localStorage.getItem("facitGrid"));
-    console.log(gridState);
     for (let state in gridState){
-        console.log(gridState[state].id);
         document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;  
     }
 }

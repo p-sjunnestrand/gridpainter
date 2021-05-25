@@ -17,7 +17,7 @@ export function Start(){
     socket.on("startGame", data => {
         startBox.innerHTML = "";
         startTimer();
-        
+        displayCalque();
     });
 
     if(localStorage.getItem("hasStarted") == "true"){
