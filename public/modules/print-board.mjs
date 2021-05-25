@@ -1,5 +1,6 @@
 import { saveImg } from "../modules/saveImg.mjs"
 import { gridClick } from "../modules/gridClick.mjs"
+import { correctImg } from "../modules/correctImg.mjs";
 
 export function printBoard(userName, userColor) {
 
@@ -29,6 +30,7 @@ export function printBoard(userName, userColor) {
                 <button id="saveImg">Save image</button>
                 <button id="restartBtn">Restart</button>
                 <button id="quitBtn">Quit</button>
+                <button id="correctBtn">Correct</button>
             </div>
         `;
 
@@ -65,6 +67,12 @@ export function printBoard(userName, userColor) {
         console.log('sparad bild');
         saveImg(userNameObj);
     })
+
+    let correct = document.getElementById('correctBtn');
+    correct.addEventListener('click', function() {
+        correctImg()
+    })
+
 
 
 
