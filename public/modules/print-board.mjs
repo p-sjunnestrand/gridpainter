@@ -33,10 +33,12 @@ export function printBoard(userName, userColor) {
                 <button id="eraseImg">Restart</button>
                 <button id="quitBtn">Quit</button>
                 <button id="correctBtn">Correct</button>
+                <div id="correctMsgContainer"></div>
             </div>
         `;
 
     root.innerHTML = board;
+    let correctMsgContainer = document.getElementById("correctMsgContainer");
 
     updateGridColors();
 
@@ -66,8 +68,20 @@ export function printBoard(userName, userColor) {
 
     let correct = document.getElementById('correctBtn');
     correct.addEventListener('click', function() {
-        correctImg()
-    })
+
+        // correctImg(correctMsgContainer);
+        correctImg();
+
+        
+    });
+
+    socket.on("printScore", scoreObject => {
+        console.log("scoreObject from printScore socket", scoreObject);
+        correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject.score}% out of 100%.</p>`;
+    
+      
+    });
+    
 
 
 

@@ -184,6 +184,11 @@ io.on('connection', function (socket) {
         console.log("test", data);
         io.emit("startGame", data);
     });
+
+    socket.on("printScore", scoreObject => {
+        console.log("scoreObject från en klient", scoreObject);
+        io.emit("printScore", scoreObject);
+    });
 });
 
 
