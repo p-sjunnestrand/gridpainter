@@ -3,5 +3,6 @@ export function randomPic(){
     .then(result => result.json())
     .then(data => {
         console.log(data);
-    })
+
+    });
 }
