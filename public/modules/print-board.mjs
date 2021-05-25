@@ -73,9 +73,19 @@ export function printBoard(userName, userColor) {
     let correct = document.getElementById('correctBtn');
     correct.addEventListener('click', function() {
 
-        correctImg(correctMsgContainer);
+        // correctImg(correctMsgContainer);
+        correctImg();
+
         
     });
+
+    socket.on("printScore", scoreObject => {
+        console.log("scoreObject from printScore socket", scoreObject);
+        correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject.score}% out of 100%.</p>`;
+    
+      
+    });
+    
 
 
 

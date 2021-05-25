@@ -1,3 +1,5 @@
+// import { Socket } from "./socket.io";
+
 export function correctImg() {
   console.log("correctMsgContainer", correctMsgContainer);
   const savedImg = JSON.parse(localStorage.getItem('gridColors'));
@@ -26,8 +28,15 @@ export function correctImg() {
   let scorePercentage = Math.floor(sum*100/total);
   console.log("scorePercentage rounded up", scorePercentage);
 
-  correctMsgContainer.innerHTML = `<p>Your score: ${scorePercentage}% out of 100%.</p>`;
+  socket.emit("printScore", {"score": scorePercentage});
+  
+  // socket.on("printScore", scoreObject => {
+  //   console.log("scoreObject from printScore socket", scoreObject);
+  //   correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject.score}% out of 100%.</p>`;
+
+  // });
 
 
-  return scorePercentage;
+
+  // return scorePercentage;
 }
