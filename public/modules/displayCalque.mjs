@@ -38,4 +38,5 @@ export function displayCalque() {
     for (let state in gridState){
         document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;  
     }
+    localStorage.setItem("hasStarted", "true");
 }

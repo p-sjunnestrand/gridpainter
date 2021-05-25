@@ -8,29 +8,38 @@ export function Start(){
     let startBtn = document.getElementById("startGameBtn");
     let startBox = document.getElementById("startGameBox");
 
+
     startBtn.addEventListener('click', () => {
-        localStorage.setItem("hasStarted", "true")
+
         socket.emit("startGame", {text: "testing"});
         randomPic();
-        
+
     });
     socket.on("startGame", data => {
+        
+
         startBox.innerHTML = "";
         startTimer();
+
+        if(localStorage.getItem("hasStarted") !== "true"){
+            displayCalque();
+
+        }
+
         
-        displayCalque();
     });
 
     if(localStorage.getItem("hasStarted") == "true"){
+        startBox.innerHTML = "";
         socket.emit("startGame", {text: "testing"});
-        socket.on("startGame", data => {
-            startBox.innerHTML = "";
+        displayCalque();
+        // socket.on("startGame", data => {
+        //     // startBox.innerHTML = "";
        
-            //displayCalque();         
-            startTimer();
-        });
+        //     //displayCalque();         
+        //     //startTimer();
+        // });
     }
 
-    
     
 }
