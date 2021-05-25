@@ -1,15 +1,9 @@
-
 import { printStartPage } from "../modules/printStartPage.mjs"
 import { setPlayerInfo } from "../modules/setPlayerInfo.mjs"
 import { printBoard } from "../modules/print-board.mjs"
 import { printChat } from "../modules/printchat.mjs";
-import { randomPic } from "../modules/randomPic.mjs";
-
-import {startTimer} from "../modules/timer.mjs";
 import { getImg } from "../modules/getImage.mjs";
-
-
-
+import {Start} from "../modules/startGame.mjs";
 
 
 printStartPage();
@@ -49,9 +43,9 @@ async function startGame() {
 
     printBoard(userName, userColor);
     printChat(userName);
-    randomPic();
-    
-    startTimer();
+    Start();
+
+
 }
 socket.on("random pic", data => {
     console.log("random int", data);
