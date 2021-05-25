@@ -1,5 +1,5 @@
 
-import { randomPic} from "../modules/randomPic.mjs"
+//import { randomPic} from "../modules/randomPic.mjs"
 
 export function displayCalque() {
     let calqueDiv = `<div id = "calqueWrap">
@@ -15,18 +15,29 @@ export function displayCalque() {
     calqueDiv += `</div>`;
     document.getElementById('gameBoardContainer').insertAdjacentHTML('afterend', calqueDiv);
 
-    randomPic();
+    //randomPic();
 
     // console.log(randomPic());
     socket.on("random pic", data => {
         // console.log("random int", data.gridState);
         let gridState = data.gridState;
-        // console.log(gridState);
+        console.log(gridState);
+        
         for (let state in gridState){
             // console.log(gridState[state].color);
             document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
             // document.getElementById(`f-${gridState[state].id}`).classList.add(gridState[state].color);
-
+            
         }
+        let gridToLocal = JSON.stringify(gridState);
+        localStorage.setItem("facitGrid", gridToLocal);
     })
+
+
+    let gridState = JSON.parse(localStorage.getItem("facitGrid"));
+    console.log(gridState);
+    for (let state in gridState){
+        console.log(gridState[state].id);
+        document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;  
+    }
 }

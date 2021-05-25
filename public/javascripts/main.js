@@ -3,7 +3,7 @@ import { setPlayerInfo } from "../modules/setPlayerInfo.mjs"
 import { printBoard } from "../modules/print-board.mjs"
 import { printChat } from "../modules/printchat.mjs";
 import { getImg } from "../modules/getImage.mjs";
-import { displayCalque } from "../modules/displayCalque.mjs";
+// import { displayCalque } from "../modules/displayCalque.mjs";
 
 
 
@@ -47,10 +47,9 @@ async function startGame() {
 
     printBoard(userName, userColor);
     printChat(userName);
-    displayCalque();
+    // displayCalque();
     // randomPic();
-    
-    startTimer();
+
     Start();
 
 

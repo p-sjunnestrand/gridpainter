@@ -1,32 +1,32 @@
 import { randomPic } from "./randomPic.mjs";
 import { startTimer } from "./timer.mjs";
+import { displayCalque } from "../modules/displayCalque.mjs";
 
 export function Start(){
     const root = document.getElementById('root');
     root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'><button id ='startGameBtn'>Start game</button></div>")
     let startBtn = document.getElementById("startGameBtn");
-
+    let startBox = document.getElementById("startGameBox");
 
     startBtn.addEventListener('click', () => {
         localStorage.setItem("hasStarted", "true")
-        console.log(localStorage.getItem("hasStarted"));
         socket.emit("startGame", {text: "testing"});
+        randomPic();
+        displayCalque();
     });
     socket.on("startGame", data => {
+        startBox.innerHTML = "";
         startTimer();
-        randomPic();
+        
     });
 
     if(localStorage.getItem("hasStarted") == "true"){
-        console.log("true it has started");
         socket.emit("startGame", {text: "testing"});
         socket.on("startGame", data => {
+            startBox.innerHTML = "";
+       
+            displayCalque();         
             startTimer();
-
-            
-            //random pic bör nog bytas ut till att den hämtar info om bilden som valdes i random pic, 
-            //annars borde den nog göra en annan random bild
-            randomPic();
         });
     }
 
