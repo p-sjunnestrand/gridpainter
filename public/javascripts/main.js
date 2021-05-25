@@ -6,8 +6,6 @@ import { getImg } from "../modules/getImage.mjs";
 import {Start} from "../modules/startGame.mjs";
 
 
-
-
 printStartPage();
 
 
