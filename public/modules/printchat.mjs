@@ -1,3 +1,6 @@
+import { isSameSender } from "../modules/isSameSender.mjs"
+
+
 export function printChat(userName){
 
     const root = document.getElementById('root');
@@ -25,7 +28,7 @@ export function printChat(userName){
         e.preventDefault();
         console.log('chat click!');
         if(msgInput.value){
-            socket.emit("chat msg", {text: msgInput.value, playerName: userName, playerColor: "playerInfo.color"});
+            socket.emit("chat msg", {text: msgInput.value, playerName: userName, playerColor: localStorage.getItem("playerColor")});
             msgInput.value = '';
           }
     });
@@ -35,8 +38,9 @@ export function printChat(userName){
         let chat = document.getElementById('chat');
         
   
-        chat.insertAdjacentHTML('beforeend', `<li><div chatMessage"><div class ="chatPlayerName">${msg.playerName}:</div>${msg.text}</div></li>`)
-        console.log();
-    })
+        // chat.insertAdjacentHTML('beforeend', `<li><div chatMessage"><div class ="chatPlayerName">${msg.playerName}:</div>${msg.text}</div></li>`);
+        chat.insertAdjacentHTML('beforeend', `<li><div class="${isSameSender(msg)?'userSender': 'otherSender'} message"><div class ="chatPlayerName">${msg.playerName}:</div>${msg.text}</div></li>`)
+        // console.log();
+      })
     
 }

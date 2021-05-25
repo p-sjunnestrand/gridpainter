@@ -197,26 +197,26 @@ io.on('connection', function (socket) {
 
 
 
-app.get('/colors');
+// app.get('/colors');
 
 
 app.post('/colors', function(req, res, next) {
-  console.log('colors!');
+//   console.log('colors!');
   let colorPicked = false;
   for(color in colors){
-    console.log(colors[color].color);
+    // console.log(colors[color].color);
     if(colors[color].taken === false){
-      console.log(colors[color].color + "color is available!");
-      console.log(req.body);
+    //   console.log(colors[color].color + "color is available!");
+    //   console.log(req.body);
       let chosenColor = {"color": colors[color].color};
       res.json(chosenColor);
       colors[color].taken = true;
       colors[color].player = req.body.playerId;
-      console.log('colorArray', colors);
-      console.log(colors[color].taken);
+    //   console.log('colorArray', colors);
+    //   console.log(colors[color].taken);
       colorPicked = true;
 
-      console.log();
+    //   console.log();
       break;
     } else {
       continue;
@@ -233,15 +233,16 @@ app.get('/random', (req, res) => {
     //asigns random int 0-4 to let
     let generatedRandomInt = randomInt(0,4);
 
-    // console.log("random int", generatedRandomInt);
+    console.log("random int", generatedRandomInt);
 
     //fetches all items from collection
-    req.app.locals.db.collection("savedPaints").find().toArray()
+    req.app.locals.db.collection("images").find().toArray()
     .then(results => {
         // console.log(results[generatedRandomInt]);
 
         //chooses the pic in the fetched array corresponding to the randomly generated number above.
         let fetchedRandomPic = results[generatedRandomInt];
+        // let fetchedRandomPic = results[0];
 
         //emits the chosen pic to front.
         io.emit("random pic", fetchedRandomPic)
