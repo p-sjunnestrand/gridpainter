@@ -1,5 +1,5 @@
 export function correctImg() {
-    
+  console.log("correctMsgContainer", correctMsgContainer);
   const savedImg = JSON.parse(localStorage.getItem('gridColors'));
   console.log(savedImg);
 
@@ -17,9 +17,17 @@ export function correctImg() {
     }
   }
   compareArrays(savedImg, facitImg);
-  console.log(sum);
+  console.log("sum", sum);
   
-  let scorePercentage = sum*100/total;
-  console.log(scorePercentage);
+  // let scorePercentage = sum*100/total;
+  // console.log("scorePercentage", scorePercentage);
+
+  //avrunda uppåt:
+  let scorePercentage = Math.floor(sum*100/total);
+  console.log("scorePercentage rounded up", scorePercentage);
+
+  correctMsgContainer.innerHTML = `<p>Your score: ${scorePercentage}% out of 100 %.</p>`;
+
+
   return scorePercentage;
 }
