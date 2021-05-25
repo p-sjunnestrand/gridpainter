@@ -2,20 +2,17 @@ import { saveImg } from "../modules/saveImg.mjs"
 import { gridClick } from "../modules/gridClick.mjs"
 import {updateGridColors} from "../modules/updateGridColor.mjs"
 
-export function printBoard(userColor) {
+export function printBoard(userName, userColor) {
 
     let root = document.getElementById("root");
     let board = `
     
             <div id="gameBoardContainer">
-                <h2>Welcome Janne</h2>
+                <h2>Welcome ${userName}</h2>
                 <section>
-                    <h3>Your Color</h3>
-                    <div>
-                        <div id="color1"></div>
-                        <div id="color2"></div>
-                        <div id="color3"></div>
-                        <div id="color4"></div>
+                    <div id="displayInfoWrapper">
+                        <h3>Your Color:</h3>
+                        <div id="colorBox" class="${userColor}"></div>
                     </div>
                     <div id="gridContainer">`;
 
@@ -55,27 +52,29 @@ export function printBoard(userColor) {
         };
         localStorage.setItem("gridColors", JSON.stringify(gridChange));
     });
-    // console.log(localStorage.getItem("gridColors"));
+    console.log(localStorage.getItem("playerName"));
+    let userNameObj = { userName: localStorage.getItem('playerName') };
 
     let save = document.getElementById('saveImg');
     save.addEventListener('click', e => {
         console.log('sparad bild');
-        saveImg({});// bild objekt
+        saveImg(userNameObj);
     })
 
 
 
     let eraseImgBtn = document.getElementById("eraseImg");
     eraseImgBtn.addEventListener("click", function(){
-        let empty = {empty: true};
-        socket.emit("empty", empty);
+       
+        socket.emit("empty grid", {text: "text"});
 
-        socket.on("empty grid", gridChange => {
-            localStorage.setItem("gridColors", JSON.stringify(gridChange));
-            //console.log(localStorage.getItem("gridColors"));
-            updateGridColors();
-        });
+        
 
+    });
+    socket.on("empty grid", data => {
+        localStorage.setItem("gridColors", JSON.stringify(data));
+        //console.log(localStorage.getItem("gridColors"));
+        updateGridColors();
     });
     
 }

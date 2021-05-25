@@ -2,15 +2,18 @@
 
 <head>
   <title>GridPainter av Grupp 8</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="stylesheet" href="/stylesheets/style.css"> -->
   <script defer type="module" src="./javascripts/main.js"></script>
   <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;700&display=swap" rel="stylesheet">  
 </head>
 
 <body>
 
   <header>
-    <h1>GridPainter</h1>
+
   </header>
 
   <main id="root">
@@ -25,6 +28,11 @@
 
   <script>
     const socket = io();
+    //Sets socket.id to LS in order to pair it with color array when starting game.
+    //Could not place it in the main js-file, only works here, for reasons at present unknown.
+    socket.on("socketId", socketId => {
+    localStorage.setItem('socketId', socketId);
+ })
   </script>
 
 </body>

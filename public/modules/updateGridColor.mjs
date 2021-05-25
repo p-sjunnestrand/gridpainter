@@ -8,7 +8,7 @@ export function updateGridColors(){
         if (colorBoard[color].color !== null) {
             document.getElementById(colorBoard[color].id).style.backgroundColor = colorBoard[color].color;
         }else{
-            document.getElementById(colorBoard[color].id).style.backgroundColor = "white";
+            document.getElementById(colorBoard[color].id).style.backgroundColor = "#f4eee2";
         }
     }
 }
