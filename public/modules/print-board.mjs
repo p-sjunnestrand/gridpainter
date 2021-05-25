@@ -1,10 +1,7 @@
-import { saveImg } from "../modules/saveImg.mjs"
-import { gridClick } from "../modules/gridClick.mjs"
-<<<<<<< HEAD
-import {updateGridColors} from "../modules/updateGridColor.mjs"
-=======
+import { saveImg } from "../modules/saveImg.mjs";
+import { gridClick } from "../modules/gridClick.mjs";
+import {updateGridColors} from "../modules/updateGridColor.mjs";
 import { correctImg } from "../modules/correctImg.mjs";
->>>>>>> main
 
 export function printBoard(userName, userColor) {
 
@@ -31,16 +28,11 @@ export function printBoard(userName, userColor) {
         `</div>
 
                 </section>
-<<<<<<< HEAD
-                <button id="saveImg">Spara bild</button>
 
-                <button id="eraseImg">Rensa bild</button>
-=======
                 <button id="saveImg">Save image</button>
-                <button id="restartBtn">Restart</button>
+                <button id="eraseImg">Restart</button>
                 <button id="quitBtn">Quit</button>
                 <button id="correctBtn">Correct</button>
->>>>>>> main
             </div>
         `;
 
