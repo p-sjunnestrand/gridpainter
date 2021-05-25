@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var saveRouter = require('./routes/save');
 
 const MongoClient = require('mongodb').MongoClient;
+const { on } = require('events');
 const { count } = require('console');
 
 MongoClient.connect("mongodb+srv://petterAdmin:gtnafyHN8WpQWfRB@rootcluster.d4txc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
@@ -158,13 +159,19 @@ io.on('connection', function (socket) {
         for (grid in gridArray) {
             if (gridArray[grid].id === click.coordinates) {
                 gridArray[grid].color = click.playerColor;
-            };
-        };
-
+            }
+        }
         io.emit("grid change", gridArray);
 
     });
 
+    socket.on("empty grid", empty => {
+        for(grid in gridArray){
+            gridArray[grid].color = null;
+        }
+        io.emit("empty grid", gridArray);
+    });
+    
     socket.on("startTimer", function(data){
         if(start == false){
             countdown = 100;
