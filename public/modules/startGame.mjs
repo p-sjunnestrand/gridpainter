@@ -12,11 +12,12 @@ export function Start(){
         localStorage.setItem("hasStarted", "true")
         socket.emit("startGame", {text: "testing"});
         randomPic();
-        displayCalque();
+        
     });
     socket.on("startGame", data => {
         startBox.innerHTML = "";
         startTimer();
+        
         displayCalque();
     });
 
@@ -25,7 +26,7 @@ export function Start(){
         socket.on("startGame", data => {
             startBox.innerHTML = "";
        
-            displayCalque();         
+            //displayCalque();         
             startTimer();
         });
     }
