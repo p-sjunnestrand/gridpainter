@@ -27,9 +27,8 @@ startBtn.addEventListener('click', (e) => {
 
 
 gallBtn.addEventListener('click', (e) => {
-    console.log('klick galleri');
+    // console.log('klick galleri');
     getImg();
-
 
 });
 
