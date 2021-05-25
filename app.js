@@ -184,22 +184,22 @@ app.get('/colors');
 
 
 app.post('/colors', function(req, res, next) {
-  console.log('colors!');
+//   console.log('colors!');
   let colorPicked = false;
   for(color in colors){
-    console.log(colors[color].color);
+    // console.log(colors[color].color);
     if(colors[color].taken === false){
-      console.log(colors[color].color + "color is available!");
-      console.log(req.body);
+    //   console.log(colors[color].color + "color is available!");
+    //   console.log(req.body);
       let chosenColor = {"color": colors[color].color};
       res.json(chosenColor);
       colors[color].taken = true;
       colors[color].player = req.body.playerId;
-      console.log('colorArray', colors);
-      console.log(colors[color].taken);
+    //   console.log('colorArray', colors);
+    //   console.log(colors[color].taken);
       colorPicked = true;
 
-      console.log();
+    //   console.log();
       break;
     } else {
       continue;
