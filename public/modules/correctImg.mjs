@@ -1,5 +1,6 @@
 // import { Socket } from "./socket.io";
 
+
 export function correctImg() {
   console.log("correctMsgContainer", correctMsgContainer);
   const savedImg = JSON.parse(localStorage.getItem('gridColors'));
@@ -36,4 +37,14 @@ export function correctImg() {
 
 
   // return scorePercentage;
+
+  //Tar bort correct-knappen
+  document.getElementById("correctBtn").parentNode.removeChild(document.getElementById("correctBtn"));
+  //skickar stop till timern
+  fetch("http://localhost:3000/stopTime")
+  .then(res => res.json())
+  .then(() => {
+
+  });
+
 }
