@@ -1,7 +1,7 @@
 import { correctImg } from "../modules/correctImg.mjs";
 
 
-export function startTimer(){
+export function startTimer(stopTimeRoute){
     // socket.emit("startTimer");
     let startGameBox = document.getElementById("startGameBox");
     console.log("startGameBox", startGameBox);
@@ -17,7 +17,7 @@ export function startTimer(){
 
     socket.on("timesUp", time=>{
         if(time == 0 ){
-            correctImg();
+            correctImg(stopTimeRoute);
             
             alert("Times up!");
         }

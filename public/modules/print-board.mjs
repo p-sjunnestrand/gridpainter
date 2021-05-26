@@ -41,7 +41,7 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
     root.innerHTML = board;
     // root.insertAdjacentHTML("beforeend", board);
 
-    let correctMsgContainer = document.getElementById("correctMsgContainer");
+    // let correctMsgContainer = document.getElementById("correctMsgContainer");
 
     updateGridColors();
 
@@ -89,6 +89,7 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
     })
 
     socket.on("printScore", scoreObject => {
+        let correctMsgContainer = document.getElementById("correctMsgContainer");
         console.log("scoreObject from printScore socket", scoreObject);
         correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject.score}% out of 100%.</p>`;
 
