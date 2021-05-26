@@ -1,11 +1,13 @@
 import { saveImg } from "../modules/saveImg.mjs";
 import { gridClick } from "../modules/gridClick.mjs";
-import {updateGridColors} from "../modules/updateGridColor.mjs";
+import { updateGridColors } from "../modules/updateGridColor.mjs";
 import { correctImg } from "../modules/correctImg.mjs";
+import { getImg } from "../modules/getImage.mjs";
 
-export function printBoard(userName, userColor, saveRoute) {
+export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
 
     let root = document.getElementById("root");
+
     let board = `
     
             <div id="gameBoardContainer">
@@ -26,18 +28,19 @@ export function printBoard(userName, userColor, saveRoute) {
 
     board +=
         `</div>
-
                 </section>
-
-                <button id="saveImg">Save image</button>
-                <button id="eraseImg">Restart</button>
-                <button id="quitBtn">Quit</button>
-                <button id="correctBtn">Correct</button>
-                <div id="correctMsgContainer"></div>
-            </div>
+                <div id="btn-container">
+                    <button id="saveImg">Save image</button>
+                    <button id="eraseImg">Restart</button>
+                    <button id="quitBtn">Quit</button>
+                    <button id="galleryBtn">Gallery</button>
+                </div>
+        </div>
         `;
 
     root.innerHTML = board;
+    // root.insertAdjacentHTML("beforeend", board);
+
     let correctMsgContainer = document.getElementById("correctMsgContainer");
 
     updateGridColors();
@@ -66,32 +69,42 @@ export function printBoard(userName, userColor, saveRoute) {
         saveImg(userNameObj, saveRoute);
     })
 
-    let correct = document.getElementById('correctBtn');
-    correct.addEventListener('click', function() {
+    // let gallBtn = document.getElementById('galleryBtn');
+    // gallBtn.addEventListener('click', (e) => {
+    //     getImg();
+    // });
 
-        // correctImg(correctMsgContainer);
-        correctImg();
+    // let correct = document.getElementById('correctBtn');
+    // correct.addEventListener('click', function () {
 
-        
-    });
+    //     // correctImg(correctMsgContainer);
+    //     correctImg(stopTimeRoute);
+
+
+    // });
+
+    let quitBtn = document.getElementById('quitBtn');
+    quitBtn.addEventListener('click', e => {
+        window.location.reload();
+    })
 
     socket.on("printScore", scoreObject => {
         console.log("scoreObject from printScore socket", scoreObject);
         correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject.score}% out of 100%.</p>`;
-    
-      
+
+
     });
-    
+
 
 
 
 
     let eraseImgBtn = document.getElementById("eraseImg");
-    eraseImgBtn.addEventListener("click", function(){
-       
-        socket.emit("empty grid", {text: "text"});
+    eraseImgBtn.addEventListener("click", function () {
 
-        
+        socket.emit("empty grid", { text: "text" });
+
+
 
     });
     socket.on("empty grid", data => {
@@ -99,5 +112,5 @@ export function printBoard(userName, userColor, saveRoute) {
         //console.log(localStorage.getItem("gridColors"));
         updateGridColors();
     });
-    
+
 }

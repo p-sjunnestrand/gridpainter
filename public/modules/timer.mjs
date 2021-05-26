@@ -1,13 +1,18 @@
 import { correctImg } from "../modules/correctImg.mjs";
 
-document.getElementById("root").insertAdjacentHTML("beforebegin", "<div id = 'timerBox'></div>")
-let timeBox = document.getElementById("timerBox");
 
 export function startTimer(){
     // socket.emit("startTimer");
+    let startGameBox = document.getElementById("startGameBox");
+    console.log("startGameBox", startGameBox);
+
+    startGameBox.insertAdjacentHTML("beforebegin", "<div id = 'timerBox'></div>")
+    
+    let timerBox = document.getElementById("timerBox");
+    console.log();
 
     socket.on("timer", function (data){
-        timeBox.innerHTML = "<p>Time: " + data.countdown + "</p>";
+        timerBox.innerHTML = "<p>Time: " + data.countdown + "</p>";
     });
 
     socket.on("timesUp", time=>{

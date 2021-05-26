@@ -3,12 +3,17 @@ let galleryRoute = "http://localhost:3000/gallery";
 let randomRoute = "http://localhost:3000/random"; //flytta från app.js till egen route?
 let colorRoute = "http://localhost:3000/colors"; //flytta från app.js till egen route?
 let saveRoute = "http://localhost:3000"; //flytta från app.js till egen route?
+let startGameRoute = "http://localhost:3000/startGame"; 
+let stopTimeRoute = "http://localhost:3000/stopTime"; 
 
 // Heroku 
 // let galleryRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/gallery";
 // let randomRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/random"; 
 // let colorRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/colors"; 
 // let saveRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/"; 
+// let startGameRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/startGame"; 
+// let stopTimeRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/stopTime"; 
+
 
 import { printStartPage } from "../modules/printStartPage.mjs"
 import { setPlayerInfo } from "../modules/setPlayerInfo.mjs"
@@ -60,12 +65,12 @@ async function startGame() {
     let userColor = localStorage.getItem("playerColor");
     console.log("Playercolor" + localStorage.getItem("playerColor"));
 
-    printBoard(userName, userColor, saveRoute);
+    printBoard(userName, userColor, saveRoute, stopTimeRoute);
     printChat(userName);
     // displayCalque();
     // randomPic();
 
-    Start(randomRoute);
+    Start(startGameRoute, stopTimeRoute);
 
 
 }
