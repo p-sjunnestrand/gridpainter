@@ -1,6 +1,6 @@
-export function saveImg(userName) {
+export function saveImg(userName, saveRoute) {
 
-  fetch("http://localhost:3000", {
+  fetch(saveRoute, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
