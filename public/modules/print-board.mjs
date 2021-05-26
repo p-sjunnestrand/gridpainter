@@ -3,7 +3,7 @@ import { gridClick } from "../modules/gridClick.mjs";
 import {updateGridColors} from "../modules/updateGridColor.mjs";
 import { correctImg } from "../modules/correctImg.mjs";
 
-export function printBoard(userName, userColor) {
+export function printBoard(userName, userColor, saveRoute) {
 
     let root = document.getElementById("root");
     let board = `
@@ -63,7 +63,7 @@ export function printBoard(userName, userColor) {
     let save = document.getElementById('saveImg');
     save.addEventListener('click', e => {
         console.log('sparad bild');
-        saveImg(userNameObj);
+        saveImg(userNameObj, saveRoute);
     })
 
     let correct = document.getElementById('correctBtn');

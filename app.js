@@ -5,6 +5,9 @@ var logger = require('morgan');
 const randomInt = require('./randomInt');
 const randomKey = require('random-key');
 
+const cors = require("cors");
+// app.options('*', cors());
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saveRouter = require('./routes/save');
@@ -40,6 +43,7 @@ app.use('/users', usersRouter);
 app.use('/save', saveRouter);
 app.use('/gallery', galleryRouter);
 
+app.use(cors());
 
 //array that represents the gameboard. Updates with each grid click.
 let gridArray = []
@@ -74,6 +78,9 @@ function timer () {
     }, 1000);
 }
 
+app.get('/stopTime', function(req, res, next){
+    clearInterval(timer);
+});
 
 // Save picture to db
 app.post('/', function (req, res, next) {
@@ -193,7 +200,7 @@ io.on('connection', function (socket) {
     
     socket.on("startTimer", function(data){
         if(start == false){
-            countdown = 100;
+            countdown = 10;
         io.sockets.emit('timer', { countdown: countdown });
         }
         start = true; 

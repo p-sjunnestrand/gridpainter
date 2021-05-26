@@ -2,7 +2,7 @@ import { randomPic } from "./randomPic.mjs";
 import { startTimer } from "./timer.mjs";
 import { displayCalque } from "../modules/displayCalque.mjs";
 
-export function Start(){
+export function Start(randomRoute){
     const root = document.getElementById('root');
     root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'></div>");
     let startGameBtn = document.createElement('button');

@@ -12,8 +12,9 @@ export function startTimer(){
 
     socket.on("timesUp", time=>{
         if(time == 0 ){
-            alert("Times up!");
             correctImg();
+            
+            alert("Times up!");
         }
     })
 }

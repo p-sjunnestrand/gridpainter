@@ -1,6 +1,6 @@
-export function getImg() {
+export function getImg(galleryRoute) {
 
- fetch("http://localhost:3000/gallery")
+ fetch(galleryRoute)
   .then(res => res.json())
   .then((paintInfo) => {
 
