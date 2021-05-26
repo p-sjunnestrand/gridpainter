@@ -6,7 +6,7 @@ export function startTimer(){
     let startGameBox = document.getElementById("startGameBox");
     console.log("startGameBox", startGameBox);
 
-    startGameBox.insertAdjacentHTML("afterbegin", "<div id = 'timerBox'></div>")
+    startGameBox.insertAdjacentHTML("beforebegin", "<div id = 'timerBox'></div>")
     
     let timerBox = document.getElementById("timerBox");
     console.log();

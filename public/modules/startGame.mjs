@@ -1,8 +1,9 @@
 import { randomPic } from "./randomPic.mjs";
 import { startTimer } from "./timer.mjs";
 import { displayCalque } from "../modules/displayCalque.mjs";
+import { correctImg } from "./correctImg.mjs"; 
 
-export function Start(startGameRoute) {
+export function Start(startGameRoute, stopTimeRoute) {
     const root = document.getElementById('root');
     // root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'></div>");
     // let startGameBtn = document.createElement('button');
@@ -27,6 +28,9 @@ export function Start(startGameRoute) {
         // socket.emit("startGame", {text: "testing"});
         // randomPic();
 
+        startGameBtn.remove();
+        document.getElementById("startGameBox").insertAdjacentHTML("afterbegin", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
+
         fetch(startGameRoute)
         console.log('game start clicked!');
         // startGameBtn.remove();
@@ -36,7 +40,17 @@ export function Start(startGameRoute) {
         // })
 
 
+        let correct = document.getElementById('correctBtn');
+        correct.addEventListener('click', function () {
+    
+            // correctImg(correctMsgContainer);
+            correctImg(stopTimeRoute);
+    
+    
+        });
     });
+
+   
     startTimer();
     // socket.on("timer", function (data){
     //     timeBox.innerHTML = "<p>Time: " + data.countdown + "</p>";
