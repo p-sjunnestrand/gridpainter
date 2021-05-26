@@ -4,14 +4,23 @@ import { displayCalque } from "../modules/displayCalque.mjs";
 
 export function Start(startGameRoute) {
     const root = document.getElementById('root');
-    root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'></div>");
-    let startGameBtn = document.createElement('button');
-    startGameBtn.innerText = 'Start game';
-    startGameBtn.id = 'startGameBtn';
-    document.getElementById('startGameBox').appendChild(startGameBtn);
-    // let startBtn = document.getElementById("startGameBtn");
-    let startBox = document.getElementById("startGameBox");
+    // root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'></div>");
+    // let startGameBtn = document.createElement('button');
+    // startGameBtn.innerText = 'Start game';
+    // startGameBtn.id = 'startGameBtn';
+    // document.getElementById('startGameBox').appendChild(startGameBtn);
+    // // let startBtn = document.getElementById("startGameBtn");
+    // let startBox = document.getElementById("startGameBox");
 
+    let startGameTemplate = `
+        <div id="startGameBox">
+            <button id="startGameBtn">Start Game</button>
+        </div>
+    `;
+
+    root.insertAdjacentHTML("afterbegin", startGameTemplate);
+    const startGameBtn = document.getElementById("startGameBtn");
+    
 
     startGameBtn.addEventListener('click', () => {
 
