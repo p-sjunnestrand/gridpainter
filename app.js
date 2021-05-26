@@ -52,18 +52,18 @@ for (let r = 1; r < 16; r++) {
 };
 //array that stores player colors and keeps track of number of players in game
 const colors = [
-    {"color": "blue", "taken":false, "player": ''},
-    {"color": "red", "taken":false, "player": ''},
-    {"color": "yellow", "taken":false, "player": ''},
-    {"color": "pink", "taken":false, "player": ''}
+    { "color": "blue", "taken": false, "player": '' },
+    { "color": "red", "taken": false, "player": '' },
+    { "color": "yellow", "taken": false, "player": '' },
+    { "color": "pink", "taken": false, "player": '' }
 ]
 
 let start = false;
 let countdown = 1000;
-let timer = setInterval(function(){
+let timer = setInterval(function () {
     countdown--;
-    io.sockets.emit("timer", {countdown: countdown});
-    if(countdown == 0){
+    io.sockets.emit("timer", { countdown: countdown });
+    if (countdown == 0) {
         clearInterval(timer);
         io.emit("timesUp", countdown);
         // Antingen setLocalstorage att timesUp = true och kollarsen i main om den är sann/falsk, om sann kör rättningsfunctionen
@@ -108,7 +108,7 @@ app.post('/', function (req, res, next) {
     console.log('rad 82', savedState);
 
 
-    res.json('bild sparad i db');
+    res.json('Bild sparad. Klicka på Visa Bildgalleri för att se din sparade bild');
 });
 
 
@@ -143,15 +143,15 @@ io.on('connection', function (socket) {
 
     socket.on("disconnect", () => {
         console.log("user " + socket.id + " disconnected ");
-        for (color in colors){
-            if(colors[color].player === socket.id){
+        for (color in colors) {
+            if (colors[color].player === socket.id) {
                 colors[color].player = '';
                 colors[color].taken = false;
                 console.log("colorArray", colors);
             }
         }
     })
-    
+
 
     //Handles sent chat messages
     socket.on("chat msg", msg => {
@@ -170,18 +170,18 @@ io.on('connection', function (socket) {
     });
 
     socket.on("empty grid", empty => {
-        for(grid in gridArray){
+        for (grid in gridArray) {
             gridArray[grid].color = null;
         }
         io.emit("empty grid", gridArray);
     });
-    
-    socket.on("startTimer", function(data){
-        if(start == false){
+
+    socket.on("startTimer", function (data) {
+        if (start == false) {
             countdown = 100;
-        io.sockets.emit('timer', { countdown: countdown });
+            io.sockets.emit('timer', { countdown: countdown });
         }
-        start = true; 
+        start = true;
     });
 
     socket.on("startGame", data => {
@@ -204,52 +204,52 @@ io.on('connection', function (socket) {
 // app.get('/colors');
 
 
-app.post('/colors', function(req, res, next) {
-//   console.log('colors!');
-  let colorPicked = false;
-  for(color in colors){
-    // console.log(colors[color].color);
-    if(colors[color].taken === false){
-    //   console.log(colors[color].color + "color is available!");
-    //   console.log(req.body);
-      let chosenColor = {"color": colors[color].color};
-      res.json(chosenColor);
-      colors[color].taken = true;
-      colors[color].player = req.body.playerId;
-    //   console.log('colorArray', colors);
-    //   console.log(colors[color].taken);
-      colorPicked = true;
+app.post('/colors', function (req, res, next) {
+    //   console.log('colors!');
+    let colorPicked = false;
+    for (color in colors) {
+        // console.log(colors[color].color);
+        if (colors[color].taken === false) {
+            //   console.log(colors[color].color + "color is available!");
+            //   console.log(req.body);
+            let chosenColor = { "color": colors[color].color };
+            res.json(chosenColor);
+            colors[color].taken = true;
+            colors[color].player = req.body.playerId;
+            //   console.log('colorArray', colors);
+            //   console.log(colors[color].taken);
+            colorPicked = true;
 
-    //   console.log();
-      break;
-    } else {
-      continue;
+            //   console.log();
+            break;
+        } else {
+            continue;
+        }
+        // res.json({"color": "none"}) 
     }
-      // res.json({"color": "none"}) 
-  }
-  if(colorPicked === false){
-    res.json({"color": "none"})
-  }
+    if (colorPicked === false) {
+        res.json({ "color": "none" })
+    }
 });
 
 app.get('/random', (req, res) => {
 
     //asigns random int 0-4 to let
-    let generatedRandomInt = randomInt(0,4);
+    let generatedRandomInt = randomInt(0, 4);
 
     console.log("random int", generatedRandomInt);
 
     //fetches all items from collection
     req.app.locals.db.collection("images").find().toArray()
-    .then(results => {
-        // console.log(results[generatedRandomInt]);
+        .then(results => {
+            // console.log(results[generatedRandomInt]);
 
-        //chooses the pic in the fetched array corresponding to the randomly generated number above.
-        let fetchedRandomPic = results[generatedRandomInt];
-        // let fetchedRandomPic = results[0];
+            //chooses the pic in the fetched array corresponding to the randomly generated number above.
+            let fetchedRandomPic = results[generatedRandomInt];
+            // let fetchedRandomPic = results[0];
 
-        //emits the chosen pic to front.
-        io.emit("random pic", fetchedRandomPic)
-    })
+            //emits the chosen pic to front.
+            io.emit("random pic", fetchedRandomPic)
+        })
 })
 module.exports = { app: app, server: server };

@@ -2,7 +2,6 @@
 
 export function printStartPage() {
   let root = document.getElementById('root');
-  // root.innerHTML = '';
   let printStartPage = `
     <main>
     <img src="img/pixellogo.png" />
