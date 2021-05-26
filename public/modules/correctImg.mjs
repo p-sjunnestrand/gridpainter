@@ -5,7 +5,7 @@ export function correctImg() {
   const savedImg = JSON.parse(localStorage.getItem('gridColors'));
   console.log(savedImg);
 
-  const facitImg = JSON.parse(localStorage.getItem('gridColors'));
+  const facitImg = JSON.parse(localStorage.getItem("facitGrid"));
   console.log(facitImg);
 
   const total = 225;
@@ -13,16 +13,13 @@ export function correctImg() {
 
   function compareArrays(savedImg, facitImg) {
     for(let i = 0; i<savedImg.length; i++){
-      if(savedImg[i].color !=null && facitImg.color == savedImg.color) {
+      if(savedImg[i].color !=null && facitImg[i].color === savedImg[i].color) {
         sum++;
       }
     }
   }
   compareArrays(savedImg, facitImg);
   console.log("sum", sum);
-  
-  // let scorePercentage = sum*100/total;
-  // console.log("scorePercentage", scorePercentage);
 
   //avrunda uppåt:
   let scorePercentage = Math.floor(sum*100/total);
