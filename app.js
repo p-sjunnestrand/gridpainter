@@ -71,6 +71,9 @@ let timer = setInterval(function(){
     }
 }, 1000);
 
+app.get('/stopTime', function(req, res, next){
+    clearInterval(timer);
+});
 
 // Save picture to db
 app.post('/', function (req, res, next) {
@@ -178,7 +181,7 @@ io.on('connection', function (socket) {
     
     socket.on("startTimer", function(data){
         if(start == false){
-            countdown = 100;
+            countdown = 10;
         io.sockets.emit('timer', { countdown: countdown });
         }
         start = true; 

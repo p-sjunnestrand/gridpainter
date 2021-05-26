@@ -29,7 +29,7 @@ export function Start(){
         
     });
 
-    if(localStorage.getItem("hasStarted") == "true"){
+    if(localStorage.getItem("hasStarted") === "true"){
         startBox.innerHTML = "";
         socket.emit("startGame", {text: "testing"});
         displayCalque();
