@@ -5,6 +5,9 @@ var logger = require('morgan');
 const randomInt = require('./randomInt');
 const randomKey = require('random-key');
 
+const cors = require("cors");
+// app.options('*', cors());
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saveRouter = require('./routes/save');
@@ -40,6 +43,7 @@ app.use('/users', usersRouter);
 app.use('/save', saveRouter);
 app.use('/gallery', galleryRouter);
 
+app.use(cors());
 
 //array that represents the gameboard. Updates with each grid click.
 let gridArray = []
