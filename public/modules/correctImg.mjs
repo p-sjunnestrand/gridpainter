@@ -1,11 +1,12 @@
 // import { Socket } from "./socket.io";
 
+
 export function correctImg() {
   console.log("correctMsgContainer", correctMsgContainer);
   const savedImg = JSON.parse(localStorage.getItem('gridColors'));
   console.log(savedImg);
 
-  const facitImg = JSON.parse(localStorage.getItem('gridColors'));
+  const facitImg = JSON.parse(localStorage.getItem("facitGrid"));
   console.log(facitImg);
 
   const total = 225;
@@ -13,16 +14,13 @@ export function correctImg() {
 
   function compareArrays(savedImg, facitImg) {
     for(let i = 0; i<savedImg.length; i++){
-      if(savedImg[i].color !=null && facitImg.color == savedImg.color) {
+      if(savedImg[i].color !=null && facitImg[i].color === savedImg[i].color) {
         sum++;
       }
     }
   }
   compareArrays(savedImg, facitImg);
   console.log("sum", sum);
-  
-  // let scorePercentage = sum*100/total;
-  // console.log("scorePercentage", scorePercentage);
 
   //avrunda uppåt:
   let scorePercentage = Math.floor(sum*100/total);
@@ -39,4 +37,14 @@ export function correctImg() {
 
 
   // return scorePercentage;
+
+  //Tar bort correct-knappen
+  document.getElementById("correctBtn").parentNode.removeChild(document.getElementById("correctBtn"));
+  //skickar stop till timern
+  fetch("http://localhost:3000/stopTime")
+  .then(res => res.json())
+  .then(() => {
+
+  });
+
 }
