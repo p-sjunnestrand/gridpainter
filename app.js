@@ -5,6 +5,9 @@ var logger = require('morgan');
 const randomInt = require('./randomInt');
 const randomKey = require('random-key');
 
+const cors = require("cors");
+// app.options('*', cors());
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saveRouter = require('./routes/save');
@@ -40,6 +43,7 @@ app.use('/users', usersRouter);
 app.use('/save', saveRouter);
 app.use('/gallery', galleryRouter);
 
+app.use(cors());
 
 //array that represents the gameboard. Updates with each grid click.
 let gridArray = []
@@ -60,17 +64,23 @@ const colors = [
 
 let start = false;
 let countdown = 1000;
-let timer = setInterval(function () {
-    countdown--;
-    io.sockets.emit("timer", { countdown: countdown });
-    if (countdown == 0) {
-        clearInterval(timer);
-        io.emit("timesUp", countdown);
-        // Antingen setLocalstorage att timesUp = true och kollarsen i main om den är sann/falsk, om sann kör rättningsfunctionen
-        // eller kör rättningsfunctionen direkt här
-    }
-}, 1000);
+function timer() {
+    let countdownTimer = setInterval(function () {
+        countdown--;
+        io.sockets.emit("timer", { countdown: countdown });
+        console.log(countdown);
+        if (countdown == 0) {
+            clearInterval(countdownTimer);
+            io.emit("timesUp", countdown);
+            // Antingen setLocalstorage att timesUp = true och kollarsen i main om den är sann/falsk, om sann kör rättningsfunctionen
+            // eller kör rättningsfunctionen direkt här
+        }
+    }, 1000);
+}
 
+app.get('/stopTime', function (req, res, next) {
+    clearInterval(timer);
+});
 
 // Save picture to db
 app.post('/', function (req, res, next) {
@@ -135,6 +145,11 @@ app.post('/', function (req, res, next) {
 
 io.on('connection', function (socket) {
     console.log('user ' + socket.id + ' connected');
+    // for (connectedSocket in io.sockets.connected) {
+    //     console.log('users: ', connectedSocket)
+    // }
+    // console.log("socket connect: ", io.sockets.connected);
+    console.log(io.engine.clientsCount);
 
     let socketId = socket.id
     io.to(socket.id).emit("socketId", socketId);
@@ -142,6 +157,13 @@ io.on('connection', function (socket) {
     io.emit("grid change", gridArray);
 
     socket.on("disconnect", () => {
+        console.log(io.engine.clientsCount);
+        if (io.engine.clientsCount === 0) {
+            console.log("no users online!");
+            countdown = 1;
+
+        }
+        // console.log("socket connect: ", io.sockets.connected);
         console.log("user " + socket.id + " disconnected ");
         for (color in colors) {
             if (colors[color].player === socket.id) {
@@ -251,5 +273,14 @@ app.get('/random', (req, res) => {
             //emits the chosen pic to front.
             io.emit("random pic", fetchedRandomPic)
         })
+});
+
+app.get('/startGame', (req, res) => {
+    console.log('game started!');
+    start = true;
+    countdown = 10;
+    console.log(countdown);
+    timer();
+    // io.sockets.emit('timer', { countdown: countdown });
 })
 module.exports = { app: app, server: server };

@@ -4,7 +4,7 @@ document.getElementById("root").insertAdjacentHTML("beforebegin", "<div id = 'ti
 let timeBox = document.getElementById("timerBox");
 
 export function startTimer(){
-    socket.emit("startTimer");
+    // socket.emit("startTimer");
 
     socket.on("timer", function (data){
         timeBox.innerHTML = "<p>Time: " + data.countdown + "</p>";
@@ -12,8 +12,9 @@ export function startTimer(){
 
     socket.on("timesUp", time=>{
         if(time == 0 ){
-            //alert("Times up!");
             correctImg();
+            
+            alert("Times up!");
         }
     })
 }
