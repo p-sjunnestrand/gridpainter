@@ -149,9 +149,14 @@ li {
     color: $color-white;
     font-size: 0.8rem;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 297 168'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: %2365286a; %7D %3C/style%3E%3C/defs%3E%3Cg id='Group_24' data-name='Group 24' transform='translate(-1404.826 -820)'%3E%3Crect id='Rectangle_269' data-name='Rectangle 269' class='cls-1' width='297' height='168' rx='50' transform='translate(1404.827 820)'/%3E%3Cpath id='Polygon_1' data-name='Polygon 1' class='cls-1' d='M27.5,0,55,25H0Z' transform='translate(1646.827 956)'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    resize: both;
+    overflow: visible;
     height: auto;
-    max-width: 297px;
-    padding: 30;
+    // max-width: 350px;
+    width: 297px;
+    padding: 40;
     margin: 20 0;
     margin-left: 50px;
 }
@@ -159,9 +164,11 @@ li {
 .otherSender {
     font-size: 0.8rem;
     background-image: url("data:image/svg+xml,%3Csvg id='Group_25' data-name='Group 25' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 297 168'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: %23f4eee2; %7D %3C/style%3E%3C/defs%3E%3Crect id='Rectangle_269' data-name='Rectangle 269' class='cls-1' width='297' height='168' viewBox='0 0 297 168' rx='50'/%3E%3Cpath id='Polygon_1' data-name='Polygon 1' class='cls-1' d='M27.5,0,55,25H0Z' transform='translate(0 136)'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-size: contain;
     height: auto;
     max-width: 297px;
-    padding: 30;
+    padding: 40;
     margin: 20 0;
     margin-left: -50px;
 }
