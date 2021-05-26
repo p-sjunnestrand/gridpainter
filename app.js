@@ -79,7 +79,7 @@ function timer() {
 }
 
 app.get('/stopTime', function (req, res, next) {
-    clearInterval(timer);
+    countdown = 1;
 });
 
 // Save picture to db

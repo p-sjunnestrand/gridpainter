@@ -53,7 +53,7 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute) {
     });
 
    
-    startTimer();
+    startTimer(stopTimeRoute);
     // socket.on("timer", function (data){
     //     timeBox.innerHTML = "<p>Time: " + data.countdown + "</p>";
     // });
