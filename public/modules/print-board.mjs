@@ -30,18 +30,19 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
         `</div>
                 </section>
                 <div id="btn-container">
-                <button id="saveImg">Save image</button>
-                <button id="eraseImg">Restart</button>
-                <button id="quitBtn">Quit</button>
-                <button id="correctBtn">Correct</button>
-                <button id="galleryBtn">Gallery</button>
-                <div id="correctMsgContainer"></div>
-                <div id="startGameBox"><button id ='startGameBtn'>Start game</button></div>
+                    <button id="saveImg">Save image</button>
+                    <button id="eraseImg">Restart</button>
+                    <button id="quitBtn">Quit</button>
+                    <button id="correctBtn">Correct</button>
+                    <button id="galleryBtn">Gallery</button>
+                    <div id="correctMsgContainer"></div>
                 </div>
         </div>
         `;
 
     root.innerHTML = board;
+    // root.insertAdjacentHTML("beforeend", board);
+
     let correctMsgContainer = document.getElementById("correctMsgContainer");
 
     updateGridColors();
