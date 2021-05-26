@@ -1,7 +1,7 @@
 // import { Socket } from "./socket.io";
 
 
-export function correctImg() {
+export function correctImg(stopTimeRoute) {
   console.log("correctMsgContainer", correctMsgContainer);
   const savedImg = JSON.parse(localStorage.getItem('gridColors'));
   console.log(savedImg);
@@ -41,7 +41,7 @@ export function correctImg() {
   //Tar bort correct-knappen
   document.getElementById("correctBtn").parentNode.removeChild(document.getElementById("correctBtn"));
   //skickar stop till timern
-  fetch("http://localhost:3000/stopTime")
+  fetch(stopTimeRoute)
   .then(res => res.json())
   .then(() => {
 
