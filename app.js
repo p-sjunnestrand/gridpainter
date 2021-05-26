@@ -59,7 +59,7 @@ const colors = [
 ]
 
 let start = false;
-let countdown = 100;
+let countdown = 1000;
 let timer = setInterval(function(){
     countdown--;
     io.sockets.emit("timer", {countdown: countdown});
@@ -178,7 +178,7 @@ io.on('connection', function (socket) {
     
     socket.on("startTimer", function(data){
         if(start == false){
-            countdown = 100;
+            countdown = 10;
         io.sockets.emit('timer', { countdown: countdown });
         }
         start = true; 
