@@ -108,7 +108,7 @@ app.post('/', function (req, res, next) {
     console.log('rad 82', savedState);
 
 
-    res.json('Bild sparad. Klicka på Visa Bildgalleri för att se din sparade bild');
+    res.json('Bild sparad. Klicka på Visa Bildgalleri för att se din sparade bild.');
 });
 
 

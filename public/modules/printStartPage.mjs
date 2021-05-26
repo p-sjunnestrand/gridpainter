@@ -15,7 +15,7 @@ export function printStartPage() {
       </div>
 
       <div id="galleryContainer">
-        <button id="galleryBtn">Visa bildgalleri</button>
+        <button id="galleryBtn">Gallery</button>
       </div>
     </main>`;
 

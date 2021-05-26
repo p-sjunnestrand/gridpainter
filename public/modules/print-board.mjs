@@ -2,7 +2,7 @@ import { saveImg } from "../modules/saveImg.mjs";
 import { gridClick } from "../modules/gridClick.mjs";
 import { updateGridColors } from "../modules/updateGridColor.mjs";
 import { correctImg } from "../modules/correctImg.mjs";
-import { printStartPage } from "../modules/printStartPage.mjs";
+import { getImg } from "../modules/getImage.mjs";
 
 export function printBoard(userName, userColor) {
 
@@ -28,16 +28,17 @@ export function printBoard(userName, userColor) {
 
     board +=
         `</div>
-
                 </section>
-
+                <div id="btn-container">
                 <button id="saveImg">Save image</button>
                 <button id="eraseImg">Restart</button>
                 <button id="quitBtn">Quit</button>
                 <button id="correctBtn">Correct</button>
+                <button id="galleryBtn">Gallery</button>
                 <div id="correctMsgContainer"></div>
-                <div id='startGameBox'><button id ='startGameBtn'>Start game</button></div>
-            </div>
+                <div id="startGameBox"><button id ='startGameBtn'>Start game</button></div>
+                </div>
+        </div>
         `;
 
     root.innerHTML = board;
@@ -68,6 +69,11 @@ export function printBoard(userName, userColor) {
         console.log('sparad bild');
         saveImg(userNameObj);
     })
+
+    // let gallBtn = document.getElementById('galleryBtn');
+    // gallBtn.addEventListener('click', (e) => {
+    //     getImg();
+    // });
 
     let correct = document.getElementById('correctBtn');
     correct.addEventListener('click', function () {
