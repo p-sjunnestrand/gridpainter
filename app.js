@@ -8,8 +8,11 @@ const randomKey = require('random-key');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saveRouter = require('./routes/save');
+var galleryRouter = require('./routes/gallery');
+
 
 const MongoClient = require('mongodb').MongoClient;
+const { on } = require('events');
 const { count } = require('console');
 
 MongoClient.connect("mongodb+srv://petterAdmin:gtnafyHN8WpQWfRB@rootcluster.d4txc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
@@ -35,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/save', saveRouter);
+app.use('/gallery', galleryRouter);
+
 
 //array that represents the gameboard. Updates with each grid click.
 let gridArray = []
@@ -54,7 +59,7 @@ const colors = [
 ]
 
 let start = false;
-let countdown = 100;
+let countdown = 1000;
 let timer = setInterval(function(){
     countdown--;
     io.sockets.emit("timer", {countdown: countdown});
@@ -107,25 +112,25 @@ app.post('/', function (req, res, next) {
 });
 
 
-app.get('/gallery', function (req, res, next) {
+// app.get('/gallery', function (req, res, next) {
 
-    let query = {}
-    let projection = { userName: 1, gridState: 1 }
-
-
-    req.app.locals.db.collection('savedPaints').find(query, projection)
-        .sort({ name: 1 })
-        .toArray()
-        .then(items => {
-            console.log(`Successfully found ${items.length} documents.`)
-            console.log(items);
-            res.json(items);
-        })
-        .catch(err => console.error(`Failed to find documents: ${err}`))
+//     let query = {}
+//     let projection = { userName: 1, gridState: 1 }
 
 
+//     req.app.locals.db.collection('savedPaints').find(query, projection)
+//         .sort({ name: 1 })
+//         .toArray()
+//         .then(items => {
+//             console.log(`Successfully found ${items.length} documents.`)
+//             console.log(items);
+//             res.json(items);
+//         })
+//         .catch(err => console.error(`Failed to find documents: ${err}`))
 
-});
+
+
+// });
 
 
 io.on('connection', function (socket) {
@@ -158,13 +163,19 @@ io.on('connection', function (socket) {
         for (grid in gridArray) {
             if (gridArray[grid].id === click.coordinates) {
                 gridArray[grid].color = click.playerColor;
-            };
-        };
-
+            }
+        }
         io.emit("grid change", gridArray);
 
     });
 
+    socket.on("empty grid", empty => {
+        for(grid in gridArray){
+            gridArray[grid].color = null;
+        }
+        io.emit("empty grid", gridArray);
+    });
+    
     socket.on("startTimer", function(data){
         if(start == false){
             countdown = 100;
@@ -177,6 +188,11 @@ io.on('connection', function (socket) {
         console.log("test", data);
         io.emit("startGame", data);
     });
+
+    socket.on("printScore", scoreObject => {
+        console.log("scoreObject från en klient", scoreObject);
+        io.emit("printScore", scoreObject);
+    });
 });
 
 
@@ -185,26 +201,26 @@ io.on('connection', function (socket) {
 
 
 
-app.get('/colors');
+// app.get('/colors');
 
 
 app.post('/colors', function(req, res, next) {
-  console.log('colors!');
+//   console.log('colors!');
   let colorPicked = false;
   for(color in colors){
-    console.log(colors[color].color);
+    // console.log(colors[color].color);
     if(colors[color].taken === false){
-      console.log(colors[color].color + "color is available!");
-      console.log(req.body);
+    //   console.log(colors[color].color + "color is available!");
+    //   console.log(req.body);
       let chosenColor = {"color": colors[color].color};
       res.json(chosenColor);
       colors[color].taken = true;
       colors[color].player = req.body.playerId;
-      console.log('colorArray', colors);
-      console.log(colors[color].taken);
+    //   console.log('colorArray', colors);
+    //   console.log(colors[color].taken);
       colorPicked = true;
 
-      console.log();
+    //   console.log();
       break;
     } else {
       continue;
@@ -221,15 +237,16 @@ app.get('/random', (req, res) => {
     //asigns random int 0-4 to let
     let generatedRandomInt = randomInt(0,4);
 
-    // console.log("random int", generatedRandomInt);
+    console.log("random int", generatedRandomInt);
 
     //fetches all items from collection
-    req.app.locals.db.collection("savedPaints").find().toArray()
+    req.app.locals.db.collection("images").find().toArray()
     .then(results => {
         // console.log(results[generatedRandomInt]);
 
         //chooses the pic in the fetched array corresponding to the randomly generated number above.
         let fetchedRandomPic = results[generatedRandomInt];
+        // let fetchedRandomPic = results[0];
 
         //emits the chosen pic to front.
         io.emit("random pic", fetchedRandomPic)

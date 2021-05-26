@@ -1,6 +1,13 @@
 $color-yellow: rgb(240, 180, 66);
 $color-white: rgb(244, 238, 226);
 $color-purple: rgb(101, 40, 106);
+$color-pxred: red; 
+$color-pxblue: blue; 
+$color-pxyellow: yellow; 
+$color-pxpink: pink; 
+
+
+
 
 * {
     box-sizing: border-box;
@@ -72,23 +79,24 @@ button {
     }
 
     .red {
-        background-color: red;
+        background-color: $color-pxred;
     }
 
     .blue {
-        background-color: blue;
+        background-color: $color-pxblue;
     }
 
     .yellow {
-        background-color: yellow;
+        background-color: $color-pxyellow;
     }
 
     .pink {
-        background-color: pink;
+        background-color: $color-pxpink;
     }
 }
 
 $pixels-30px: 30px;
+$small-pixels: 12px;
 
 #gridContainer {
     width: 490px;
@@ -170,4 +178,50 @@ footer {
     font-size: 0.9rem;
     font-weight: 700;
     text-align: right;
+}
+
+#calqueGridContainer {
+    width: 230px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    padding: 20px;
+ 
+    .calque-pixels {
+        border: 1px solid white;
+        background-color: $color-white;
+        width: $small-pixels;
+        height: $small-pixels; 
+    }
+}
+
+.savedPaintGridContainer {
+    width: 490px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    padding: 20px;
+ 
+    .savedPaintPixels {
+        border: 1px solid white;
+        background-color: $color-white;
+        width: $pixels-30px;
+        height: $pixels-30px; 
+    }
+
+    .red {
+        background-color: $color-pxred;
+    }
+
+    .blue {
+        background-color: $color-pxblue;
+    }
+
+    .yellow {
+        background-color: $color-pxyellow;
+    }
+
+    .pink {
+        background-color: $color-pxpink;
+    }
 }

@@ -1,5 +1,7 @@
-import { saveImg } from "../modules/saveImg.mjs"
-import { gridClick } from "../modules/gridClick.mjs"
+import { saveImg } from "../modules/saveImg.mjs";
+import { gridClick } from "../modules/gridClick.mjs";
+import {updateGridColors} from "../modules/updateGridColor.mjs";
+import { correctImg } from "../modules/correctImg.mjs";
 
 export function printBoard(userName, userColor) {
 
@@ -26,21 +28,19 @@ export function printBoard(userName, userColor) {
         `</div>
 
                 </section>
+
                 <button id="saveImg">Save image</button>
-                <button id="restartBtn">Restart</button>
+                <button id="eraseImg">Restart</button>
                 <button id="quitBtn">Quit</button>
+                <button id="correctBtn">Correct</button>
+                <div id="correctMsgContainer"></div>
             </div>
         `;
 
     root.innerHTML = board;
+    let correctMsgContainer = document.getElementById("correctMsgContainer");
 
-    let colorBoard = JSON.parse(localStorage.getItem("gridColors"));
-
-    for (let color in colorBoard) {
-        if (colorBoard[color].color !== null) {
-            document.getElementById(colorBoard[color].id).style.backgroundColor = colorBoard[color].color;
-        };
-    }
+    updateGridColors();
 
     //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
@@ -66,7 +66,38 @@ export function printBoard(userName, userColor) {
         saveImg(userNameObj);
     })
 
+    let correct = document.getElementById('correctBtn');
+    correct.addEventListener('click', function() {
+
+        // correctImg(correctMsgContainer);
+        correctImg();
+
+        
+    });
+
+    socket.on("printScore", scoreObject => {
+        console.log("scoreObject from printScore socket", scoreObject);
+        correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject.score}% out of 100%.</p>`;
+    
+      
+    });
+    
 
 
 
+
+    let eraseImgBtn = document.getElementById("eraseImg");
+    eraseImgBtn.addEventListener("click", function(){
+       
+        socket.emit("empty grid", {text: "text"});
+
+        
+
+    });
+    socket.on("empty grid", data => {
+        localStorage.setItem("gridColors", JSON.stringify(data));
+        //console.log(localStorage.getItem("gridColors"));
+        updateGridColors();
+    });
+    
 }

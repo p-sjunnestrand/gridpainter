@@ -1,14 +1,13 @@
-
 import { printStartPage } from "../modules/printStartPage.mjs"
 import { setPlayerInfo } from "../modules/setPlayerInfo.mjs"
 import { printBoard } from "../modules/print-board.mjs"
 import { printChat } from "../modules/printchat.mjs";
-import { randomPic } from "../modules/randomPic.mjs";
-
 import { getImg } from "../modules/getImage.mjs";
+// import { displayCalque } from "../modules/displayCalque.mjs";
+
+
+
 import {Start} from "../modules/startGame.mjs";
-
-
 
 
 printStartPage();
@@ -25,10 +24,13 @@ startBtn.addEventListener('click', (e) => {
 
 })
 
+
+
 gallBtn.addEventListener('click', (e) => {
-    console.log('galleri');
+    // console.log('klick galleri');
     getImg();
-})
+
+});
 
 
 
@@ -48,11 +50,13 @@ async function startGame() {
 
     printBoard(userName, userColor);
     printChat(userName);
-    randomPic();
+    // displayCalque();
+    // randomPic();
+
     Start();
 
 
 }
-socket.on("random pic", data => {
-    console.log("random int", data);
-})
+// socket.on("random pic", data => {
+//     console.log("random int", data);
+// })
