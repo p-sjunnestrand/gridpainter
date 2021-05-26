@@ -70,7 +70,7 @@ async function startGame() {
     // displayCalque();
     // randomPic();
 
-    Start(startGameRoute, stopTimeRoute);
+    Start(startGameRoute, stopTimeRoute, randomRoute);
 
 
 }

@@ -3,7 +3,7 @@ import { startTimer } from "./timer.mjs";
 import { displayCalque } from "../modules/displayCalque.mjs";
 import { correctImg } from "./correctImg.mjs"; 
 
-export function Start(startGameRoute, stopTimeRoute) {
+export function Start(startGameRoute, stopTimeRoute, randomRoute) {
     const root = document.getElementById('root');
     // root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'></div>");
     // let startGameBtn = document.createElement('button');
