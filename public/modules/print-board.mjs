@@ -4,7 +4,7 @@ import { updateGridColors } from "../modules/updateGridColor.mjs";
 import { correctImg } from "../modules/correctImg.mjs";
 import { getImg } from "../modules/getImage.mjs";
 
-export function printBoard(userName, userColor, saveRoute) {
+export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
 
     let root = document.getElementById("root");
 
@@ -79,7 +79,7 @@ export function printBoard(userName, userColor, saveRoute) {
     correct.addEventListener('click', function () {
 
         // correctImg(correctMsgContainer);
-        correctImg();
+        correctImg(stopTimeRoute);
 
 
     });

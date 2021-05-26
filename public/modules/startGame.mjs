@@ -2,7 +2,7 @@ import { randomPic } from "./randomPic.mjs";
 import { startTimer } from "./timer.mjs";
 import { displayCalque } from "../modules/displayCalque.mjs";
 
-export function Start(randomRoute) {
+export function Start(startGameRoute) {
     const root = document.getElementById('root');
     root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'></div>");
     let startGameBtn = document.createElement('button');
@@ -18,7 +18,7 @@ export function Start(randomRoute) {
         // socket.emit("startGame", {text: "testing"});
         // randomPic();
 
-        fetch("http://localhost:3000/startGame")
+        fetch(startGameRoute)
         console.log('game start clicked!');
         // startGameBtn.remove();
         // .then(result => result.json())
