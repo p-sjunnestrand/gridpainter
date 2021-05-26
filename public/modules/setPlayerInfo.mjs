@@ -1,5 +1,5 @@
 
-export function setPlayerInfo() {
+export function setPlayerInfo(colorRoute) {
   return new Promise ((resolve, reject) => {
     console.log(localStorage.getItem("playerColor"));
     console.log('click');
@@ -15,7 +15,7 @@ export function setPlayerInfo() {
       let playerId = localStorage.getItem('socketId');
       
 
-      fetch("http://localhost:3000/colors", {
+      fetch(colorRoute, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
