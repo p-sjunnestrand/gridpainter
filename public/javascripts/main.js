@@ -1,14 +1,14 @@
 //Localhost
-// let galleryRoute = "http://localhost:3000/gallery";
-// let randomRoute = "http://localhost:3000/random"; //flytta från app.js till egen route?
-// let colorRoute = "http://localhost:3000/colors"; //flytta från app.js till egen route?
-// let saveRoute = "http://localhost:3000"; //flytta från app.js till egen route?
+let galleryRoute = "http://localhost:3000/gallery";
+let randomRoute = "http://localhost:3000/random"; //flytta från app.js till egen route?
+let colorRoute = "http://localhost:3000/colors"; //flytta från app.js till egen route?
+let saveRoute = "http://localhost:3000"; //flytta från app.js till egen route?
 
 // Heroku 
-let galleryRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/gallery";
-let randomRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/random"; 
-let colorRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/colors"; 
-let saveRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/"; 
+// let galleryRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/gallery";
+// let randomRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/random"; 
+// let colorRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/colors"; 
+// let saveRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/"; 
 
 import { printStartPage } from "../modules/printStartPage.mjs"
 import { setPlayerInfo } from "../modules/setPlayerInfo.mjs"

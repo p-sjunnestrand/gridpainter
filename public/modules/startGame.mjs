@@ -20,6 +20,8 @@ export function Start(randomRoute){
 
         fetch("http://localhost:3000/startGame")
         console.log('game start clicked!');
+        
+        displayCalque(randomRoute);
         // startGameBtn.remove();
         // .then(result => result.json())
         // .then(data => {
@@ -38,7 +40,6 @@ export function Start(randomRoute){
 
         startBox.innerHTML = "";
         startTimer();
-        displayCalque();
 
         // if(localStorage.getItem("hasStarted") !== "true"){
 
