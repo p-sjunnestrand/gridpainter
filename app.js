@@ -94,7 +94,7 @@ app.post('/', function (req, res, next) {
     };
 
 
-    req.app.locals.db.collection('images').findOneAndUpdate(query, savedState, options)
+    req.app.locals.db.collection('savedPaints').findOneAndUpdate(query, savedState, options)
         .then(updatedDocument => {
             if (updatedDocument) {
                 console.log(`Successfully updated document: ${updatedDocument}.`)
