@@ -24,10 +24,13 @@ startBtn.addEventListener('click', (e) => {
 
 })
 
+
+
 gallBtn.addEventListener('click', (e) => {
-    console.log('galleri');
+    // console.log('klick galleri');
     getImg();
-})
+
+});
 
 
 

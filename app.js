@@ -8,6 +8,8 @@ const randomKey = require('random-key');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var saveRouter = require('./routes/save');
+var galleryRouter = require('./routes/gallery');
+
 
 const MongoClient = require('mongodb').MongoClient;
 const { on } = require('events');
@@ -36,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/save', saveRouter);
+app.use('/gallery', galleryRouter);
+
 
 //array that represents the gameboard. Updates with each grid click.
 let gridArray = []
@@ -108,25 +112,25 @@ app.post('/', function (req, res, next) {
 });
 
 
-app.get('/gallery', function (req, res, next) {
+// app.get('/gallery', function (req, res, next) {
 
-    let query = {}
-    let projection = { userName: 1, gridState: 1 }
-
-
-    req.app.locals.db.collection('savedPaints').find(query, projection)
-        .sort({ name: 1 })
-        .toArray()
-        .then(items => {
-            console.log(`Successfully found ${items.length} documents.`)
-            console.log(items);
-            res.json(items);
-        })
-        .catch(err => console.error(`Failed to find documents: ${err}`))
+//     let query = {}
+//     let projection = { userName: 1, gridState: 1 }
 
 
+//     req.app.locals.db.collection('savedPaints').find(query, projection)
+//         .sort({ name: 1 })
+//         .toArray()
+//         .then(items => {
+//             console.log(`Successfully found ${items.length} documents.`)
+//             console.log(items);
+//             res.json(items);
+//         })
+//         .catch(err => console.error(`Failed to find documents: ${err}`))
 
-});
+
+
+// });
 
 
 io.on('connection', function (socket) {
