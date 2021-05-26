@@ -178,7 +178,7 @@ io.on('connection', function (socket) {
     
     socket.on("startTimer", function(data){
         if(start == false){
-            countdown = 10;
+            countdown = 100;
         io.sockets.emit('timer', { countdown: countdown });
         }
         start = true; 

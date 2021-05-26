@@ -33,11 +33,12 @@ export function Start(){
         startBox.innerHTML = "";
         socket.emit("startGame", {text: "testing"});
         displayCalque();
+        startTimer();
+
         // socket.on("startGame", data => {
         //     // startBox.innerHTML = "";
        
         //     //displayCalque();         
-        //     //startTimer();
         // });
     }
 
