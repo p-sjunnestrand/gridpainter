@@ -2,7 +2,7 @@ import { randomPic } from "./randomPic.mjs";
 import { startTimer } from "./timer.mjs";
 import { displayCalque } from "../modules/displayCalque.mjs";
 
-export function Start(randomRoute){
+export function Start(randomRoute) {
     const root = document.getElementById('root');
     root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'></div>");
     let startGameBtn = document.createElement('button');
@@ -25,7 +25,7 @@ export function Start(randomRoute){
         // .then(data => {
         //     console.log(data);
         // })
-        
+
 
     });
     startTimer();
@@ -34,7 +34,7 @@ export function Start(randomRoute){
     // });
 
     socket.on("startGame", data => {
-        
+
 
         startBox.innerHTML = "";
         startTimer();
@@ -44,7 +44,7 @@ export function Start(randomRoute){
 
         // }
 
-        
+
     });
 
     // if(localStorage.getItem("hasStarted") == "true"){
@@ -55,10 +55,10 @@ export function Start(randomRoute){
 
     //     // socket.on("startGame", data => {
     //     //     // startBox.innerHTML = "";
-       
+
     //     //     //displayCalque();         
     //     // });
     // }
 
-    
+
 }

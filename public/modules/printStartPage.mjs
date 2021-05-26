@@ -1,8 +1,8 @@
 
 
 export function printStartPage() {
- let root = document.getElementById('root');
- let printStartPage = `
+  let root = document.getElementById('root');
+  let printStartPage = `
     <main>
     <img src="img/pixellogo.png" />
     <h1>Make pixel art together.</h1>
@@ -15,10 +15,10 @@ export function printStartPage() {
       </div>
 
       <div id="galleryContainer">
-        <button id="galleryBtn">Visa bildgalleri</button>
+        <button id="galleryBtn">Gallery</button>
       </div>
     </main>`;
 
- root.insertAdjacentHTML('beforeend', printStartPage);
+  root.insertAdjacentHTML('beforeend', printStartPage);
 
 }
