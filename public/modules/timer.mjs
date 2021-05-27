@@ -7,6 +7,10 @@ export function startTimer(stopTimeRoute){
     console.log("startGameBox", startGameBox);
 
     startGameBox.insertAdjacentHTML("beforebegin", "<div id = 'timerBox'></div>")
+
+    // let calqueGridContainer = document.getElementById("calqueGridContainer");
+    // calqueGridContainer.insertAdjacentHTML("afterbegin", "<div id = 'timerBox'></div>")
+
     
     let timerBox = document.getElementById("timerBox");
     console.log();
