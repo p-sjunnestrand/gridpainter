@@ -4,7 +4,7 @@ import { updateGridColors } from "../modules/updateGridColor.mjs";
 import { correctImg } from "../modules/correctImg.mjs";
 import { getImg } from "../modules/getImage.mjs";
 
-export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
+export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute) {
 
     let root = document.getElementById("root");
 
@@ -30,21 +30,20 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
         `</div>
                 </section>
                 <div id="btn-container">
-                <button id="saveImg">Save image</button>
-                <button id="eraseImg">Restart</button>
-                <button id="quitBtn">Quit</button>
-                <button id="correctBtn">Correct</button>
-                <button id="galleryBtn">Gallery</button>
-                <div id="correctMsgContainer"></div>
-                <div id="startGameBox"><button id ='startGameBtn'>Start game</button></div>
+                    <button id="saveImg">Save image</button>
+                    <button id="eraseImg">Restart</button>
+                    <button id="quitBtn">Quit</button>
+                    <button id="galleryBtn">Gallery</button>
                 </div>
         </div>
         `;
 
     root.innerHTML = board;
-    let correctMsgContainer = document.getElementById("correctMsgContainer");
+    // root.insertAdjacentHTML("beforeend", board);
 
-    updateGridColors();
+    // let correctMsgContainer = document.getElementById("correctMsgContainer");
+
+    updateGridColors(gridStateRoute);
 
     //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
@@ -75,14 +74,14 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
     //     getImg();
     // });
 
-    let correct = document.getElementById('correctBtn');
-    correct.addEventListener('click', function () {
+    // let correct = document.getElementById('correctBtn');
+    // correct.addEventListener('click', function () {
 
-        // correctImg(correctMsgContainer);
-        correctImg(stopTimeRoute);
+    //     // correctImg(correctMsgContainer);
+    //     correctImg(stopTimeRoute);
 
 
-    });
+    // });
 
     let quitBtn = document.getElementById('quitBtn');
     quitBtn.addEventListener('click', e => {
@@ -90,6 +89,7 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
     })
 
     socket.on("printScore", scoreObject => {
+        let correctMsgContainer = document.getElementById("correctMsgContainer");
         console.log("scoreObject from printScore socket", scoreObject);
         correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject.score}% out of 100%.</p>`;
 

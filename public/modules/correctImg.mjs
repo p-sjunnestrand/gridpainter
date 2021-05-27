@@ -39,12 +39,12 @@ export function correctImg(stopTimeRoute) {
   // return scorePercentage;
 
   //Tar bort correct-knappen
-  document.getElementById("correctBtn").parentNode.removeChild(document.getElementById("correctBtn"));
+  // document.getElementById("correctBtn").parentNode.removeChild(document.getElementById("correctBtn"));
   //skickar stop till timern
   fetch(stopTimeRoute)
   .then(res => res.json())
-  .then(() => {
-
+  .then((data) => {
+    console.log(data);
   });
 
 }

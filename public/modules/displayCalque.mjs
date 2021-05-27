@@ -1,7 +1,7 @@
 
-//import { randomPic} from "../modules/randomPic.mjs"
+import { randomPic} from "../modules/randomPic.mjs"
 
-export function displayCalque() {
+export function displayCalque(randomRoute) {
     let calqueDiv = `<div id = "calqueWrap">
                         <div id = "calqueGridContainer">`;
 
@@ -15,7 +15,7 @@ export function displayCalque() {
     calqueDiv += `</div>`;
     document.getElementById('gameBoardContainer').insertAdjacentHTML('afterend', calqueDiv);
 
-    //randomPic();
+    randomPic(randomRoute);
 
     // console.log(randomPic());
     socket.on("random pic", data => {
