@@ -220,14 +220,6 @@ io.on('connection', function (socket) {
 });
 
 
-
-
-
-
-
-// app.get('/colors');
-
-
 app.post('/colors', function (req, res, next) {
     let chosenColor;
     for (color in colors) {
@@ -276,6 +268,7 @@ app.get('/startGame', (req, res) => {
     countdown = 10;
     console.log(countdown);
     io.emit("start klicked");
+    io.emit("startGame", start);
     timer();
 
     // io.sockets.emit('timer', { countdown: countdown });
@@ -284,4 +277,6 @@ app.get('/startGame', (req, res) => {
 app.get('/gridState', (req, res) => {
     res.json({ gridArray: gridArray })
 })
+
+
 module.exports = { app: app, server: server };
