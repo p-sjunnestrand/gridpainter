@@ -56,10 +56,10 @@ for (let r = 1; r < 16; r++) {
 };
 //array that stores player colors and keeps track of number of players in game
 const colors = [
-    { "color": "blue", "taken": true, "player": null },
-    { "color": "red", "taken": true, "player": null },
-    { "color": "yellow", "taken": true, "player": null },
-    { "color": "pink", "taken": true, "player": null }
+    { "color": "blue", "taken": false, "player": null },
+    { "color": "red", "taken": false, "player": null },
+    { "color": "yellow", "taken": false, "player": null },
+    { "color": "pink", "taken": false, "player": null }
 ]
 
 let start = false;
