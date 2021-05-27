@@ -19,7 +19,9 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute) {
         </div>
     `;
 
-    root.insertAdjacentHTML("afterbegin", startGameTemplate);
+    // root.insertAdjacentHTML("beforeend", startGameTemplate);
+    document.getElementById('gameBoardContainer').insertAdjacentHTML("afterend", startGameTemplate);
+    // document.getElementById('calqueWrap').insertAdjacentHTML("afterbegin", startGameTemplate);
     const startGameBtn = document.getElementById("startGameBtn");
     
 
@@ -29,7 +31,10 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute) {
         // randomPic();
 
         startGameBtn.remove();
+        // document.getElementById("calqueWrap").insertAdjacentHTML("afterbegin", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
+
         document.getElementById("startGameBox").insertAdjacentHTML("afterbegin", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
+        // document.getElementById('gameBoardContainer').insertAdjacentHTML("afterend", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
 
         fetch(startGameRoute)
         console.log('game start clicked!');

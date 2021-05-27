@@ -124,6 +124,7 @@ $small-pixels: 12px;
 #root {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
 }
 
 #gameBoardContainer {
