@@ -56,10 +56,10 @@ for (let r = 1; r < 16; r++) {
 };
 //array that stores player colors and keeps track of number of players in game
 const colors = [
-    { "color": "blue", "taken": false, "player": '' },
-    { "color": "red", "taken": false, "player": '' },
-    { "color": "yellow", "taken": false, "player": '' },
-    { "color": "pink", "taken": false, "player": '' }
+    { "color": "blue", "taken": false, "player": null },
+    { "color": "red", "taken": false, "player": null },
+    { "color": "yellow", "taken": false, "player": null},
+    { "color": "pink", "taken": false, "player": null }
 ]
 
 let start = false;
@@ -161,13 +161,15 @@ io.on('connection', function (socket) {
         if (io.engine.clientsCount === 0) {
             console.log("no users online!");
             countdown = 1;
-
+            for (grid in gridArray) {
+                gridArray[grid].color = null;
+            }
         }
         // console.log("socket connect: ", io.sockets.connected);
         console.log("user " + socket.id + " disconnected ");
         for (color in colors) {
             if (colors[color].player === socket.id) {
-                colors[color].player = '';
+                colors[color].player = null;
                 colors[color].taken = false;
                 console.log("colorArray", colors);
             }
@@ -282,5 +284,9 @@ app.get('/startGame', (req, res) => {
     console.log(countdown);
     timer();
     // io.sockets.emit('timer', { countdown: countdown });
+})
+
+app.get('/gridState', (req, res) => {
+    res.json({gridArray: gridArray})
 })
 module.exports = { app: app, server: server };

@@ -4,7 +4,7 @@ import { updateGridColors } from "../modules/updateGridColor.mjs";
 import { correctImg } from "../modules/correctImg.mjs";
 import { getImg } from "../modules/getImage.mjs";
 
-export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
+export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute) {
 
     let root = document.getElementById("root");
 
@@ -43,7 +43,7 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute) {
 
     // let correctMsgContainer = document.getElementById("correctMsgContainer");
 
-    updateGridColors();
+    updateGridColors(gridStateRoute);
 
     //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
