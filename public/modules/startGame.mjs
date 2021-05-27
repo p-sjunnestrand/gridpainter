@@ -28,30 +28,10 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute) {
 
         // socket.emit("startGame", {text: "testing"});
         // randomPic();
-
-        startGameBtn.remove();
-        document.getElementById("startGameBox").insertAdjacentHTML("afterbegin", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
-
         fetch(startGameRoute)
         console.log('game start clicked!');
-        
-        displayCalque(randomRoute);
-        // startGameBtn.remove();
-        // .then(result => result.json())
-        // .then(data => {
-        //     console.log(data);
-        // })
 
-        let correctMsgContainer = document.getElementById("correctMsgContainer");
-
-        let correct = document.getElementById('correctBtn');
-        correct.addEventListener('click', function () {
-    
-            // correctImg(correctMsgContainer);
-            correctImg(stopTimeRoute, correctMsgContainer);
-    
-    
-        });
+       
     });
 
    
@@ -71,6 +51,33 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute) {
         // }
 
 
+    });
+
+    socket.on("start klicked", data =>{
+        console.log("statrt is klicked!");
+
+        startGameBtn.remove();
+        document.getElementById("startGameBox").insertAdjacentHTML("afterbegin", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
+
+        
+        
+        displayCalque(randomRoute);
+        // startGameBtn.remove();
+        // .then(result => result.json())
+        // .then(data => {
+        //     console.log(data);
+        // })
+
+        let correctMsgContainer = document.getElementById("correctMsgContainer");
+
+        let correct = document.getElementById('correctBtn');
+        correct.addEventListener('click', function () {
+    
+            // correctImg(correctMsgContainer);
+            correctImg(stopTimeRoute, correctMsgContainer);
+    
+    
+        });
     });
 
     // if(localStorage.getItem("hasStarted") == "true"){

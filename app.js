@@ -282,7 +282,9 @@ app.get('/startGame', (req, res) => {
     start = true;
     countdown = 10;
     console.log(countdown);
+    io.emit("start klicked");
     timer();
+    
     // io.sockets.emit('timer', { countdown: countdown });
 })
 
