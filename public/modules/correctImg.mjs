@@ -1,7 +1,7 @@
 // import { Socket } from "./socket.io";
 
 
-export function correctImg(stopTimeRoute) {
+export function correctImg(stopTimeRoute, correctMsgContainer) {
   console.log("correctMsgContainer", correctMsgContainer);
   const savedImg = JSON.parse(localStorage.getItem('gridColors'));
   console.log(savedImg);

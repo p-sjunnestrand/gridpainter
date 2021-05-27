@@ -5,7 +5,7 @@
 // let saveRoute = "http://localhost:3000"; //flytta från app.js till egen route?
 // let startGameRoute = "http://localhost:3000/startGame"; 
 // let stopTimeRoute = "http://localhost:3000/stopTime"; 
-// let gridStateRoute = "http://localhost:3000/gridState"
+// let gridStateRoute = "http://localhost:3000/gridState";
 
 // Heroku 
 let galleryRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/gallery";
@@ -17,9 +17,9 @@ let stopTimeRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/stopTime";
 let gridStateRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/gridState";
 
 
-import { printStartPage } from "../modules/printStartPage.mjs"
-import { setPlayerInfo } from "../modules/setPlayerInfo.mjs"
-import { printBoard } from "../modules/print-board.mjs"
+import { printStartPage } from "../modules/printStartPage.mjs";
+import { setPlayerInfo } from "../modules/setPlayerInfo.mjs";
+import { printBoard } from "../modules/print-board.mjs";
 import { printChat } from "../modules/printchat.mjs";
 import { getImg } from "../modules/getImage.mjs";
 // import { displayCalque } from "../modules/displayCalque.mjs";

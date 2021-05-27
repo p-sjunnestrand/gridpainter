@@ -3,6 +3,7 @@ import { startTimer } from "./timer.mjs";
 import { displayCalque } from "../modules/displayCalque.mjs";
 import { correctImg } from "./correctImg.mjs"; 
 
+
 export function Start(startGameRoute, stopTimeRoute, randomRoute) {
     const root = document.getElementById('root');
     // root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'></div>");
@@ -41,12 +42,13 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute) {
         //     console.log(data);
         // })
 
+        let correctMsgContainer = document.getElementById("correctMsgContainer");
 
         let correct = document.getElementById('correctBtn');
         correct.addEventListener('click', function () {
     
             // correctImg(correctMsgContainer);
-            correctImg(stopTimeRoute);
+            correctImg(stopTimeRoute, correctMsgContainer);
     
     
         });

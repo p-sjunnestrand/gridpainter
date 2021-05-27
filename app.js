@@ -232,7 +232,7 @@ app.post('/colors', function (req, res, next) {
     //   console.log('colors!');
     let colorPicked = false;
     for (color in colors) {
-        // console.log(colors[color].color);
+         console.log("Color: ",colors[color].color);
         if (colors[color].taken === false) {
             //   console.log(colors[color].color + "color is available!");
             //   console.log(req.body);
