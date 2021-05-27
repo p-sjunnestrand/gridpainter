@@ -56,10 +56,10 @@ for (let r = 1; r < 16; r++) {
 };
 //array that stores player colors and keeps track of number of players in game
 const colors = [
-    { "color": "blue", "taken": false, "player": null },
-    { "color": "red", "taken": false, "player": null },
-    { "color": "yellow", "taken": false, "player": null},
-    { "color": "pink", "taken": false, "player": null }
+    { "color": "blue", "taken": true, "player": null },
+    { "color": "red", "taken": true, "player": null },
+    { "color": "yellow", "taken": true, "player": null },
+    { "color": "pink", "taken": true, "player": null }
 ]
 
 let start = false;
@@ -229,30 +229,23 @@ io.on('connection', function (socket) {
 
 
 app.post('/colors', function (req, res, next) {
-    //   console.log('colors!');
-    let colorPicked = false;
+    let chosenColor;
     for (color in colors) {
-         console.log("Color: ",colors[color].color);
         if (colors[color].taken === false) {
-            //   console.log(colors[color].color + "color is available!");
-            //   console.log(req.body);
-            let chosenColor = { "color": colors[color].color };
-            res.json(chosenColor);
+            chosenColor = { color: colors[color].color };
+            // console.log('chosen rad 241', chosenColor);
             colors[color].taken = true;
             colors[color].player = req.body.playerId;
-            //   console.log('colorArray', colors);
-            //   console.log(colors[color].taken);
-            colorPicked = true;
-
-            //   console.log();
             break;
-        } else {
-            continue;
         }
-        // res.json({"color": "none"}) 
     }
-    if (colorPicked === false) {
-        res.json({ "color": "none" })
+    // console.log('rad 258', chosenColor);
+    if (chosenColor == undefined) {
+        // console.log('rad 260', chosenColor);
+        res.json({ color: "none" })
+    } else {
+        // console.log('chosen rad 263', chosenColor);
+        res.json(chosenColor);
     }
 });
 
@@ -284,11 +277,11 @@ app.get('/startGame', (req, res) => {
     console.log(countdown);
     io.emit("start klicked");
     timer();
-    
+
     // io.sockets.emit('timer', { countdown: countdown });
 })
 
 app.get('/gridState', (req, res) => {
-    res.json({gridArray: gridArray})
+    res.json({ gridArray: gridArray })
 })
 module.exports = { app: app, server: server };
