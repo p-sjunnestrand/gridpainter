@@ -261,18 +261,28 @@ app.get('/random', (req, res) => {
             io.emit("random pic", fetchedRandomPic)
         })
 });
-
+let begin = false;
 app.get('/startGame', (req, res) => {
     console.log('game started!');
-    start = true;
-    countdown = 10;
+    begin = true;
+    countdown = 100;
     console.log(countdown);
-    io.emit("start klicked");
-    io.emit("startGame", start);
+    // io.emit("start klicked", start);
     timer();
-
+    res.json(begin);
     // io.sockets.emit('timer', { countdown: countdown });
 })
+
+app.get('/printGameMode', (req, res) => {
+    if(begin === true){
+        io.emit("start klicked", start);
+    }
+})
+
+
+app.post('/checkFacitPicture', (req, res) =>{
+    res.json(req.body);
+});
 
 app.get('/gridState', (req, res) => {
     res.json({ gridArray: gridArray })
