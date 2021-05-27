@@ -11,7 +11,7 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute) {
     // startGameBtn.id = 'startGameBtn';
     // document.getElementById('startGameBox').appendChild(startGameBtn);
     // // let startBtn = document.getElementById("startGameBtn");
-    // let startBox = document.getElementById("startGameBox");
+    let startBox = document.getElementById("startGameBox");
 
     let startGameTemplate = `
         <div id="startGameBox">

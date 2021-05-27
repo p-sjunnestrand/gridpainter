@@ -91,7 +91,8 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
     socket.on("printScore", scoreObject => {
         let correctMsgContainer = document.getElementById("correctMsgContainer");
         console.log("scoreObject from printScore socket", scoreObject);
-        correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject.score}% out of 100%.</p>`;
+        // let scoreString = toString(scoreObject);
+        correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject}% out of 100%.</p>`;
 
 
     });
@@ -111,7 +112,7 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
     socket.on("empty grid", data => {
         localStorage.setItem("gridColors", JSON.stringify(data));
         //console.log(localStorage.getItem("gridColors"));
-        updateGridColors();
+        updateGridColors(gridStateRoute);
     });
 
 }

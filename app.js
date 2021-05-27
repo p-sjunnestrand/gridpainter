@@ -77,7 +77,7 @@ function timer() {
         }
     }, 1000);
 }
-
+let fetchedRandomPic;
 app.get('/stopTime', function (req, res, next) {
     countdown = 1;
 });
@@ -213,10 +213,10 @@ io.on('connection', function (socket) {
         io.emit("startGame", data);
     });
 
-    socket.on("printScore", scoreObject => {
-        console.log("scoreObject från en klient", scoreObject);
-        io.emit("printScore", scoreObject);
-    });
+    // socket.on("printScore", scoreObject => {
+    //     console.log("scoreObject från en klient", scoreObject);
+    //     io.emit("printScore", scoreObject);
+    // });
 });
 
 
@@ -269,7 +269,8 @@ app.get('/random', (req, res) => {
             // console.log(results[generatedRandomInt]);
 
             //chooses the pic in the fetched array corresponding to the randomly generated number above.
-            let fetchedRandomPic = results[generatedRandomInt];
+            fetchedRandomPic = results[generatedRandomInt];
+            console.log(fetchedRandomPic);
             // let fetchedRandomPic = results[0];
 
             //emits the chosen pic to front.
@@ -288,5 +289,25 @@ app.get('/startGame', (req, res) => {
 
 app.get('/gridState', (req, res) => {
     res.json({gridArray: gridArray})
+})
+
+app.get('/correctImg', (req, res) => {
+    // console.log('correct function!', fetchedRandomPic.gridState);
+
+    const total = 225;
+    let sum = 0;
+
+    for (pixel in gridArray){
+        // console.log(fetchedRandomPic.gridState[pixel]);
+
+        if(gridArray[pixel].color !== null && gridArray[pixel].color === fetchedRandomPic.gridState[pixel].color){
+            // console.log('pixel id: ', gridArray[pixel].id);
+            sum++;
+        }
+    }
+    let scorePercentage = Math.floor(sum*100/total);
+    console.log("scorePercentage rounded up", scorePercentage);
+    io.emit("printScore", scorePercentage);
+
 })
 module.exports = { app: app, server: server };
