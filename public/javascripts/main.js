@@ -1,5 +1,4 @@
 //Localhost
-<<<<<<< HEAD
 let galleryRoute = "http://localhost:3000/gallery";
 let randomRoute = "http://localhost:3000/random"; //flytta från app.js till egen route?
 let colorRoute = "http://localhost:3000/colors"; //flytta från app.js till egen route?
@@ -7,15 +6,6 @@ let saveRoute = "http://localhost:3000"; //flytta från app.js till egen route?
 let startGameRoute = "http://localhost:3000/startGame"; 
 let stopTimeRoute = "http://localhost:3000/stopTime"; 
 let gridStateRoute = "http://localhost:3000/gridState"
-=======
-// let galleryRoute = "http://localhost:3000/gallery";
-// let randomRoute = "http://localhost:3000/random"; //flytta från app.js till egen route?
-// let colorRoute = "http://localhost:3000/colors"; //flytta från app.js till egen route?
-// let saveRoute = "http://localhost:3000"; //flytta från app.js till egen route?
-// let startGameRoute = "http://localhost:3000/startGame"; 
-// let stopTimeRoute = "http://localhost:3000/stopTime"; 
-// let gridStateRoute = "http://localhost:3000/gridState";
->>>>>>> main
 
 // Heroku 
 // let galleryRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/gallery";
