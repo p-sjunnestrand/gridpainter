@@ -7,6 +7,7 @@ let startGameRoute = "http://localhost:3000/startGame";
 let stopTimeRoute = "http://localhost:3000/stopTime";
 let gridStateRoute = "http://localhost:3000/gridState";
 
+
 // Heroku 
 // let galleryRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/gallery";
 // let randomRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/random";
