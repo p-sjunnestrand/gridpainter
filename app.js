@@ -80,6 +80,7 @@ function timer() {
 
 app.get('/stopTime', function (req, res, next) {
     countdown = 1;
+    //clearInterval(countdownTimer);
 });
 
 // Save picture to db
@@ -202,7 +203,7 @@ io.on('connection', function (socket) {
 
     socket.on("startTimer", function (data) {
         if (start == false) {
-            countdown = 100;
+            countdown = 10;
             io.sockets.emit('timer', { countdown: countdown });
         }
         start = true;
