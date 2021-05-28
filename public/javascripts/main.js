@@ -6,6 +6,7 @@
 // let startGameRoute = "http://localhost:3000/startGame";
 // let stopTimeRoute = "http://localhost:3000/stopTime";
 // let gridStateRoute = "http://localhost:3000/gridState";
+//let printGameModeRoute = "http://localhost:3000/printGameMode";
 
 
 // Heroku 
@@ -16,6 +17,7 @@ let saveRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/";
 let startGameRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/startGame";
 let stopTimeRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/stopTime";
 let gridStateRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/gridState";
+let printGameModeRoute = "https://fed20d-grupp8-gridpainter.herokuapp.com/printGameMode";
 
 import { printStartPage } from "../modules/printStartPage.mjs";
 import { callLoginPage } from "../modules/callLoginPage.mjs";
@@ -28,7 +30,7 @@ let gallBtn = document.getElementById('galleryBtn');
 
 logInBtn.addEventListener('click', (e) => {
     let userName = document.getElementById('inputUserName').value;
-    callLoginPage(colorRoute, randomRoute, saveRoute, startGameRoute, stopTimeRoute, gridStateRoute, userName);
+    callLoginPage(colorRoute, randomRoute, saveRoute, startGameRoute, stopTimeRoute, gridStateRoute, userName, printGameModeRoute);
 })
 
 gallBtn.addEventListener('click', (e) => {
