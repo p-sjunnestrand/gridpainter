@@ -4,19 +4,10 @@ import { displayCalque } from "../modules/displayCalque.mjs";
 import { correctImg } from "./correctImg.mjs";
 
 
-export function Start(startGameRoute, stopTimeRoute, randomRoute) {
-    const root = document.getElementById('root');
-<<<<<<< HEAD
-    // root.insertAdjacentHTML("beforebegin", "<div id ='startGameBox'></div>");
-    // let startGameBtn = document.createElement('button');
-    // startGameBtn.innerText = 'Start game';
-    // startGameBtn.id = 'startGameBtn';
-    // document.getElementById('startGameBox').appendChild(startGameBtn);
-    // // let startBtn = document.getElementById("startGameBtn");
-    let startBox = document.getElementById("startGameBox");
 
-=======
->>>>>>> bc9b9d0fadf2b60c3ff07b63d062c1fa4eed7719
+export function Start(startGameRoute, stopTimeRoute, randomRoute) {
+    
+    const root = document.getElementById('root');
     let startGameTemplate = `
         <div id="startGameBox">
             <button id="startGameBtn">Start Game</button>
@@ -28,40 +19,46 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute) {
 
     startGameBtn.addEventListener('click', () => {
         randomPic(randomRoute);
-
-        fetch(startGameRoute)
+        fetch(startGameRoute);
+        
+        fetch("http://localhost:3000/printGameMode");
     });
 
+    // fetch(startGameRoute)
+    // .then(res => res.json())
+    // .then(data => {
+    //     if(data === true){
 
-    startTimer(stopTimeRoute);
+    //     }
+    // });
 
-    socket.on("startGame", data => {
+    fetch("http://localhost:3000/printGameMode");
+
+    function printGameMode(){
         let startBox = document.getElementById("startGameBox");
-
-        if (data) {
-            startGameBtn.remove();
-            document.getElementById("startGameBox").insertAdjacentHTML("afterbegin", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
-
-
-            displayCalque(randomRoute);
-
-            let correctMsgContainer = document.getElementById("correctMsgContainer");
-
-            let correct = document.getElementById('correctBtn');
-            correct.addEventListener('click', function () {
-
-                correctImg(stopTimeRoute, correctMsgContainer);
-
-
-            });
-
-        }
+        console.log("statrt is klicked!");
         startBox.innerHTML = "";
         startTimer();
-    });
+        startGameBtn.remove();
+        startBox.insertAdjacentHTML("afterbegin", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
+
+
+        displayCalque(randomRoute);
+
+        let correctMsgContainer = document.getElementById("correctMsgContainer");
+
+        let correct = document.getElementById('correctBtn');
+        correct.addEventListener('click', function () {
+
+            correctImg(stopTimeRoute, correctMsgContainer);
+
+
+        });
+    }
 
     socket.on("start klicked", data => {
-        console.log("statrt is klicked!");
+        printGameMode();
 
     });
+
 }

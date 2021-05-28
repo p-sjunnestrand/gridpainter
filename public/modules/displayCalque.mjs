@@ -1,6 +1,7 @@
 
 export function displayCalque() {
-    let calqueDiv = `<div id = "calqueWrap">
+
+    let calqueDiv = `
                         <div id = "calqueGridContainer">`;
 
     for (let r = 1; r < 16; r++) {
@@ -10,8 +11,12 @@ export function displayCalque() {
         }
     };
 
-    calqueDiv += `</div>`;
-    document.getElementById('gameBoardContainer').insertAdjacentHTML('afterend', calqueDiv);
+    //calqueDiv += ;
+
+
+    document.getElementById('root').insertAdjacentHTML('beforeend', `<div id = "calqueWrap"></div></div>`);
+    
+    document.getElementById("calqueWrap").innerHTML = calqueDiv;
 
     socket.on("random pic", data => {
         let gridState = data.gridState;
