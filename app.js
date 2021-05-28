@@ -58,7 +58,7 @@ for (let r = 1; r < 16; r++) {
 const colors = [
     { "color": "blue", "taken": false, "player": null },
     { "color": "red", "taken": false, "player": null },
-    { "color": "yellow", "taken": false, "player": null},
+    { "color": "yellow", "taken": false, "player": null },
     { "color": "pink", "taken": false, "player": null }
 ]
 
@@ -220,39 +220,24 @@ io.on('connection', function (socket) {
 });
 
 
-
-
-
-
-
-// app.get('/colors');
-
-
 app.post('/colors', function (req, res, next) {
-    //   console.log('colors!');
-    let colorPicked = false;
+    let chosenColor;
     for (color in colors) {
-         console.log("Color: ",colors[color].color);
         if (colors[color].taken === false) {
-            //   console.log(colors[color].color + "color is available!");
-            //   console.log(req.body);
-            let chosenColor = { "color": colors[color].color };
-            res.json(chosenColor);
+            chosenColor = { color: colors[color].color };
+            // console.log('chosen rad 241', chosenColor);
             colors[color].taken = true;
             colors[color].player = req.body.playerId;
-            //   console.log('colorArray', colors);
-            //   console.log(colors[color].taken);
-            colorPicked = true;
-
-            //   console.log();
             break;
-        } else {
-            continue;
         }
-        // res.json({"color": "none"}) 
     }
-    if (colorPicked === false) {
-        res.json({ "color": "none" })
+    // console.log('rad 258', chosenColor);
+    if (chosenColor == undefined) {
+        // console.log('rad 260', chosenColor);
+        res.json({ color: "none" })
+    } else {
+        // console.log('chosen rad 263', chosenColor);
+        res.json(chosenColor);
     }
 });
 
@@ -284,15 +269,17 @@ app.get('/startGame', (req, res) => {
     countdown = 10;
     console.log(countdown);
     io.emit("start klicked");
+    io.emit("startGame", start);
     timer();
-    
+
     // io.sockets.emit('timer', { countdown: countdown });
 })
 
 app.get('/gridState', (req, res) => {
-    res.json({gridArray: gridArray})
+    res.json({ gridArray: gridArray })
 })
 
+<<<<<<< HEAD
 app.get('/correctImg', (req, res) => {
     // console.log('correct function!', fetchedRandomPic.gridState);
 
@@ -313,3 +300,7 @@ app.get('/correctImg', (req, res) => {
 
 })
 module.exports = { app: app, server: server };
+=======
+
+module.exports = { app: app, server: server };
+>>>>>>> bc9b9d0fadf2b60c3ff07b63d062c1fa4eed7719

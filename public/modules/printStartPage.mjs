@@ -12,7 +12,7 @@ export function printStartPage() {
         <div id="loginContainer">
           <h2>Enter your name</h2>
           <input id="inputUserName" placeholder=""></input><br />
-          <button id="startGameBtn">Get started</button>
+          <button id="logInBtn">Get started</button>
         </div>
     </div>
     <div id="galleryContainer">
