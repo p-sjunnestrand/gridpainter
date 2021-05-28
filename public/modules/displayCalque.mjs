@@ -21,16 +21,33 @@ export function displayCalque() {
     socket.on("random pic", data => {
         let gridState = data.gridState;
 
+        
+        
         for (let state in gridState) {
             document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
         }
+
+        
         let gridToLocal = JSON.stringify(gridState);
         localStorage.setItem("facitGrid", gridToLocal);
     })
 
+    // fetch("http://localhost:3000/random")
+    // .then(res => res.json())
+    // .then(gridState =>{
+    //     console.log(gridState);
+    //     let gridToLocal = JSON.stringify(gridState);
+    //     localStorage.setItem("facitGrid", gridToLocal);
+        
+    // });
 
-    let gridState = JSON.parse(localStorage.getItem("facitGrid"));
-    for (let state in gridState) {
-        document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
-    }
+
+    // for (let state in gridToLocal) {
+    //     //console.log(gridState[state].id);
+    //     document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
+    // }
+    // let gridState = JSON.parse(localStorage.getItem("facitGrid"));
+    // for (let state in gridState) {
+    //     document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
+    // }
 }

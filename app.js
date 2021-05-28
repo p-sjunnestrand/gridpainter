@@ -242,6 +242,7 @@ app.post('/colors', function (req, res, next) {
     }
 });
 
+let fetchedRandomPic;
 app.get('/random', (req, res) => {
 
     //asigns random int 0-4 to let
@@ -251,17 +252,25 @@ app.get('/random', (req, res) => {
 
     //fetches all items from collection
     req.app.locals.db.collection("images").find().toArray()
-        .then(results => {
-            // console.log(results[generatedRandomInt]);
+    .then(results => {
+        // console.log(results[generatedRandomInt]);
 
-            //chooses the pic in the fetched array corresponding to the randomly generated number above.
-            let fetchedRandomPic = results[generatedRandomInt];
-            // let fetchedRandomPic = results[0];
-
-            //emits the chosen pic to front.
-            io.emit("random pic", fetchedRandomPic)
-        })
+        //chooses the pic in the fetched array corresponding to the randomly generated number above.
+        fetchedRandomPic = results[generatedRandomInt];
+        // let fetchedRandomPic = results[0];
+        console.log(fetchedRandomPic);
+        //emits the chosen pic to front.
+        io.emit("random pic", fetchedRandomPic)
+        res.json(fetchedRandomPic);
+        
+    })
 });
+
+// app.get('/getRandomPic', (req, res) =>{
+//     console.log(fetchedRandomPic);
+//     res.json(fetchedRandomPic);
+// });
+
 let begin = false;
 app.get('/startGame', (req, res) => {
     console.log('game started!');
