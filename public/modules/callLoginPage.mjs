@@ -3,7 +3,7 @@ import { printChat } from "../modules/printchat.mjs";
 import { Start } from "../modules/startGame.mjs";
 
 
-export function callLoginPage(colorRoute, randomRoute, saveRoute, startGameRoute, stopTimeRoute, gridStateRoute, userName, printGameModeRoute) {
+export function callLoginPage(colorRoute, randomRoute, saveRoute, startGameRoute, stopTimeRoute, gridStateRoute, userName, printGameModeRoute, correctImgRoute) {
   // return new Promise((resolve, reject) => {
   // console.log(localStorage.getItem("playerColor"));
   // console.log('click');
@@ -42,7 +42,7 @@ export function callLoginPage(colorRoute, randomRoute, saveRoute, startGameRoute
           let userColor = localStorage.getItem("playerColor");
           console.log("Playercolor" + localStorage.getItem("playerColor"));
 
-          printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute, gameStarted);
+          printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute, gameStarted, correctImgRoute);
           printChat(userName);
           
 

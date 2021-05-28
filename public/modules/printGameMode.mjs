@@ -3,7 +3,7 @@ import { displayCalque } from "../modules/displayCalque.mjs";
 import { startTimer } from "./timer.mjs";
 
 
-export function printGameMode(stopTimeRoute){
+export function printGameMode(stopTimeRoute, correctImgRoute){
     let startBox = document.getElementById("startGameBox");
     startBox.innerHTML = "";
 
@@ -24,7 +24,7 @@ export function printGameMode(stopTimeRoute){
         .then(res => res.json())
         .then((data) => {
             console.log(data);
-            correctImg(stopTimeRoute, correctMsgContainer);
+            correctImg(correctImgRoute);
         });
     });
 }

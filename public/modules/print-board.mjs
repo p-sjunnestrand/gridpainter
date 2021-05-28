@@ -4,7 +4,7 @@ import { updateGridColors } from "../modules/updateGridColor.mjs";
 import { getImg } from "../modules/getImage.mjs";
 import { printGameMode } from "./printGameMode.mjs";
 
-export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute, gameStarted) {
+export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute, gameStarted, correctImgRoute) {
 
     let root = document.getElementById("root");
 
@@ -121,7 +121,7 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
     }
     socket.on("random pic", data => {
         let gridState = data.gridState;
-        printGameMode(stopTimeRoute);
+        printGameMode(stopTimeRoute, correctImgRoute);
         for (let state in gridState) {
             document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
         }
