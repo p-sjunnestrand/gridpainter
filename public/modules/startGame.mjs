@@ -1,9 +1,3 @@
-import { randomPic } from "./randomPic.mjs";
-import { startTimer } from "./timer.mjs";
-import { displayCalque } from "../modules/displayCalque.mjs";
-import { correctImg } from "./correctImg.mjs";
-
-
 export function Start(startGameRoute, stopTimeRoute, randomRoute, printGameModeRoute) {
     
     const root = document.getElementById('root');
@@ -17,10 +11,10 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute, printGameModeR
 
 
     startGameBtn.addEventListener('click', () => {
-        randomPic(randomRoute);
+        fetch(randomRoute);
         fetch(startGameRoute);
         
-        fetch(printGameModeRoute);
+        // fetch(printGameModeRoute);
     });
 
     // fetch(startGameRoute)
@@ -31,33 +25,33 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute, printGameModeR
     //     }
     // });
 
-    fetch(printGameModeRoute);
+    // fetch(printGameModeRoute);
 
-    function printGameMode(){
-        let startBox = document.getElementById("startGameBox");
-        console.log("statrt is klicked!");
-        startBox.innerHTML = "";
-        startTimer();
-        startGameBtn.remove();
-        startBox.insertAdjacentHTML("afterbegin", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
-
-
-        displayCalque(randomRoute);
-
-        let correctMsgContainer = document.getElementById("correctMsgContainer");
-
-        let correct = document.getElementById('correctBtn');
-        correct.addEventListener('click', function () {
-
-            correctImg(stopTimeRoute, correctMsgContainer);
+    // function printGameMode(){
+    //     let startBox = document.getElementById("startGameBox");
+    //     console.log("statrt is klicked!");
+    //     startBox.innerHTML = "";
+    //     startTimer();
+    //     startGameBtn.remove();
+    //     startBox.insertAdjacentHTML("afterbegin", `<button id="correctBtn">Finish Game</button> <div id="correctMsgContainer"></div>`);
 
 
-        });
-    }
+    //     displayCalque();
 
-    socket.on("start klicked", data => {
-        printGameMode();
+    //     let correctMsgContainer = document.getElementById("correctMsgContainer");
 
-    });
+    //     let correct = document.getElementById('correctBtn');
+    //     correct.addEventListener('click', function () {
+
+    //         correctImg(stopTimeRoute, correctMsgContainer);
+
+
+    //     });
+    // }
+
+    // socket.on("start klicked", data => {
+    //     printGameMode();
+
+    // });
 
 }

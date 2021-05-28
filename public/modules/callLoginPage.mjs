@@ -29,10 +29,12 @@ export function callLoginPage(colorRoute, randomRoute, saveRoute, startGameRoute
     })
       .then(response => response.json())
       .then(colorObject => {
-        // console.log("hello from json");
-        console.log('colorObject', colorObject);
+
+        console.log('color', colorObject.color);
+        console.log('gameBegin', colorObject.started);
+        let gameStarted = colorObject.started;
+
         if (colorObject.color === 'none') {
-          // console.log("Game is full");
           alert("The game is full. Try again later.");
         } else {
           localStorage.setItem("playerColor", colorObject.color);
@@ -40,19 +42,14 @@ export function callLoginPage(colorRoute, randomRoute, saveRoute, startGameRoute
           let userColor = localStorage.getItem("playerColor");
           console.log("Playercolor" + localStorage.getItem("playerColor"));
 
-          printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute);
+          printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute, gameStarted);
           printChat(userName);
-          // displayCalque();
-          // randomPic();
+          
 
           Start(startGameRoute, stopTimeRoute, randomRoute, printGameModeRoute);
 
-          // console.log('player color is ' + colorObject.color);
-
-          // setUserColorVar();
         }
       });
   }
-  // })
 
 }

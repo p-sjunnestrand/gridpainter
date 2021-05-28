@@ -1,10 +1,10 @@
 import { saveImg } from "../modules/saveImg.mjs";
 import { gridClick } from "../modules/gridClick.mjs";
 import { updateGridColors } from "../modules/updateGridColor.mjs";
-import { correctImg } from "../modules/correctImg.mjs";
 import { getImg } from "../modules/getImage.mjs";
+import { printGameMode } from "./printGameMode.mjs";
 
-export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute) {
+export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute, gameStarted) {
 
     let root = document.getElementById("root");
 
@@ -91,7 +91,8 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
     socket.on("printScore", scoreObject => {
         let correctMsgContainer = document.getElementById("correctMsgContainer");
         console.log("scoreObject from printScore socket", scoreObject);
-        correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject.score}% out of 100%.</p>`;
+        // let scoreString = toString(scoreObject);
+        correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject}% out of 100%.</p>`;
 
 
     });
@@ -111,7 +112,21 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
     socket.on("empty grid", data => {
         localStorage.setItem("gridColors", JSON.stringify(data));
         //console.log(localStorage.getItem("gridColors"));
-        updateGridColors();
+        updateGridColors(gridStateRoute);
     });
+
+    //checks if game is started. If so, fetches server that responds with current calque image.
+    if(gameStarted === true){
+        socket.emit("late login");
+    }
+    socket.on("random pic", data => {
+        let gridState = data.gridState;
+        printGameMode(stopTimeRoute);
+        for (let state in gridState) {
+            document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
+        }
+        // let gridToLocal = JSON.stringify(gridState);
+        // localStorage.setItem("facitGrid", gridToLocal);
+    })
 
 }

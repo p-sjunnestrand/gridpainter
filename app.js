@@ -64,6 +64,8 @@ const colors = [
 
 let start = false;
 let countdown = 1000;
+
+//Timer som kör igång när start game klickas. Kallas i /startGame.
 function timer() {
     let countdownTimer = setInterval(function () {
         countdown--;
@@ -71,12 +73,19 @@ function timer() {
         console.log(countdown);
         if (countdown == 0) {
             clearInterval(countdownTimer);
+            gameBegin = false;
             io.emit("timesUp", countdown);
+            console.log('gameBegin', gameBegin);
             // Antingen setLocalstorage att timesUp = true och kollarsen i main om den är sann/falsk, om sann kör rättningsfunctionen
             // eller kör rättningsfunctionen direkt här
         }
     }, 1000);
 }
+//Slumpad facitbild. Byts ut i /random varje gång någon klickar på start game.
+let fetchedRandomPic;
+
+//Håller koll på om spelet är igång eller ej. Sätts till true i /startGame när man klickar på start game.
+let gameBegin = false;
 
 app.get('/stopTime', function (req, res, next) {
     countdown = 1;
@@ -151,6 +160,7 @@ io.on('connection', function (socket) {
     // }
     // console.log("socket connect: ", io.sockets.connected);
     console.log(io.engine.clientsCount);
+    console.log(colors);
 
     let socketId = socket.id
     io.to(socket.id).emit("socketId", socketId);
@@ -183,6 +193,7 @@ io.on('connection', function (socket) {
         console.log("msg", msg);
         io.emit("chat msg", msg)
     })
+
     //Handles clicks on gameboard
     socket.on("grid click", click => {
         for (grid in gridArray) {
@@ -201,44 +212,51 @@ io.on('connection', function (socket) {
         io.emit("empty grid", gridArray);
     });
 
-    socket.on("startTimer", function (data) {
-        if (start == false) {
-            countdown = 10;
-            io.sockets.emit('timer', { countdown: countdown });
-        }
-        start = true;
-    });
+    // socket.on("startTimer", function (data) {
+    //     if (start == false) {
+    //         countdown = 10;
+    //         io.sockets.emit('timer', { countdown: countdown });
+    //     }
+    //     start = true;
+    // });
 
     socket.on("startGame", data => {
         console.log("test", data);
         io.emit("startGame", data);
     });
 
-    socket.on("printScore", scoreObject => {
-        console.log("scoreObject från en klient", scoreObject);
-        io.emit("printScore", scoreObject);
-    });
+    // socket.on("printScore", scoreObject => {
+    //     console.log("scoreObject från en klient", scoreObject);
+    //     io.emit("printScore", scoreObject);
+    // });
+    socket.on("late login", () => {
+        console.log('late login!', socket.id);
+        io.to(socket.id).emit("random pic", fetchedRandomPic);
+
+    })
 });
 
 
 app.post('/colors', function (req, res, next) {
-    let chosenColor;
+    let reply;
     for (color in colors) {
         if (colors[color].taken === false) {
-            chosenColor = { color: colors[color].color };
+            reply = { color: colors[color].color, started: gameBegin };
             // console.log('chosen rad 241', chosenColor);
             colors[color].taken = true;
             colors[color].player = req.body.playerId;
+            console.log(colors);
             break;
         }
     }
+    console.log(reply.color);
     // console.log('rad 258', chosenColor);
-    if (chosenColor == undefined) {
+    if (reply.color == undefined) {
         // console.log('rad 260', chosenColor);
         res.json({ color: "none" })
     } else {
         // console.log('chosen rad 263', chosenColor);
-        res.json(chosenColor);
+        res.json(reply);
     }
 });
 
@@ -255,22 +273,25 @@ app.get('/random', (req, res) => {
             // console.log(results[generatedRandomInt]);
 
             //chooses the pic in the fetched array corresponding to the randomly generated number above.
-            let fetchedRandomPic = results[generatedRandomInt];
+            fetchedRandomPic = results[generatedRandomInt];
+            console.log(fetchedRandomPic);
             // let fetchedRandomPic = results[0];
 
             //emits the chosen pic to front.
             io.emit("random pic", fetchedRandomPic)
         })
 });
-let begin = false;
+
+
+
 app.get('/startGame', (req, res) => {
     console.log('game started!');
-    begin = true;
+    gameBegin = true;
     countdown = 100;
     console.log(countdown);
     // io.emit("start klicked", start);
     timer();
-    res.json(begin);
+    // res.json(begin);
     // io.sockets.emit('timer', { countdown: countdown });
 })
 
@@ -287,6 +308,26 @@ app.post('/checkFacitPicture', (req, res) =>{
 
 app.get('/gridState', (req, res) => {
     res.json({ gridArray: gridArray })
+})
+
+app.get('/correctImg', (req, res) => {
+    // console.log('correct function!', fetchedRandomPic.gridState);
+
+    const total = 225;
+    let sum = 0;
+
+    for (pixel in gridArray){
+        // console.log(fetchedRandomPic.gridState[pixel]);
+
+        if(gridArray[pixel].color !== null && gridArray[pixel].color === fetchedRandomPic.gridState[pixel].color){
+            // console.log('pixel id: ', gridArray[pixel].id);
+            sum++;
+        }
+    }
+    let scorePercentage = Math.floor(sum*100/total);
+    console.log("scorePercentage rounded up", scorePercentage);
+    io.emit("printScore", scorePercentage);
+
 })
 
 
