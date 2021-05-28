@@ -1,10 +1,10 @@
 import { saveImg } from "../modules/saveImg.mjs";
 import { gridClick } from "../modules/gridClick.mjs";
 import { updateGridColors } from "../modules/updateGridColor.mjs";
-import { correctImg } from "../modules/correctImg.mjs";
 import { getImg } from "../modules/getImage.mjs";
+import { printGameMode } from "./printGameMode.mjs";
 
-export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute) {
+export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridStateRoute, gameStarted) {
 
     let root = document.getElementById("root");
 
@@ -114,5 +114,19 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
         //console.log(localStorage.getItem("gridColors"));
         updateGridColors(gridStateRoute);
     });
+
+    //checks if game is started. If so, fetches server that responds with current calque image.
+    if(gameStarted === true){
+        socket.emit("late login");
+    }
+    socket.on("random pic", data => {
+        let gridState = data.gridState;
+        printGameMode(stopTimeRoute);
+        for (let state in gridState) {
+            document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
+        }
+        // let gridToLocal = JSON.stringify(gridState);
+        // localStorage.setItem("facitGrid", gridToLocal);
+    })
 
 }

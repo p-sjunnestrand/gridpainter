@@ -33,11 +33,11 @@ export function correctImg(stopTimeRoute) {
 
 
 
-  //skickar stop till timern
-  fetch(stopTimeRoute)
-  .then(res => res.json())
-  .then((data) => {
-    console.log(data);
-  });
+  // //skickar stop till timern
+  // fetch(stopTimeRoute)
+  // .then(res => res.json())
+  // .then((data) => {
+  //   console.log(data);
+  // });
 
 }

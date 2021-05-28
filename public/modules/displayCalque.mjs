@@ -18,19 +18,19 @@ export function displayCalque() {
     
     document.getElementById("calqueWrap").innerHTML = calqueDiv;
 
-    socket.on("random pic", data => {
-        let gridState = data.gridState;
+    // socket.on("random pic", data => {
+    //     let gridState = data.gridState;
 
-        for (let state in gridState) {
-            document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
-        }
-        let gridToLocal = JSON.stringify(gridState);
-        localStorage.setItem("facitGrid", gridToLocal);
-    })
+    //     for (let state in gridState) {
+    //         document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
+    //     }
+    //     let gridToLocal = JSON.stringify(gridState);
+    //     localStorage.setItem("facitGrid", gridToLocal);
+    // })
 
 
-    let gridState = JSON.parse(localStorage.getItem("facitGrid"));
-    for (let state in gridState) {
-        document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
-    }
+    // let gridState = JSON.parse(localStorage.getItem("facitGrid"));
+    // for (let state in gridState) {
+    //     document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
+    // }
 }
