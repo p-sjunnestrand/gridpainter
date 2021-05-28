@@ -238,7 +238,7 @@ io.on('connection', function (socket) {
 
 
 app.post('/colors', function (req, res, next) {
-    let reply;
+    let reply = {color: undefined};
     for (color in colors) {
         if (colors[color].taken === false) {
             reply = { color: colors[color].color, started: gameBegin };
@@ -330,7 +330,6 @@ app.get('/correctImg', (req, res) => {
     console.log("scorePercentage rounded up", scorePercentage);
     io.emit("printScore", scorePercentage);
     res.end();
-
 })
 
 

@@ -1,8 +1,9 @@
 // import { Socket } from "./socket.io";
 
 
-export function correctImg(stopTimeRoute) {
-  fetch('https://fed20d-grupp8-gridpainter.herokuapp.com/correctImg')
+export function correctImg(correctImgRoute) {
+  console.log(correctImgRoute);
+  fetch('https://fed20d-grupp8-gridpainter.herokuapp.com/correctImg');
   // console.log("correctMsgContainer", correctMsgContainer);
   // const savedImg = JSON.parse(localStorage.getItem('gridColors'));
   // console.log(savedImg);
