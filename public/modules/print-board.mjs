@@ -33,7 +33,6 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
                     <button id="saveImg">Save image</button>
                     <button id="eraseImg">Restart</button>
                     <button id="quitBtn">Quit</button>
-                    <button id="galleryBtn">Gallery</button>
                 </div>
         </div>
         `;
@@ -116,7 +115,7 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
     });
 
     //checks if game is started. If so, fetches server that responds with current calque image.
-    if(gameStarted === true){
+    if (gameStarted === true) {
         socket.emit("late login");
     }
     socket.on("random pic", data => {
