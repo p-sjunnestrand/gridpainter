@@ -293,12 +293,14 @@ app.get('/startGame', (req, res) => {
     timer();
     // res.json(begin);
     // io.sockets.emit('timer', { countdown: countdown });
+    res.end();
 })
 
 app.get('/printGameMode', (req, res) => {
     if (begin === true) {
         io.emit("start klicked", start);
     }
+    res.end();
 })
 
 
