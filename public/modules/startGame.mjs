@@ -4,12 +4,7 @@ import { displayCalque } from "../modules/displayCalque.mjs";
 import { correctImg } from "./correctImg.mjs";
 
 
-<<<<<<< HEAD
-
-export function Start(startGameRoute, stopTimeRoute, randomRoute) {
-=======
 export function Start(startGameRoute, stopTimeRoute, randomRoute, printGameModeRoute) {
->>>>>>> 149cb11e1cf0cc7d9ffb4a38f5001e0c6b1c26b1
     
     const root = document.getElementById('root');
     let startGameTemplate = `
@@ -25,11 +20,7 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute, printGameModeR
         randomPic(randomRoute);
         fetch(startGameRoute);
         
-<<<<<<< HEAD
-        fetch("http://localhost:3000/printGameMode");
-=======
         fetch(printGameModeRoute);
->>>>>>> 149cb11e1cf0cc7d9ffb4a38f5001e0c6b1c26b1
     });
 
     // fetch(startGameRoute)
@@ -40,11 +31,7 @@ export function Start(startGameRoute, stopTimeRoute, randomRoute, printGameModeR
     //     }
     // });
 
-<<<<<<< HEAD
-    fetch("http://localhost:3000/printGameMode");
-=======
     fetch(printGameModeRoute);
->>>>>>> 149cb11e1cf0cc7d9ffb4a38f5001e0c6b1c26b1
 
     function printGameMode(){
         let startBox = document.getElementById("startGameBox");
