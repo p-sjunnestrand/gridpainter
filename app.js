@@ -293,16 +293,18 @@ app.get('/startGame', (req, res) => {
     timer();
     // res.json(begin);
     // io.sockets.emit('timer', { countdown: countdown });
+    res.end();
 })
 
 app.get('/printGameMode', (req, res) => {
-    if(begin === true){
+    if (begin === true) {
         io.emit("start klicked", start);
     }
+    res.end();
 })
 
 
-app.post('/checkFacitPicture', (req, res) =>{
+app.post('/checkFacitPicture', (req, res) => {
     res.json(req.body);
 });
 
@@ -316,15 +318,15 @@ app.get('/correctImg', (req, res) => {
     const total = 225;
     let sum = 0;
 
-    for (pixel in gridArray){
+    for (pixel in gridArray) {
         // console.log(fetchedRandomPic.gridState[pixel]);
 
-        if(gridArray[pixel].color !== null && gridArray[pixel].color === fetchedRandomPic.gridState[pixel].color){
+        if (gridArray[pixel].color !== null && gridArray[pixel].color === fetchedRandomPic.gridState[pixel].color) {
             // console.log('pixel id: ', gridArray[pixel].id);
             sum++;
         }
     }
-    let scorePercentage = Math.floor(sum*100/total);
+    let scorePercentage = Math.floor(sum * 100 / total);
     console.log("scorePercentage rounded up", scorePercentage);
     io.emit("printScore", scorePercentage);
     res.end();
