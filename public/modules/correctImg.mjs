@@ -2,7 +2,8 @@
 
 
 export function correctImg(correctImgRoute) {
-  fetch('https://fed20d-grupp8-gridpainter.herokuapp.com/correctImg')
+  console.log(correctImgRoute);
+  fetch('https://fed20d-grupp8-gridpainter.herokuapp.com/correctImg');
   // console.log("correctMsgContainer", correctMsgContainer);
   // const savedImg = JSON.parse(localStorage.getItem('gridColors'));
   // console.log(savedImg);

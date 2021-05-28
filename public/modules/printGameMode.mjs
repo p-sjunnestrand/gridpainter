@@ -19,6 +19,8 @@ export function printGameMode(stopTimeRoute, correctImgRoute){
 
     let correct = document.getElementById('correctBtn');
     correct.addEventListener('click', function () {
+        console.log('rad 27', correctImgRoute);
+
         //skickar stop till timern
         fetch(stopTimeRoute)
         .then(res => res.json())

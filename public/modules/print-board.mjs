@@ -122,6 +122,7 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
     socket.on("random pic", data => {
         let gridState = data.gridState;
         printGameMode(stopTimeRoute, correctImgRoute);
+        console.log('rad 125', correctImgRoute);
         for (let state in gridState) {
             document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
         }

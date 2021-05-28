@@ -33,7 +33,7 @@ export function callLoginPage(colorRoute, randomRoute, saveRoute, startGameRoute
         console.log('color', colorObject.color);
         console.log('gameBegin', colorObject.started);
         let gameStarted = colorObject.started;
-
+        console.log('rad 36', colorObject.color);
         if (colorObject.color === 'none') {
           alert("The game is full. Try again later.");
         } else {
