@@ -151,6 +151,7 @@ io.on('connection', function (socket) {
     // }
     // console.log("socket connect: ", io.sockets.connected);
     console.log(io.engine.clientsCount);
+    console.log(colors);
 
     let socketId = socket.id
     io.to(socket.id).emit("socketId", socketId);
@@ -229,6 +230,7 @@ app.post('/colors', function (req, res, next) {
             // console.log('chosen rad 241', chosenColor);
             colors[color].taken = true;
             colors[color].player = req.body.playerId;
+            console.log(colors);
             break;
         }
     }
