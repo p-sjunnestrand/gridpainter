@@ -238,7 +238,7 @@ io.on('connection', function (socket) {
 
 
 app.post('/colors', function (req, res, next) {
-    let reply = {color: undefined};
+    let reply = { color: undefined };
     for (color in colors) {
         if (colors[color].taken === false) {
             reply = { color: colors[color].color, started: gameBegin };
@@ -280,6 +280,7 @@ app.get('/random', (req, res) => {
             //emits the chosen pic to front.
             io.emit("random pic", fetchedRandomPic)
         })
+    res.end();
 });
 
 
