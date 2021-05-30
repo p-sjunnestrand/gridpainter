@@ -39,8 +39,6 @@ export function getImg(galleryRoute) {
 
     galleryContainer.insertAdjacentHTML("afterbegin", printGalleryHeading);
     galleryWrapper.insertAdjacentHTML("beforeend", printGalleryTemplate);
-   
-    galleryContainer.insertAdjacentHTML("beforeend", printGalleryTemplate);
 
   })  
 };

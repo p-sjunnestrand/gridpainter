@@ -85,6 +85,7 @@ let gameBegin = false;
 app.get('/stopTime', function (req, res, next) {
     countdown = 1;
     //clearInterval(countdownTimer);
+    res.end();
 });
 
 // Save picture to db
