@@ -20,7 +20,7 @@ export function printGameMode(stopTimeRoute, correctImgRoute) {
 
         //skickar stop till timern
         fetch(stopTimeRoute)
-            .then(res => res.json())
+            .then(res => res.text())
             .then((data) => {
                 correctImg(correctImgRoute);
             });
