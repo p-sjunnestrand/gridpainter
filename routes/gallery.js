@@ -9,10 +9,9 @@ router.use(cors());
 router.get('/', function (req, res) {
 
     req.app.locals.db.collection("savedPaints").find().toArray()
-    .then(paintInfo => {
-        console.log("paintInfo from db savedPaints", paintInfo);
-        res.json( {'paintInfo': paintInfo });
-    });
+        .then(paintInfo => {
+            res.json({ 'paintInfo': paintInfo });
+        });
 });
 
 module.exports = router;
