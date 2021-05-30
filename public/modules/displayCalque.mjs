@@ -2,7 +2,8 @@
 export function displayCalque() {
 
     let calqueDiv = `
-                        <div id = "calqueGridContainer">`;
+    <h2>Image to draw</h2>                    
+    <div id = "calqueGridContainer">`;
 
     for (let r = 1; r < 16; r++) {
 
@@ -11,9 +12,7 @@ export function displayCalque() {
         }
     };
 
-
-
-    document.getElementById('root').insertAdjacentHTML('beforeend', `<div id = "calqueWrap"></div></div>`);
+    document.getElementById('root').insertAdjacentHTML('afterbegin', `<div id = "calqueWrap"></div></div>`);
 
     document.getElementById("calqueWrap").innerHTML = calqueDiv;
 
