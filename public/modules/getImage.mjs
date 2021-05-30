@@ -5,9 +5,13 @@ export function getImg(galleryRoute) {
   .then((paintInfo) => {
 
   //  console.log("paintInfo", paintInfo);
+  galleryBtn.remove();
 
    let galleryContainer = document.getElementById("galleryContainer");
-   let printGalleryTemplate = `<h3>Bilder</h3>`; 
+   let galleryWrapper = document.getElementById("galleryWrapper");
+
+   let printGalleryHeading = `<h2>Pixel art gallery</h2>`; 
+   let printGalleryTemplate = ""; 
 
    for (let obj in paintInfo) {
     //  console.log("paintInfo[obj].length", paintInfo[obj].length);
@@ -22,7 +26,7 @@ export function getImg(galleryRoute) {
 
        printGalleryTemplate += `
        <div class="paintContainer">
-         <h4>${paintInfo[obj][i].userName}</h4>
+         <h4>Saved by: ${paintInfo[obj][i].userName}</h4>
          <div class="savedPaintGridContainer">
       `;
 
@@ -44,7 +48,9 @@ export function getImg(galleryRoute) {
 
    };
 
-   galleryContainer.insertAdjacentHTML("beforeend", printGalleryTemplate);
+   galleryContainer.insertAdjacentHTML("afterbegin", printGalleryHeading);
+   galleryWrapper.insertAdjacentHTML("beforeend", printGalleryTemplate);
+   
 
   });
 

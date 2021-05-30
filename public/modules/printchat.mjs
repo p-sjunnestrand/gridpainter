@@ -6,7 +6,7 @@ export function printChat(userName){
     const root = document.getElementById('root');
     
     //inserts chat window w/ input field and submit btn
-    root.insertAdjacentHTML('beforeend', 
+    root.insertAdjacentHTML('afterend', 
     `<div id ="chat-container">
         
         <div id="chatWindow">
@@ -39,7 +39,7 @@ export function printChat(userName){
         
   
         // chat.insertAdjacentHTML('beforeend', `<li><div chatMessage"><div class ="chatPlayerName">${msg.playerName}:</div>${msg.text}</div></li>`);
-        chat.insertAdjacentHTML('beforeend', `<li><div class="${isSameSender(msg)?'userSender': 'otherSender'} message"><div class ="chatPlayerName">${msg.playerName}:</div>${msg.text}</div></li>`)
+        chat.insertAdjacentHTML('afterend', `<li><div class="${isSameSender(msg)?'userSender': 'otherSender'} message"><div class ="chatPlayerName">${msg.playerName}:</div>${msg.text}</div></li>`)
         // console.log();
       })
     

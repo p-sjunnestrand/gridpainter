@@ -31,14 +31,15 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
                 </section>
                 <div id="btn-container">
                     <button id="saveImg">Save image</button>
-                    <button id="eraseImg">Restart</button>
+                    <button id="eraseImg">Clear</button>
                     <button id="quitBtn">Quit</button>
                 </div>
         </div>
         `;
 
-    root.innerHTML = board;
-    // root.insertAdjacentHTML("beforeend", board);
+    // root.innerHTML = board;
+    root.innerHTML = "";
+    root.insertAdjacentHTML("beforebegin", board);
 
     // let correctMsgContainer = document.getElementById("correctMsgContainer");
 
@@ -91,7 +92,8 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
         let correctMsgContainer = document.getElementById("correctMsgContainer");
         console.log("scoreObject from printScore socket", scoreObject);
         // let scoreString = toString(scoreObject);
-        correctMsgContainer.innerHTML = `<p>Your score: ${scoreObject}% out of 100%.</p>`;
+        correctMsgContainer.innerHTML = `<img src="img/score256px.png" alt="Medal icon" width="140" height="140" />
+                                        <p>Your score: ${scoreObject}% out of 100%.</p>`;
 
 
     });
