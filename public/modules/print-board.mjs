@@ -45,10 +45,8 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
 
     updateGridColors(gridStateRoute);
 
-    //Flytta över nedanstående till en egen mjs?
     let gridContainer = document.getElementById("gridContainer");
     gridContainer.addEventListener("click", e => {
-        //funktionen skickar klick från en klient till servern
         gridClick(e, userColor);
     });
 
@@ -60,28 +58,13 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
         };
         localStorage.setItem("gridColors", JSON.stringify(gridChange));
     });
-    console.log(localStorage.getItem("playerName"));
     let userNameObj = { userName: localStorage.getItem('playerName') };
 
     let save = document.getElementById('saveImg');
     save.addEventListener('click', e => {
-        console.log('sparad bild');
         saveImg(userNameObj, saveRoute);
     })
 
-    // let gallBtn = document.getElementById('galleryBtn');
-    // gallBtn.addEventListener('click', (e) => {
-    //     getImg();
-    // });
-
-    // let correct = document.getElementById('correctBtn');
-    // correct.addEventListener('click', function () {
-
-    //     // correctImg(correctMsgContainer);
-    //     correctImg(stopTimeRoute);
-
-
-    // });
 
     let quitBtn = document.getElementById('quitBtn');
     quitBtn.addEventListener('click', e => {
@@ -90,45 +73,30 @@ export function printBoard(userName, userColor, saveRoute, stopTimeRoute, gridSt
 
     socket.on("printScore", scoreObject => {
         let correctMsgContainer = document.getElementById("correctMsgContainer");
-        console.log("scoreObject from printScore socket", scoreObject);
-        // let scoreString = toString(scoreObject);
+
         correctMsgContainer.innerHTML = `<img src="img/score256px.png" alt="Medal icon" width="140" height="140" />
                                         <p>Your score: ${scoreObject}% out of 100%.</p>`;
-
-
     });
-
-
-
-
 
     let eraseImgBtn = document.getElementById("eraseImg");
     eraseImgBtn.addEventListener("click", function () {
 
         socket.emit("empty grid", { text: "text" });
 
-
-
     });
     socket.on("empty grid", data => {
         localStorage.setItem("gridColors", JSON.stringify(data));
-        //console.log(localStorage.getItem("gridColors"));
         updateGridColors(gridStateRoute);
     });
 
-    //checks if game is started. If so, fetches server that responds with current calque image.
     if (gameStarted === true) {
         socket.emit("late login");
     }
     socket.on("random pic", data => {
         let gridState = data.gridState;
         printGameMode(stopTimeRoute, correctImgRoute);
-        console.log('rad 125', correctImgRoute);
         for (let state in gridState) {
             document.getElementById(`f-${gridState[state].id}`).style.backgroundColor = gridState[state].color;
         }
-        // let gridToLocal = JSON.stringify(gridState);
-        // localStorage.setItem("facitGrid", gridToLocal);
     })
-
 }

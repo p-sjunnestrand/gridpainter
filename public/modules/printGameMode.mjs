@@ -3,11 +3,9 @@ import { displayCalque } from "../modules/displayCalque.mjs";
 import { startTimer } from "./timer.mjs";
 
 
-export function printGameMode(stopTimeRoute, correctImgRoute){
+export function printGameMode(stopTimeRoute, correctImgRoute) {
     let startBox = document.getElementById("startGameBox");
     startBox.innerHTML = "";
-
-    console.log("start is klicked!");
 
     startTimer();
 
@@ -19,14 +17,12 @@ export function printGameMode(stopTimeRoute, correctImgRoute){
 
     let correct = document.getElementById('correctBtn');
     correct.addEventListener('click', function () {
-        console.log('rad 27', correctImgRoute);
 
         //skickar stop till timern
         fetch(stopTimeRoute)
-        .then(res => res.json())
-        .then((data) => {
-            console.log(data);
-            correctImg(correctImgRoute);
-        });
+            .then(res => res.json())
+            .then((data) => {
+                correctImg(correctImgRoute);
+            });
     });
 }
