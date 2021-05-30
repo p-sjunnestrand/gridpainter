@@ -7,8 +7,6 @@ $color-pxyellow: yellow;
 $color-pxpink: pink; 
 
 
-
-
 * {
     box-sizing: border-box;
   }
@@ -27,11 +25,17 @@ body {
 }
 
 header {
-    // align-self: flex-start;
     position: sticky;
     padding-bottom: 30px;;
     width: 100%;
+}
 
+footer {
+    padding: 100 0 50 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: right;
+    align-self: flex-end;
 }
 
 h1 {
@@ -49,28 +53,23 @@ h2 {
     padding: 0 100 50 100;
 }
 
+// gallery
 #galleryContainer {
     padding-top: 100px;
-
 }
 
 #galleryWrapper {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-
 }
+
 .paintContainer {
     padding: 20px;
 }
 
-#galleryBtn {
-    flex: none;
-}
-// #paintContainer {
-//     display: flex;
-//     flex-direction: row wrap;
-// }
+
+// input
 input {
     border: none;
     border-radius: 20px;
@@ -82,6 +81,7 @@ input {
     margin-right: 10px;
 }
 
+// buttons
 button {
     color:  $color-white;
     background-color: $color-purple;
@@ -151,16 +151,14 @@ $small-pixels: 12px;
         height: $pixels-30px; 
     }
 }
+
 #root {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // flex-wrap: wrap;
-    // padding: 30px;
     margin-left: auto;
     margin-right: auto;
     padding: 30 50 30 50;
-    // width: 33%;
 }
 
 #gameBoardContainer {
@@ -168,22 +166,12 @@ $small-pixels: 12px;
     text-align: left;
 }
 
-// #startGameBox {
-//     width: 33%;
-// }
-
-// #startGameBox >p {
-//     width: 50%;
-// }
-// #startGameBox >h2 {
-//     width: 33%;
-// }
-
 #correctMsgContainer {
     font-weight: 700;
     padding-top: 30px;
 }
 
+// chat
 #chat-container {
     padding: 30px;
     text-align: left;
@@ -231,14 +219,6 @@ li {
     position: absolute;
     left: 296px;
     top: -17px;
-}
-
-footer {
-    padding: 100 0 50 0;
-    font-size: 0.9rem;
-    font-weight: 700;
-    text-align: right;
-    align-self: flex-end;
 }
 
 #calqueGridContainer {
@@ -292,8 +272,4 @@ footer {
     .pink {
         background-color: $color-pxpink;
     }
-}
-
-footer {
-    align-self: flex-end;
 }
