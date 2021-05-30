@@ -13,7 +13,6 @@
 <body>
 
   <header>
-    <!-- loggan -->
   </header>
 
   <main id="root">
@@ -29,7 +28,6 @@
     const socket = io();
     //Sets socket.id to LS in order to pair it with color array when starting game.
     //Could not place it in the main js-file, only works here, for reasons at present unknown.
-    // localStorage.clear();
     socket.on("socketId", socketId => {
       localStorage.setItem('socketId', socketId);
       if (localStorage.getItem('playerName')) {

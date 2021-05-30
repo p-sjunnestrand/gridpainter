@@ -1,5 +1,3 @@
-
-
 export function printStartPage() {
   let root = document.getElementById('root');
   let printStartPage = `
